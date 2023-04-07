@@ -39,7 +39,7 @@
 
 
     <style name="TextStyle.Caption" parent="TextStyle">
-        <item name="android:textSize">@dimen/font_size_Caption</item>
+        <item name="android:textSize">@dimen/font_size_caption</item>
     </style>
 
     <style name="TextStyle.Caption.Large" parent="TextStyle.Caption">
