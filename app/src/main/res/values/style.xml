@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextStyle" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:textColor">@color/color_text_primary</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
+
+    <style name="TextStyle.ToolBar" parent="TextStyle">
+        <item name="android:textSize">@dimen/font_size_title_medium</item>
+    </style>
+
+
+    <style name="TextStyle.Title" parent="TextStyle">
+        <item name="android:textSize">@dimen/font_size_title</item>
+    </style>
+
+    <style name="TextStyle.Title.Large" parent="TextStyle.Title">
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+    </style>
+
+    <style name="TextStyle.Title.Medium" parent="TextStyle.Title">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
+
+
+    <style name="TextStyle.Body" parent="TextStyle">
+        <item name="android:textSize">@dimen/font_size_body</item>
+    </style>
+
+    <style name="TextStyle.Body.Large" parent="TextStyle.Body">
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+    </style>
+
+    <style name="TextStyle.Body.Medium" parent="TextStyle.Body">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+
+    </style>
+
+
+    <style name="TextStyle.Caption" parent="TextStyle">
+        <item name="android:textSize">@dimen/font_size_caption</item>
+    </style>
+
+    <style name="TextStyle.Caption.Large" parent="TextStyle.Caption">
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+    </style>
+
+    <style name="TextStyle.Caption.Medium" parent="TextStyle.Caption">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
+
+
+    <style name="CardStyle" parent="">
+        <item name="android:layout_marginEnd">@dimen/spacing_medium</item>
+        <item name="android:layout_marginStart">@dimen/spacing_medium</item>
+        <item name="color">@color/color_card</item>
+        <item name="android:radius">@dimen/radius_medium</item>
+    </style>
+
+    <style name="Card.Chart" parent="CardStyle">
+        <item name="android:layout_marginTop">@dimen/spacing_medium</item>
+        <item name="layout_constraintDimensionRatio">16:9</item>
+    </style>
+
+
+    <style name="ChipsStyle">
+       <item name="checkedIconVisible">false</item>
+        <item name="chipStartPadding">@dimen/spacing_normal</item>
+        <item name="chipEndPadding">@dimen/spacing_normal</item>
+        <item name="chipBackgroundColor">@color/color_card</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textSize">@dimen/font_size_title</item>
+        <item name="android:textColor">@color/color_text_primary</item>
+    </style>
+
+</resources>
