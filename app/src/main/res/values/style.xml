@@ -7,55 +7,79 @@
     </style>
 
     <style name="TextStyle.ToolBar" parent="TextStyle">
-        <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/font_size_title_medium</item>
     </style>
 
-    <style name="TextStyle.Title.Large" parent="TextStyle">
+
+    <style name="TextStyle.Title" parent="TextStyle">
+        <item name="android:textSize">@dimen/font_size_title</item>
+    </style>
+
+    <style name="TextStyle.Title.Large" parent="TextStyle.Title">
         <item name="android:fontFamily">@font/montserrat_semibold</item>
-        <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="TextStyle.Title.Medium" parent="TextStyle">
+    <style name="TextStyle.Title.Medium" parent="TextStyle.Title">
         <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="TextStyle.Title.Regular" parent="TextStyle">
-        <item name="android:fontFamily">@font/montserrat</item>
-        <item name="android:textSize">16sp</item>
+
+    <style name="TextStyle.Body" parent="TextStyle">
+        <item name="android:textSize">@dimen/font_size_body</item>
     </style>
 
-    <style name="TextStyle.Body.Large" parent="TextStyle">
+    <style name="TextStyle.Body.Large" parent="TextStyle.Body">
         <item name="android:fontFamily">@font/montserrat_semibold</item>
-        <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TextStyle.Body.Medium" parent="TextStyle">
+    <style name="TextStyle.Body.Medium" parent="TextStyle.Body">
         <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="android:textSize">14sp</item>
+
     </style>
 
-    <style name="TextStyle.Body.Regular" parent="TextStyle">
+    <style name="TextStyle.Body.Regular" parent="TextStyle.Body">
         <item name="android:fontFamily">@font/montserrat</item>
-        <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TextStyle.Caption.Large" parent="TextStyle">
+
+    <style name="TextStyle.Caption" parent="TextStyle">
+        <item name="android:textSize">@dimen/font_size_Caption</item>
+    </style>
+
+    <style name="TextStyle.Caption.Large" parent="TextStyle.Caption">
         <item name="android:fontFamily">@font/montserrat_semibold</item>
-        <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="TextStyle.Caption.Medium" parent="TextStyle">
+    <style name="TextStyle.Caption.Medium" parent="TextStyle.Caption">
         <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="TextStyle.Caption.Regular" parent="TextStyle">
+    <style name="TextStyle.Caption.Regular" parent="TextStyle.Caption">
         <item name="android:fontFamily">@font/montserrat</item>
-        <item name="android:textSize">12sp</item>
     </style>
 
 
+    <style name="CardStyle" parent="">
+        <item name="android:layout_marginEnd">@dimen/spacing_medium</item>
+        <item name="android:layout_marginStart">@dimen/spacing_medium</item>
+        <item name="color">@color/color_card</item>
+        <item name="android:radius">@dimen/radius_medium</item>
+    </style>
+
+    <style name="Card.Chart" parent="CardStyle">
+        <item name="android:layout_marginTop">@dimen/spacing_medium</item>
+        <item name="layout_constraintDimensionRatio">16:9</item>
+    </style>
+
+
+    <style name="ChipsStyle">
+       <item name="checkedIconVisible">false</item>
+        <item name="chipStartPadding">8dp</item>
+        <item name="chipEndPadding">8dp</item>
+        <item name="chipBackgroundColor">@color/color_card</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textSize">@dimen/font_size_title</item>
+        <item name="android:textColor">@color/color_text_primary</item>
+    </style>
 
 </resources>
