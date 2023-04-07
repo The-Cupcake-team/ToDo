@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero">0dp</dimen>
+
+    <dimen name="spacing_small">4dp</dimen>
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+
+    <dimen name="font_size_title">16sp</dimen>
+    <dimen name="font_size_body">14sp</dimen>
+    <dimen name="font_size_Caption">12sp</dimen>
+    <dimen name="font_size_title_medium">20sp</dimen>
+    <dimen name="font_size_title_large">22sp</dimen>
+    <dimen name="font_size_title_x_large">24sp</dimen>
+
+    <dimen name="radius_normal">8dp</dimen>
+    <dimen name="radius_medium">16dp</dimen>
+
+    <dimen name="item_card_categories_width">160dp</dimen>
+    <dimen name="item_card_categories_height">97dp</dimen>
+    <dimen name="item_card_recent_task_height">91dp</dimen>
+    <dimen name="item_card_recent_task_width">328dp</dimen>
+    <dimen name="item_card_team_task_width">179dp</dimen>
+    <dimen name="item_card_team_task_height">152dp</dimen>
+
+    <dimen name="app_bar_height">56dp</dimen>
+
+    <dimen name="small_icon_size">16dp</dimen>
+    <dimen name="default_icon_size">24dp</dimen>
+
+    </resources>
