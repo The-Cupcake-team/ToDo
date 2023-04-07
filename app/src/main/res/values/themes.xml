@@ -13,4 +13,8 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="splashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen_background</item>
+        <item name="android:statusBarColor">@color/splash_background</item>
+    </style>
 </resources>
