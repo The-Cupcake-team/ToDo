@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_medium"
+    android:background="@drawable/card_background">
+
+
+    <TextView
+        android:id="@+id/text_view_task_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:text="@string/personal_plans"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textColor="@color/color_text_primary"
+        android:textSize="@dimen/font_size_body"
+        app:layout_constraintEnd_toStartOf="@+id/text_view_go_t_plans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_remaining_plans"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/color_text_secondary"
+        android:text="@string/this_is_my_firs_task_i_should_do_some_thing_but_i_dont_know"
+        android:textSize="@dimen/font_size_body"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/text_view_go_t_plans"
+        app:layout_constraintStart_toStartOf="@+id/text_view_task_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_task_title" />
+
+    <TextView
+        android:id="@+id/text_view_go_t_plans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:text="@string/_23_march_20_00"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/color_text_tertiary"
+        android:textSize="@dimen/font_size_caption"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_task_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_view_task_title"
+        app:layout_constraintTop_toTopOf="@+id/text_view_task_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

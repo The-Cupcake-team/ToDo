@@ -64,7 +64,7 @@
     </style>
 
 
-    <style name="ChipsStyle">
+    <style name="ChipsStyle" parent="Theme.Material3.Light">
        <item name="checkedIconVisible">false</item>
         <item name="chipStartPadding">@dimen/spacing_normal</item>
         <item name="chipEndPadding">@dimen/spacing_normal</item>

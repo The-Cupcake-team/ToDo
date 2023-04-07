@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_medium"
+    android:background="@drawable/card_background">
+
+    <TextView
+        android:id="@+id/text_view_task_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:text="@string/personal_plans"
+        android:textColor="@color/color_text_primary"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textSize="@dimen/font_size_body"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_remaining_plans"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:ellipsize="end"
+        android:fontFamily="@font/montserrat"
+        android:maxLines="2"
+        android:textColor="@color/color_text_primary"
+
+    android:text="@string/this_is_my_firs_task_i_should_do_some_thing_but_i_dont_know"
+        android:textSize="@dimen/font_size_body"
+        app:layout_constraintEnd_toEndOf="@+id/text_view_task_title"
+        app:layout_constraintStart_toStartOf="@+id/text_view_task_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_task_title" />
+
+    <TextView
+        android:id="@+id/text_view_go_t_plans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_23_march_20_00"
+        android:fontFamily="@font/montserrat"
+        android:textSize="@dimen/font_size_caption"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_assignee"
+        app:layout_constraintEnd_toEndOf="@+id/text_view_remaining_plans"
+        app:layout_constraintTop_toTopOf="@+id/text_view_assignee" />
+
+    <View
+        android:id="@+id/icon_assignee"
+        android:layout_width="@dimen/user_avatar"
+        android:layout_height="@dimen/user_avatar"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:background="@drawable/ic_assignee"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/text_view_remaining_plans"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_remaining_plans" />
+
+    <TextView
+        android:id="@+id/text_view_assignee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lines="1"
+        android:maxWidth="@dimen/spacing_xnormal"
+        android:text="@string/ms"
+        android:fontFamily="@font/montserrat"
+        android:textSize="@dimen/font_size_caption"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_assignee"
+        app:layout_constraintEnd_toEndOf="@+id/icon_assignee"
+        app:layout_constraintStart_toStartOf="@+id/icon_assignee"
+        app:layout_constraintTop_toTopOf="@+id/icon_assignee" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

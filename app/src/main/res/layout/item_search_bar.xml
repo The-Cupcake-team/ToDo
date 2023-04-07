@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_input"
+    android:layout_marginHorizontal="@dimen/spacing_medium"
+    android:background="@drawable/card_background"
+    android:drawableStart="@drawable/ic_search"
+    android:drawableTint="@color/color_text_tertiary"
+    android:drawablePadding="@dimen/spacing_medium"
+    android:paddingHorizontal="@dimen/spacing_medium"
+    android:hint="@string/search"
+    android:maxLines="1"
+    android:ellipsize="end"
+    android:imeOptions="actionSearch"
+    android:textSize="@dimen/font_size_body"
+    android:textColor="@color/color_text_primary"
+    android:textColorHint="@color/color_text_tertiary"/>
+
+
