@@ -37,10 +37,6 @@
 
     </style>
 
-    <style name="TextStyle.Body.Regular" parent="TextStyle.Body">
-        <item name="android:fontFamily">@font/montserrat</item>
-    </style>
-
 
     <style name="TextStyle.Caption" parent="TextStyle">
         <item name="android:textSize">@dimen/font_size_Caption</item>
@@ -52,10 +48,6 @@
 
     <style name="TextStyle.Caption.Medium" parent="TextStyle.Caption">
         <item name="android:fontFamily">@font/montserrat_medium</item>
-    </style>
-
-    <style name="TextStyle.Caption.Regular" parent="TextStyle.Caption">
-        <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
 
