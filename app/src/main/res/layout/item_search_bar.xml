@@ -5,15 +5,15 @@
     android:layout_marginHorizontal="16dp"
     android:background="@drawable/card_background"
     android:drawableStart="@drawable/ic_search"
-    android:drawableTint="@color/white_38"
+    android:drawableTint="@color/color_text_tertiary"
     android:drawablePadding="16dp"
     android:paddingHorizontal="16dp"
     android:hint="@string/search"
     android:maxLines="1"
     android:ellipsize="end"
     android:imeOptions="actionSearch"
-    android:textSize="14sp"
-    android:textColor="@color/black"
-    android:textColorHint="@color/black"/>
+    android:textSize="@dimen/font_size_body"
+    android:textColor="@color/color_text_primary"
+    android:textColorHint="@color/color_text_tertiary"/>
 
 

@@ -1,76 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="160dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="0dp"
-    app:cardBackgroundColor="@color/white_38"
-    android:layout_height="100dp">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/ic_group"
-            android:backgroundTint="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_view_task_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/personal_plans"
-            android:textSize="14sp"
-            style=""
-            app:layout_constraintBottom_toBottomOf="@+id/view"
-            app:layout_constraintStart_toEndOf="@+id/view"
-            app:layout_constraintTop_toTopOf="@+id/view" />
-
-        <TextView
-            android:id="@+id/text_view_remaining_plans"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="3 plans Remaining"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_task_title" />
-
-        <View
-            android:id="@+id/icone_go_to_plan"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/ic_right_arrow"
-            android:backgroundTint="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/text_view_go_t_plans"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_view_go_t_plans" />
+    android:layout_height="100dp"
+    android:layout_marginStart="@dimen/spacing_normal"
+    android:layout_marginEnd="@dimen/spacing_normal"
+    android:background="@drawable/card_background">
 
 
-        <TextView
-            android:id="@+id/text_view_go_t_plans"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="12dp"
-            android:text="3 plans Remaining"
-            android:textAlignment="viewEnd"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/icone_go_to_plan"
-            app:layout_constraintStart_toStartOf="@+id/view" />
+    <View
+        android:id="@+id/view"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_xnormal"
+        android:background="@drawable/ic_group"
+        android:backgroundTint="@color/color_text_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/text_view_task_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/personal_plans"
+        android:textColor="@color/color_text_secondary"
+        android:textSize="@dimen/font_size_body"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/text_view_remaining_plans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:text="@string/_3_plans_remaining"
+        android:textColor="@color/color_text_secondary"
+        android:textSize="@dimen/font_size_body"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_task_title" />
+
+    <View
+        android:id="@+id/icone_go_to_plan"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:background="@drawable/ic_right_arrow"
+        android:backgroundTint="@color/color_primary"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_go_t_plans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_view_go_t_plans" />
+
+    <TextView
+        android:id="@+id/text_view_go_t_plans"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:layout_marginBottom="@dimen/spacing_xnormal"
+        android:text="Go to plans"
+        android:textAlignment="viewEnd"
+        android:textSize="@dimen/font_size_body"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/icone_go_to_plan"
+        app:layout_constraintStart_toStartOf="@+id/view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.cardview.widget.CardView>
