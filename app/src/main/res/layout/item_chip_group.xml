@@ -13,7 +13,7 @@
         android:checked="true"
         android:text="@string/to_do"
         android:textSize="@dimen/font_size_caption"
-        app:chipCornerRadius="12dp" />
+        app:chipCornerRadius="@dimen/radius_normal" />
 
     <com.google.android.material.chip.Chip
         style="@style/ChipsStyle"
@@ -23,7 +23,7 @@
         android:checked="true"
         android:text="@string/inprogress"
         android:textSize="@dimen/font_size_caption"
-        app:chipCornerRadius="12dp" />
+        app:chipCornerRadius="@dimen/radius_normal" />
 
     <com.google.android.material.chip.Chip
         style="@style/ChipsStyle"
@@ -32,6 +32,6 @@
         android:background="@drawable/chip_background"
         android:text="@string/done"
         android:textSize="@dimen/font_size_caption"
-        app:chipCornerRadius="12dp" />
+        app:chipCornerRadius="@dimen/radius_normal" />
 
 </com.google.android.material.chip.ChipGroup>

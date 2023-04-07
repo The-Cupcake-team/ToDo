@@ -9,4 +9,5 @@
     <string name="_3_plans_remaining">3 plans Remaining</string>
     <string name="inprogress">inProgress</string>
     <string name="done">Done</string>
+    <string name="go_to_plans">Go to plans</string>
 </resources>

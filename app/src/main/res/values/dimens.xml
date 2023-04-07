@@ -19,6 +19,9 @@
     <dimen name="radius_normal">8dp</dimen>
     <dimen name="radius_medium">16dp</dimen>
 
+    <dimen name="height_input">56dp</dimen>
+    <dimen name="user_avatar">24dp</dimen>
+
     <dimen name="item_card_categories_width">160dp</dimen>
     <dimen name="item_card_categories_height">97dp</dimen>
     <dimen name="item_card_recent_task_height">91dp</dimen>

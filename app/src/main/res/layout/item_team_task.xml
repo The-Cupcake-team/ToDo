@@ -51,9 +51,9 @@
         app:layout_constraintTop_toTopOf="@+id/text_view_assignee" />
 
     <View
-        android:id="@+id/icone_assignee"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:id="@+id/icon_assignee"
+        android:layout_width="@dimen/user_avatar"
+        android:layout_height="@dimen/user_avatar"
         android:layout_marginTop="@dimen/spacing_medium"
         android:layout_marginBottom="@dimen/spacing_medium"
         android:background="@drawable/ic_assignee"
@@ -70,10 +70,10 @@
         android:maxWidth="@dimen/spacing_xnormal"
         android:text="@string/ms"
         android:textSize="@dimen/font_size_caption"
-        app:layout_constraintBottom_toBottomOf="@+id/icone_assignee"
-        app:layout_constraintEnd_toEndOf="@+id/icone_assignee"
-        app:layout_constraintStart_toStartOf="@+id/icone_assignee"
-        app:layout_constraintTop_toTopOf="@+id/icone_assignee" />
+        app:layout_constraintBottom_toBottomOf="@+id/icon_assignee"
+        app:layout_constraintEnd_toEndOf="@+id/icon_assignee"
+        app:layout_constraintStart_toStartOf="@+id/icon_assignee"
+        app:layout_constraintTop_toTopOf="@+id/icon_assignee" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
