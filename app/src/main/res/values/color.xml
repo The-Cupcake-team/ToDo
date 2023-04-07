@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Brand colors -->
+    <color name="color_primary">#269AB1</color>
+    <color name="color_on_primary">#FFFFFF</color>
+    <color name="color_secondary">#B2CFDE</color>
+    <color name="color_on_secondary">@color/color_text_tertiary</color>
+    <color name="color_border">#D9D9D9</color>
+
+    <!-- Text colors -->
+    <color name="color_text_primary">#DE000000</color>
+    <color name="color_text_secondary">#99000000</color>
+    <color name="color_text_tertiary">#61000000</color>
+    
+    <!-- background color -->
+    <color name="color_background">#F7F7F7</color>
+
+    <!-- card color -->
+    <color name="color_card">#F7F7F7</color>
+
+    <!-- accent color -->
+    <color name="color_done">@color/color_primary</color>
+    <color name="color_in_progress">@color/color_secondary</color>
+    <color name="color_to_do">#81B2F3</color>
+
+</resources>
