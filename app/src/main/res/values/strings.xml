@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">ToDo</string>
+    <string name="user_name">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="login">Login</string>
+    <string name="joined_us_before">Joined us before?</string>
+    <string name="have_no_account">Don’t have an account?</string>
+    <string name="create_account">Create account</string>
+    <string name="welcome">Welcome back!</string>
+    <string name="personal_plans">Personal plans</string>
+    <string name="team_plans">Team plans</string>
+    <string name="go_to_plans">Go to plans</string>
+    <string name="recent_task">Recent task</string>
+    <string name="view_all">view all</string>
+    <string name="search">search</string>
+    <string name="todo">ToDo</string>
+    <string name="in_progress">inProgress</string>
+    <string name="done">Done</string>
+    <string name="task_tittle">Title</string>
+    <string name="task_desc">Description</string>
+    <string name="add_task_title_hint">Add Task Name</string>
+    <string name="add_task_desc_hint">Add Task Description</string>
+    <string name="add_task">Add Task</string>
+    <string name="assign_to">Assign</string>
+    <string name="update_task">Update Task</string>
+    <string name="language">Language</string>
+    <string name="dark_theme">Dark Theme</string>
 </resources>
