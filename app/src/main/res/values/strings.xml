@@ -32,4 +32,6 @@
     <string name="to_do">To Do</string>
     <string name="_3_plans_remaining">3 plans Remaining</string>
     <string name="inprogress">inProgress</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
