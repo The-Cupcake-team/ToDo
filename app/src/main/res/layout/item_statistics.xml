@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_card"
+    app:cardCornerRadius="@dimen/radius_medium"
+    app:cardElevation="0dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/view_graph"
+            android:layout_width="@dimen/view_graph_size"
+            android:layout_height="@dimen/view_graph_size"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_in_progress_percent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginVertical="@dimen/spacing_medium"
+            tools:src="@drawable/ic_graph" />
+
+        <ImageView
+            android:id="@+id/image_view_ic_graph_to_do"
+            android:layout_width="@dimen/spacing_medium"
+            android:layout_height="@dimen/spacing_medium"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_graph_check_box"
+            android:backgroundTint="@color/color_to_do"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_to_do_status"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_to_do_status"
+            app:layout_constraintTop_toTopOf="@+id/text_view_to_do_percent" />
+
+        <TextView
+            android:id="@+id/text_view_to_do_percent"
+            style="@style/TextStyle.Caption.Large"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/color_to_do"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_to_do_status"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_to_do_status"
+            app:layout_constraintStart_toStartOf="@+id/text_view_to_do_status"
+            tools:text="40%" />
+
+        <TextView
+            android:id="@+id/text_view_to_do_status"
+            style="@style/TextStyle.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/to_do"
+            android:textColor="@color/color_text_tertiary"
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_view_in_progress_status"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_in_progress_status"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_view_ic_graph_in_progress"
+            android:layout_width="@dimen/spacing_medium"
+            android:layout_height="@dimen/spacing_medium"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_graph_check_box"
+            android:backgroundTint="@color/color_in_progress"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_in_progress_status"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_in_progress_percent"
+            app:layout_constraintTop_toTopOf="@+id/text_view_in_progress_percent" />
+
+        <TextView
+            android:id="@+id/text_view_in_progress_percent"
+            style="@style/TextStyle.Caption.Large"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/color_in_progress"
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_view_to_do_percent"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_in_progress_status"
+            app:layout_constraintStart_toStartOf="@+id/text_view_in_progress_status"
+            tools:text="40%" />
+
+        <TextView
+            android:id="@+id/text_view_in_progress_status"
+            style="@style/TextStyle.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/in_progress"
+            android:textColor="@color/color_text_tertiary"
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_view_done_status"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_done_status"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/text_view_to_do_status" />
+
+        <ImageView
+            android:id="@+id/image_view_ic_graph_done"
+            android:layout_width="@dimen/spacing_medium"
+            android:layout_height="@dimen/spacing_medium"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_graph_check_box"
+            android:backgroundTint="@color/color_done"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_done_status"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_done_percent"
+            app:layout_constraintTop_toTopOf="@+id/text_view_done_percent" />
+
+        <TextView
+            android:id="@+id/text_view_done_percent"
+            style="@style/TextStyle.Caption.Large"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:textAlignment="center"
+            android:textColor="@color/color_done"
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_view_in_progress_percent"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_done_status"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/text_view_done_status"
+            tools:text="40%" />
+
+        <TextView
+            android:id="@+id/text_view_done_status"
+            style="@style/TextStyle.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/done"
+            android:textColor="@color/color_text_tertiary"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/text_view_in_progress_status" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
