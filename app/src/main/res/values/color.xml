@@ -18,6 +18,7 @@
 
     <!-- card color -->
     <color name="color_card">#F7F7F7</color>
+    <color name="color_surface">#FFFFFF</color>
 
     <!-- accent color -->
     <color name="color_done">@color/color_primary</color>
