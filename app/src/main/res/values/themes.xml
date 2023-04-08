@@ -14,7 +14,7 @@
     </style>
 
     <style name="EditTextStyle">
-        <item name="android:background">@drawable/shape_radius_rectangle</item>
+        <item name="android:background">@drawable/card_background</item>
         <item name="android:backgroundTint">@color/white</item>
         <item name="android:textColorHint">@color/color_text_tertiary</item>
         <item name="android:inputType">textPersonName</item>
