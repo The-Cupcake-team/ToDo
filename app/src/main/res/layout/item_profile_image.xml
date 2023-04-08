@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/image_button_1"
+        android:layout_width="@dimen/small_profile"
+        android:layout_height="@dimen/small_profile"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:background="@drawable/ic_assignee"
+        android:backgroundTint="@color/color_secondary"
+        app:layout_constraintStart_toStartOf="@id/container"
+        app:layout_constraintTop_toTopOf="@id/container" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AZ"
+        android:textColor="@color/color_background"
+        style="@style/TextStyle.Caption.Medium"
+        app:layout_constraintTop_toTopOf="@id/image_button_1"
+        app:layout_constraintStart_toStartOf="@id/image_button_1"
+        app:layout_constraintBottom_toBottomOf="@id/image_button_1"
+        app:layout_constraintEnd_toEndOf="@id/image_button_1"/>
+
+    <TextView
+        style="@style/TextStyle.Caption.Medium"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:text="Ali zainy"
+        android:textColor="@color/color_text_secondary"
+        android:maxLines="2"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/image_button_1"
+        app:layout_constraintStart_toStartOf="@id/image_button_1"
+        app:layout_constraintTop_toBottomOf="@id/image_button_1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
