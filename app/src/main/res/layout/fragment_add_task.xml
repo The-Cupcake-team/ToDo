@@ -12,7 +12,6 @@
         android:layout_height="@dimen/height_input"
         android:layout_marginBottom="@dimen/spacing_medium"
         android:background="@color/color_background"
-        android:elevation="@dimen/spacing_small"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -20,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_left_arrow"
-            app:navigationIconTint="@color/color_text_secondary"
+            app:navigationIconTint="@color/color_text_primary"
             app:title="@string/add_task"
             app:titleTextAppearance="@style/TextStyle.Title.Medium"
             app:titleTextColor="@color/color_text_primary" />
@@ -67,6 +66,7 @@
         android:layout_marginTop="@dimen/spacing_normal"
         android:padding="@dimen/spacing_medium"
         android:hint="@string/add_task_title_hint"
+        style="@style/TextStyle.Body"
         android:textColorHint="@color/color_text_tertiary"
         android:layout_marginHorizontal="@dimen/spacing_medium"
         android:background="@drawable/card_background"
