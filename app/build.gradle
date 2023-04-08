@@ -3,6 +3,13 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+def getSecretKeys(){
+    def keyFile = project.rootProject.file('local.properties')
+    def properties = new Properties()
+    properties.load(new FileInputStream(keyFile))
+    return properties
+}
+
 android {
     namespace 'com.cupcake.todo'
     compileSdk 33
@@ -15,6 +22,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'BASE_URL',  getSecretKeys()['BASE_URL']
+        buildConfigField 'String', 'TEAM_ID',  getSecretKeys()['TEAM_ID']
+
     }
 
     buildTypes {
