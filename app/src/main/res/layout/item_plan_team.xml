@@ -18,7 +18,7 @@
             android:layout_height="@dimen/small_icon_size"
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_xnormal"
-            android:background="@drawable/ic_user"
+            android:background="@drawable/ic_group"
             android:backgroundTint="@color/color_text_primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/personal_plans"
+            android:text="@string/team_plans"
             android:textColor="@color/color_text_secondary"
             android:textSize="@dimen/font_size_body"
             app:layout_constraintBottom_toBottomOf="@+id/icon_team_group"
