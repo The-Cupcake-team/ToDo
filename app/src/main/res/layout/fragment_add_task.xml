@@ -12,7 +12,7 @@
         android:layout_height="@dimen/height_input"
         android:layout_marginBottom="@dimen/spacing_medium"
         android:background="@color/color_background"
-        android:elevation="@dimen/spacing_small"
+        app:elevation="@dimen/zero"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -49,32 +49,9 @@
        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
        app:layout_constraintTop_toBottomOf="@id/text_view_assign"
        />
-<!--
+
     <TextView
         android:id="@+id/text_view_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/task_tittle"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
-        style="@style/TextStyle.Title.Medium"
-        app:layout_constraintTop_toBottomOf="@id/recycler_view_profile"/>
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edit_text_add_task"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:padding="@dimen/spacing_medium"
-        android:hint="@string/add_task_title_hint"
-        android:textColorHint="@color/color_text_tertiary"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:background="@drawable/card_background"
-        app:layout_constraintTop_toBottomOf="@id/text_view_title"/>
--->
-
-    <TextView
-        android:id="@+id/textView"
         style="@style/TextStyle.Title.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,19 +63,23 @@
         app:layout_constraintTop_toBottomOf="@+id/recycler_view_profile" />
 
     <EditText
-        android:id="@+id/editTextTaskTitle"
-        style="@style/EditTextStyle"
+        android:id="@+id/edit_text_title"
+        style="@style/TextStyle.Body"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_input"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_normal"
+        android:maxLines="3"
+        android:padding="@dimen/spacing_medium"
         android:hint="@string/add_task_title_hint"
+        android:textColorHint="@color/color_text_tertiary"
+        android:background="@drawable/card_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_title" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/text_view_description"
         style="@style/TextStyle.Title.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,32 +88,33 @@
         android:textColor="@color/color_text_primary"
         android:text="@string/task_desc"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTaskTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_title" />
 
     <EditText
-        android:id="@+id/editTextTaskDescription"
-        style="@style/EditTextStyle"
+        android:id="@+id/edit_text_description"
+        style="@style/TextStyle.Body"
+        android:background="@drawable/card_background"
         android:layout_width="match_parent"
-        android:layout_height="144dp"
+        android:layout_height="@dimen/zero"
         android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_large"
         android:layout_marginTop="@dimen/spacing_normal"
-        android:lines="5"
+        android:padding="@dimen/spacing_medium"
+        android:gravity="top"
         android:hint="@string/add_task_desc_hint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:textColorHint="@color/color_text_tertiary"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_task"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_description" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonAddTask"
+        android:id="@+id/button_add_task"
         style="@style/ActiveButton"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/height_input"
         android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_large"
         android:text="@string/add_task"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
