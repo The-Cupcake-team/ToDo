@@ -1,130 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_background">
+    android:background="@color/color_background"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/top_app_bar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_background"
-        app:elevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/color_background">
 
-        <com.google.android.material.appbar.MaterialToolbar
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/top_app_bar"
             android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:background="@color/color_background"
+            app:elevation="@dimen/zero"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/login"
+                app:titleTextColor="@color/black_87" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ImageView
+            android:id="@+id/image_login"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:contentDescription="@string/sign_up"
+            android:src="@drawable/image_login"
+            app:layout_constraintDimensionRatio="16:12"
+            app:layout_constraintTop_toBottomOf="@+id/top_app_bar" />
+
+        <EditText
+            android:id="@+id/edit_text_user_name"
+            style="@style/EditTextSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_input"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:autofillHints="username"
+            android:drawableStart="@drawable/ic_user"
+            android:hint="@string/user_name"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@id/edit_text_password"
+            app:layout_constraintTop_toBottomOf="@id/image_login" />
+
+        <EditText
+            android:id="@+id/edit_text_password"
+            style="@style/EditTextSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_input"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:autofillHints="password"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawableEnd="@drawable/ic_open_eye"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_user_name" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_input"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textColor="@color/color_on_primary"
+            android:textSize="@dimen/font_size_title"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_password" />
+
+        <TextView
+            android:id="@+id/text_view_question"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/spacing_medium"
-            android:paddingVertical="22dp"
-            app:title="@string/login"
-            app:navigationIconTint="@color/black_87"
-            app:titleTextColor="@color/black_87"/>
-    </com.google.android.material.appbar.AppBarLayout>
+            android:layout_marginTop="120dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/have_no_account"
+            android:textColor="@color/color_text_secondary"
+            android:textSize="@dimen/font_size_caption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_sign_up"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_login" />
 
+        <TextView
+            android:id="@+id/text_view_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rectangle_ripple"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/sign_up"
+            android:textColor="@color/brand"
+            android:textSize="@dimen/font_size_caption"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_question"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_view_question"
+            app:layout_constraintTop_toTopOf="@+id/text_view_question" />
 
-    <ImageView
-        android:id="@+id/image_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:contentDescription="@string/sign_up"
-        app:srcCompat="@drawable/image_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_app_bar"/>
-
-    <EditText
-        android:id="@+id/ed_user_name"
-        style="@style/EditTextSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_input"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/ic_user"
-        android:hint="@string/user_name"
-        app:layout_constraintBottom_toTopOf="@id/ed_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_login" />
-
-
-    <EditText
-        android:id="@+id/ed_password"
-        style="@style/EditTextSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_input"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:drawableStart="@drawable/ic_lock"
-        android:drawableEnd="@drawable/ic_open_eye"
-        android:hint="@string/password"
-        app:layout_constraintBottom_toTopOf="@+id/button_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ed_user_name" />
-
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_login"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_input"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/button_background"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/login"
-        android:textAllCaps="false"
-        android:textColor="@color/color_on_primary"
-        android:textSize="@dimen/font_size_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ed_password" />
-
-
-
-    <TextView
-        android:id="@+id/text_view_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="159dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/have_no_account"
-        android:textColor="@color/color_text_secondary"
-        android:textSize="@dimen/font_size_caption"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/text_view_login"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_login" />
-
-    <TextView
-        android:id="@+id/text_view_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="159dp"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/sign_up"
-        android:textColor="@color/brand"
-        android:textSize="@dimen/font_size_caption"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_view_question"
-        app:layout_constraintTop_toBottomOf="@id/button_login" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
