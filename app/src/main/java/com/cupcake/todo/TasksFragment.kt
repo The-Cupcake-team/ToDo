@@ -1,19 +1,15 @@
 package com.cupcake.todo
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import com.cupcake.todo.databinding.FragmentTasksBinding
 
-class TasksFragment : Fragment() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-    }
+class TasksFragment : BaseFragment<FragmentTasksBinding>() {
+    override val LOG_TAG: String = this::class.java.name
+    override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentTasksBinding
+        get() = FragmentTasksBinding::inflate
+}
 
 
 
