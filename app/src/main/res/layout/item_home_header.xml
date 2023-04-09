@@ -14,7 +14,9 @@
         android:layout_marginTop="@dimen/spacing_medium"
         android:src="@drawable/ic_assignee"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/user_name"
+        />
 
     <TextView
         android:id="@+id/text_view_image_user_name"
@@ -65,7 +67,7 @@
 
     <include
         android:id="@+id/item_plan_personal"
-        layout="@layout/item_plan"
+        layout="@layout/item_plan_personal"
         android:layout_width="@dimen/zero"
         android:layout_height="@dimen/item_plan_task_height"
         android:layout_marginVertical="@dimen/spacing_large"
