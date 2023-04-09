@@ -37,5 +37,7 @@
     <dimen name="image_profile_size">48dp</dimen>
     <dimen name="view_graph_size">132dp</dimen>
     <dimen name="item_plan_task_height">100dp</dimen>
+    <dimen name="item_plan_task_width">160dp</dimen>
+    <dimen name="icon_go_to_plan">14dp</dimen>
 
     </resources>
