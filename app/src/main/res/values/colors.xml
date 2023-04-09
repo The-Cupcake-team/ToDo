@@ -16,4 +16,5 @@
     <color name="graph_color_jordy_blue">#81B2F3</color>
     <color name="brand">#269AB1</color>
     <color name="selected_assigne_color">#6763CF</color>
+    <color name="button_on_press">#1D7485</color>
 </resources>

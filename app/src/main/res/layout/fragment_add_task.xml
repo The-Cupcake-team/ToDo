@@ -64,7 +64,7 @@
 
     <EditText
         android:id="@+id/edit_text_title"
-        style="@style/TextStyle.Body"
+        style="@style/TextStyle.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_medium"
@@ -92,7 +92,7 @@
 
     <EditText
         android:id="@+id/edit_text_description"
-        style="@style/TextStyle.Body"
+        style="@style/TextStyle.Title"
         android:background="@drawable/card_background"
         android:layout_width="match_parent"
         android:layout_height="@dimen/zero"
