@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginEnd="@dimen/spacing_normal">
+
+    <TextView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_assignee"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text="YS"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_caption" />
+
+    <TextView
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="yousef salem"
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="@dimen/font_size_caption"
+        android:textColor="@color/color_text_secondary"
+        android:layout_marginTop="@dimen/spacing_small"/>
+
+
+</LinearLayout>
