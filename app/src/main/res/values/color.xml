@@ -17,6 +17,7 @@
     <color name="color_background">#F7F7F7</color>
 
     <!-- card color -->
+    <color name="color_surface">#FFFFFF</color>
     <color name="color_card">#FFFFFF</color>
 
     <!-- accent color -->
