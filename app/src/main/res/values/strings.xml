@@ -33,4 +33,5 @@
     <string name="_3_plans_remaining">3 plans Remaining</string>
     <string name="inprogress">inProgress</string>
     <string name="team_task">Team Task</string>
+    <string name="ic_graph">ic_graph</string>
 </resources>
