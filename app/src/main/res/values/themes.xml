@@ -1,6 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Theme.ToDo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorOnPrimary">@color/color_on_primary</item>
+        <item name="colorSecondary">@color/color_secondary</item>
+        <item name="colorOnSecondary">@color/color_on_secondary</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="background">@color/color_background</item>
+        <item name="android:statusBarColor">?attr/background</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+
     </style>
+
 </resources>
