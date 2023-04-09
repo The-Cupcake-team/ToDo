@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content"
                 app:navigationIcon="@drawable/ic_left_arrow"
                 app:navigationIconTint="@color/black_87"
+                app:titleTextAppearance="@style/TextStyle.Title.Large"
                 app:title="@string/sign_up"
                 app:titleTextColor="@color/black_87" />
 
