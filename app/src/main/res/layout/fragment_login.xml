@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:title="@string/login"
+                app:titleTextAppearance="@style/TextStyle.Title.Large"
                 app:titleTextColor="@color/black_87" />
 
         </com.google.android.material.appbar.AppBarLayout>
