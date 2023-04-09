@@ -31,5 +31,6 @@
 
     <dimen name="small_icon_size">16dp</dimen>
     <dimen name="default_icon_size">24dp</dimen>
+    <dimen name="small_profile">48dp</dimen>
 
-    </resources>
+</resources>
