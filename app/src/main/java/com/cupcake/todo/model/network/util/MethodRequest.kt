@@ -1,5 +1,5 @@
 package com.cupcake.todo.model.network.util
 
-enum class TypeRequest {
+enum class MethodRequest {
     GET, PUT, POST
 }
