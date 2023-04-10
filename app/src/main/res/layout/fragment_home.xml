@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainer"
+    android:background="@color/color_background"
+    tools:context=".HomeFragment">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/nested_recycler_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.cupcake.todo.signUpFragment.SignUpFragment"
-        tools:layout="@layout/fragment_sign_up"/>
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

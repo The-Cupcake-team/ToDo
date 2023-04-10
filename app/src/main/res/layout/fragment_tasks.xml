@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TasksFragment"
+    android:orientation="vertical"
+    android:background="@color/color_background"
+   android:paddingTop="@dimen/spacing_medium">
+
+<include
+    android:id="@+id/search_bar"
+    layout="@layout/item_search_bar"
+   />
+
+<com.google.android.material.tabs.TabLayout
+    android:id="@+id/tab_tasks"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spacing_medium"/>
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
