@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TasksFragment"
+    tools:context=".ui.fragment.tasks.TasksFragment"
     android:orientation="vertical"
     android:background="@color/color_background"
    android:paddingTop="@dimen/spacing_medium">

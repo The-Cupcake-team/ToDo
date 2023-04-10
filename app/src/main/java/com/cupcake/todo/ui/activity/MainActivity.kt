@@ -1,4 +1,4 @@
-package com.cupcake.todo
+package com.cupcake.todo.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

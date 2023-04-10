@@ -1,4 +1,4 @@
-package com.cupcake.todo
+package com.cupcake.todo.ui.base
 
 import android.os.Bundle
 import android.util.Log

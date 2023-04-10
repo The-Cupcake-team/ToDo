@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_background"
-    tools:context=".TasksTeamFragment"
+    tools:context=".ui.fragment.team_tasks.TeamTasksFragment"
     android:orientation="vertical"
     android:paddingTop="@dimen/spacing_large"
     >
