@@ -7,13 +7,15 @@ import okhttp3.FormBody
 
 class ApiServiceImpl : ApiService {
 
+    private val client = Client()
+
     override fun register(username: String, password: String): Call {
         val registerBody = FormBody.Builder()
             .add(USERNAME, username)
             .add(PASSWORD, password)
             .add(TEAM_ID, BuildConfig.TEAM_ID)
             .build()
-        return Client().postRequest(ApiEndPoint.register, registerBody)
+        return client.postRequest(ApiEndPoint.register, registerBody)
     }
 
 
