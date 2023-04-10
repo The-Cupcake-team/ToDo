@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/spacing_medium"
-    android:background="@drawable/card_background">
+    android:background="@drawable/card_background"
+    android:layout_marginVertical="@dimen/spacing_small">
 
     <TextView
         android:id="@+id/text_view_task_title"

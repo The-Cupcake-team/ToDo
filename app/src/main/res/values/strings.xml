@@ -34,4 +34,12 @@
     <string name="inprogress">inProgress</string>
     <string name="team_task">Team Task</string>
     <string name="ic_graph">ic_graph</string>
+
+    <string-array name="spinner_status">
+        <item>To Do</item>
+        <item>In Progress</item>
+        <item>Done</item>
+    </string-array>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
