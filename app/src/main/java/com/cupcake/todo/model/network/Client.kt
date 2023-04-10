@@ -3,7 +3,7 @@ package com.cupcake.todo.model.network
 import com.cupcake.todo.BuildConfig
 import com.cupcake.todo.model.network.interceptor.AuthInterceptor
 import com.cupcake.todo.model.network.interceptor.LoginInterceptor
-import com.cupcake.todo.model.network.util.TypeRequest
+import com.cupcake.todo.model.network.util.MethodRequest
 import okhttp3.Call
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -18,44 +18,50 @@ class Client {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
+    fun getRequest(
+        path: String,
+        username: String? = null,
+        password: String? = null
+    ): Call {
+        val request = request(path = path)
+        return executeHttpRequest(request, username, password)
+    }
 
     fun postRequest(path: String, body: RequestBody): Call {
-        return makeHttpRequest(TypeRequest.POST, path, body)
+        val request = request(MethodRequest.POST, path, body)
+        return executeHttpRequest(request)
     }
 
     fun putRequest(path: String, body: RequestBody): Call {
-        return makeHttpRequest(TypeRequest.PUT, path, body)
+        val request = request(MethodRequest.PUT, path, body)
+        return executeHttpRequest(request)
     }
 
-    fun getRequest(path: String): Call {
-        return makeHttpRequest(TypeRequest.GET, path, null)
-    }
-
-    private fun makeHttpRequest(method: TypeRequest, path: String, body: RequestBody?): Call {
-        val request = Request.Builder().url(getHttpUrl(path)).method(method.name, body).build()
-        return authOkHttpClient().newCall(request)
-    }
-
-    fun getRequest(path: String, username: String, password: String): Call {
-        val request = Request.Builder().url(getHttpUrl(path)).build()
-        return loginOkHttpClient(username, password).newCall(request)
-    }
-
-
-    private fun authOkHttpClient(): OkHttpClient {
-        return okHttpClient
-            .newBuilder()
-            .addInterceptor(AuthInterceptor())
-            .addInterceptor(logInterceptor)
+    private fun request(
+        method: MethodRequest = MethodRequest.GET,
+        path: String,
+        body: RequestBody? = null
+    ): Request {
+        return Request.Builder()
+            .url(getHttpUrl(path))
+            .method(method.name, body)
             .build()
     }
 
-    private fun loginOkHttpClient(username: String, password: String): OkHttpClient {
-        return okHttpClient
-            .newBuilder()
-            .addInterceptor(LoginInterceptor(username, password))
-            .addInterceptor(logInterceptor)
-            .build()
+    private fun executeHttpRequest(
+        request: Request,
+        username: String? = null,
+        password: String? = null,
+    ): Call {
+        val httpClient = okHttpClient.newBuilder().apply {
+            addInterceptor(AuthInterceptor())
+            if (!username.isNullOrEmpty() && !password.isNullOrEmpty()) {
+                addInterceptor(LoginInterceptor(username, password))
+            }
+            addInterceptor(logInterceptor)
+        }.build()
+
+        return httpClient.newCall(request)
     }
 
     private fun getHttpUrl(path: String): HttpUrl {
