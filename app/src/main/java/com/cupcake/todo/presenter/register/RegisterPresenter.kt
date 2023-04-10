@@ -1,6 +1,6 @@
 package com.cupcake.todo.presenter.register
 
-import com.cupcake.todo.data.network.ApiServiceImpl
+import com.cupcake.todo.model.network.ApiServiceImpl
 import com.cupcake.todo.ui.fragment.register.IRegisterView
 import okhttp3.Call
 import okhttp3.Callback

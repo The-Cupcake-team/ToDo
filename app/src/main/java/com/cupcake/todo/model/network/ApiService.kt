@@ -1,4 +1,4 @@
-package com.cupcake.todo.data.network
+package com.cupcake.todo.model.network
 
 import okhttp3.Call
 

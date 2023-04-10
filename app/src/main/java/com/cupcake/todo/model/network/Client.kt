@@ -1,9 +1,9 @@
-package com.cupcake.todo.data.network
+package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
-import com.cupcake.todo.data.network.interceptor.AuthInterceptor
-import com.cupcake.todo.data.network.interceptor.LoginInterceptor
-import com.cupcake.todo.data.network.util.TypeRequest
+import com.cupcake.todo.model.network.interceptor.AuthInterceptor
+import com.cupcake.todo.model.network.interceptor.LoginInterceptor
+import com.cupcake.todo.model.network.util.TypeRequest
 import okhttp3.Call
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient

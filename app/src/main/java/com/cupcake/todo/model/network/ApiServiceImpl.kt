@@ -1,7 +1,7 @@
-package com.cupcake.todo.data.network
+package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
-import com.cupcake.todo.data.network.util.ApiEndPoint
+import com.cupcake.todo.model.network.util.ApiEndPoint
 import okhttp3.Call
 import okhttp3.FormBody
 
