@@ -9,6 +9,7 @@
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_xlarge">32dp</dimen>
 
+
     <dimen name="font_size_title">16sp</dimen>
     <dimen name="font_size_body">14sp</dimen>
     <dimen name="font_size_caption">12sp</dimen>
@@ -32,8 +33,17 @@
     <dimen name="small_icon_size">16dp</dimen>
     <dimen name="default_icon_size">24dp</dimen>
 
+
+    <dimen name="image_profile_size">48dp</dimen>
+    <dimen name="view_graph_size">132dp</dimen>
+    <dimen name="item_plan_task_height">100dp</dimen>
+    <dimen name="item_plan_task_width">160dp</dimen>
+    <dimen name="icon_go_to_plan">14dp</dimen>
+
+
     <dimen name="app_bar_height">64dp</dimen>
     <dimen name="small_profile">48dp</dimen>
 
 
 </resources>
+
