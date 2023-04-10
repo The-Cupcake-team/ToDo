@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_background"
-    tools:context=".HomeFragment">
+    tools:context=".ui.fragment.home.HomeFragment">
     <ImageView
         android:id="@+id/image_view_profile"
         android:layout_width="@dimen/image_profile_size"
