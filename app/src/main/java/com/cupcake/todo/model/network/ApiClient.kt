@@ -11,7 +11,7 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 
-class Client {
+class ApiClient {
     private val okHttpClient = OkHttpClient()
 
     private val logInterceptor = HttpLoggingInterceptor().apply {

@@ -10,7 +10,7 @@ import okhttp3.FormBody
 
 class ApiServiceImpl : ApiService {
 
-    private val client = Client()
+    private val client = ApiClient()
 
     override fun register(
         username: String,
