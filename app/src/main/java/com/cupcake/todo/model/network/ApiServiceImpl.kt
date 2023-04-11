@@ -1,22 +1,45 @@
 package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
+import com.cupcake.todo.model.network.response.BaseResponse
+import com.cupcake.todo.model.network.response.RegisterResponse
+import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
-import okhttp3.Call
+import com.cupcake.todo.model.network.util.enqueueCall
 import okhttp3.FormBody
 
 class ApiServiceImpl : ApiService {
 
     private val client = Client()
 
-    override fun register(username: String, password: String): Call {
+    override fun register(
+        username: String,
+        password: String,
+        callback: ApiCallback<BaseResponse<RegisterResponse>>,
+    ) {
         val registerBody = FormBody.Builder()
             .add(USERNAME, username)
             .add(PASSWORD, password)
             .add(TEAM_ID, BuildConfig.TEAM_ID)
             .build()
-        return client.postRequest(ApiEndPoint.register, registerBody)
+
+        client.postRequest(ApiEndPoint.register, registerBody)
+            .enqueueCall(
+                object : ApiCallback<BaseResponse<RegisterResponse>> {
+                    override fun onSuccess(response: BaseResponse<RegisterResponse>) {
+                        callback.onSuccess(response)
+                    }
+
+                    override fun onFailure(
+                        throwable: Throwable,
+                        statusCode: Int?,
+                        message: String?
+                    ) {
+                        callback.onFailure(throwable, statusCode, message)
+                    }
+                })
     }
+
 
 
     private companion object {

@@ -1,37 +1,28 @@
 package com.cupcake.todo.presenter.register
 
 import com.cupcake.todo.model.network.ApiServiceImpl
+import com.cupcake.todo.model.network.response.BaseResponse
+import com.cupcake.todo.model.network.response.RegisterResponse
+import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.ui.fragment.register.IRegisterView
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import java.io.IOException
 
 class RegisterPresenter(
     private val view: IRegisterView,
-) {
+) : ApiCallback<BaseResponse<RegisterResponse>> {
 
-    private val apiService = ApiServiceImpl()
+    private val service = ApiServiceImpl()
+
     fun register(username: String, password: String) {
         view.showLoading()
-
-        apiService.register(username, password).enqueue(
-            object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    view.onRegisterFailure(e.toString())
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    if (response.code == 201) {
-                        view.onRegisterSuccess()
-                    } else {
-                        view.onRegisterFailure(response.code.toString())
-                    }
-
-                }
-
-            }
-        )
+        service.register(username, password, this)
         view.hideLoading()
+    }
+
+    override fun onSuccess(response: BaseResponse<RegisterResponse>) {
+        view.onRegisterSuccess()
+    }
+
+    override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+        view.onRegisterFailure(throwable.toString())
     }
 }
