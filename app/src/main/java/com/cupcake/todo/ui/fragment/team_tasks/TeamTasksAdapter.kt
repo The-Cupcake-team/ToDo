@@ -3,6 +3,7 @@ package com.cupcake.todo.ui.fragment.team_tasks
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemTodoTeamTaskBinding
@@ -35,6 +36,12 @@ class TeamTasksAdapter(
 
     class TeamTasksViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
         val binding = ItemTodoTeamTaskBinding.bind(viewItem)
+    }
+
+    fun updateTasks(newTask: List<TeamTasksResponse>){
+        val diffResult = DiffUtil.calculateDiff(TasksDiffUtil(teamTasks, newTask))
+        teamTasks = newTask
+        diffResult.dispatchUpdatesTo(this)
     }
 
 }
