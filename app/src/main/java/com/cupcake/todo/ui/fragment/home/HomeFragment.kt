@@ -3,6 +3,7 @@ package com.cupcake.todo.ui.fragment.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.cupcake.todo.databinding.FragmentHomeBinding
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.ui.base.BaseFragment
 
 
@@ -20,6 +21,23 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
     }
 
     override fun onGetDataSuccess() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetLatestTeamTaskSuccess(teamTasks: List<TeamTask>) {
+        TODO("Not yet implemented")
+    }
+
+
+    override fun onToDoTeamTasksSuccess(teamTasks: List<TeamTask>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onInProgressTeamTasksSuccess(teamTasks: List<TeamTask>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDoneTeamTasksSuccess(teamTasks: List<TeamTask>) {
         TODO("Not yet implemented")
     }
 
