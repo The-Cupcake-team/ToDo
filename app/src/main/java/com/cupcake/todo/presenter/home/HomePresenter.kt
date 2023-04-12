@@ -1,6 +1,5 @@
 package com.cupcake.todo.presenter.home
 
-import android.util.Log
 import com.cupcake.todo.model.network.ApiServiceImpl
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.PersonalTask
@@ -10,25 +9,36 @@ import com.cupcake.todo.ui.fragment.home.IHomeView
 
 class HomePresenter(
     private val view: IHomeView
-) : ApiCallback<BaseResponse<List<PersonalTask>>>{
+)  {
 
     private val service = ApiServiceImpl()
 
-    fun getAllPersonal() {
+    fun getAllPersonalTask() {
         view.showLoading()
-        val personalTask = service.getAllPersonalTask(this)
+        service.getAllPersonalTask(
+            object : ApiCallback<BaseResponse<List<PersonalTask>>> {
+                override fun onSuccess(response: BaseResponse<List<PersonalTask>>) {
+                    getRecentTask(response.result!!)
+                    val recentTask = getRecentTask(response.result)
+                    val todoTask = getToDoPersonalTask(response.result)
+                    val intProgressTask = getInProgressPersonalTask(response.result)
+                    val doneTask = getDonePersonalTask(response.result)
+
+                    view.onToDoPersonalTaskSuccess(todoTask)
+                    view.onInProgressPersonalTaskSuccess(intProgressTask)
+                    view.onDonePersonalTaskSuccess(doneTask)
+                    view.onRecentPersonalTaskSuccess(recentTask)
+
+                }
+
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    view.onGetDataFailure(throwable.toString())
+                }
+
+            })
         view.hideLoading()
     }
 
-    override fun onSuccess(response: BaseResponse<List<PersonalTask>>) {
-        Log.e("result", "personalTask: ${response.result}")
-        getRecentTask(response.result!!)
-        view.onGetDataSuccess()
-    }
-
-    override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-        view.onGetDataFailure(throwable.toString())
-    }
 
     private fun getRecentTask(personalTask: List<PersonalTask>): List<PersonalTask> {
         return personalTask.filter {
@@ -36,21 +46,44 @@ class HomePresenter(
         }
     }
 
+    private fun getToDoPersonalTask(personalTask: List<PersonalTask>): List<PersonalTask> {
+        return personalTask.filter {
+            it.status == TODO
+        }
+    }
+
+    private fun getInProgressPersonalTask(personalTask: List<PersonalTask>): List<PersonalTask> {
+        return personalTask.filter {
+            it.status == INPROGRESS
+        }
+    }
+
+    private fun getDonePersonalTask(personalTask: List<PersonalTask>): List<PersonalTask> {
+        return personalTask.filter {
+            it.status == DONE
+        }
+    }
+
+
+
+
     fun getAllTeamTask() {
         view.showLoading()
-        val teamTasks = service.getAllTeamTask(object : ApiCallback<BaseResponse<List<TeamTask>>>{
-            override fun onSuccess(response: BaseResponse<List<TeamTask>>) {
-                view.onGetLatestTeamTaskSuccess(getLatestTeamTasks(response.result!!))
-                view.onToDoTeamTasksSuccess(getToDoTeamTasks(response.result))
-                view.onInProgressTeamTasksSuccess(getInProgressTeamTasks(response.result))
-                view.onDoneTeamTasksSuccess(getDoneTeamTasks(response.result))
-            }
 
-            override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                view.onGetDataFailure(throwable.toString())
-            }
+        service.getAllTeamTask(
+            object : ApiCallback<BaseResponse<List<TeamTask>>> {
+                override fun onSuccess(response: BaseResponse<List<TeamTask>>) {
+                    view.onGetLatestTeamTaskSuccess(getLatestTeamTasks(response.result!!))
+                    view.onToDoTeamTasksSuccess(getToDoTeamTasks(response.result))
+                    view.onInProgressTeamTasksSuccess(getInProgressTeamTasks(response.result))
+                    view.onDoneTeamTasksSuccess(getDoneTeamTasks(response.result))
+                }
 
-        })
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    view.onGetDataFailure(throwable.toString())
+                }
+
+            })
         view.hideLoading()
     }
 
@@ -59,18 +92,26 @@ class HomePresenter(
     }
 
     private fun getToDoTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
-        return teamTasks.filter { it.status == 0 }
+        return teamTasks.filter { it.status ==TODO }
     }
 
     private fun getInProgressTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
-        return teamTasks.filter { it.status == 1 }
+        return teamTasks.filter { it.status == INPROGRESS }
     }
 
     private fun getDoneTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
-        return teamTasks.filter { it.status == 2 }
+        return teamTasks.filter { it.status == DONE }
     }
-    private fun getInProgressTasksNumberForTeam(teamTasks: List<TeamTask>): Int{
+
+    private fun getInProgressTasksNumberForTeam(teamTasks: List<TeamTask>): Int {
         return teamTasks.size
     }
+
+    private companion object {
+        private const val TODO = 0
+        private const val INPROGRESS = 1
+        private const val DONE = 2
+    }
+
 
 }
