@@ -4,6 +4,6 @@ data class PersonalTask(
     val id: String,
     val title: String,
     val description: String,
-    val status: Boolean,
+    val status: Int,
     val creationTime: String
 )

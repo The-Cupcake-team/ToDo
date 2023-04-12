@@ -2,6 +2,7 @@ package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
 import com.cupcake.todo.model.network.response.BaseResponse
+import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.RegisterResponse
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
@@ -24,22 +25,30 @@ class ApiServiceImpl : ApiService {
             .build()
 
         client.postRequest(ApiEndPoint.register, registerBody)
-            .enqueueCall(
-                object : ApiCallback<BaseResponse<RegisterResponse>> {
-                    override fun onSuccess(response: BaseResponse<RegisterResponse>) {
-                        callback.onSuccess(response)
-                    }
+            .enqueueCall(object : ApiCallback<BaseResponse<RegisterResponse>> {
+                override fun onSuccess(response: BaseResponse<RegisterResponse>) {
+                    callback.onSuccess(response)
+                }
 
-                    override fun onFailure(
-                        throwable: Throwable,
-                        statusCode: Int?,
-                        message: String?
-                    ) {
-                        callback.onFailure(throwable, statusCode, message)
-                    }
-                })
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    callback.onFailure(throwable, statusCode, message)
+                }
+            })
     }
 
+    override fun getAllPersonalTask(callback: ApiCallback<BaseResponse<List<PersonalTask>>>) {
+        client.getRequest(ApiEndPoint.toDoPersonal)
+            .enqueueCall(object : ApiCallback<BaseResponse<List<PersonalTask>>> {
+                override fun onSuccess(response: BaseResponse<List<PersonalTask>>) {
+                    callback.onSuccess(response)
+                }
+
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    callback.onFailure(throwable, statusCode, message)
+
+                }
+            })
+    }
 
 
     private companion object {
