@@ -1,6 +1,7 @@
 package com.cupcake.todo.model.network
 
-import com.cupcake.todo.BuildConfig
+
+import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.RegisterResponse
 import com.cupcake.todo.model.network.util.ApiCallback
@@ -11,35 +12,6 @@ import okhttp3.FormBody
 class ApiServiceImpl : ApiService {
 
     private val client = ApiClient()
-
-    override fun register(
-        username: String,
-        password: String,
-        callback: ApiCallback<BaseResponse<RegisterResponse>>,
-    ) {
-        val registerBody = FormBody.Builder()
-            .add(USERNAME, username)
-            .add(PASSWORD, password)
-            .add(TEAM_ID, BuildConfig.TEAM_ID)
-            .build()
-
-        client.postRequest(ApiEndPoint.register, registerBody)
-            .enqueueCall(
-                object : ApiCallback<BaseResponse<RegisterResponse>> {
-                    override fun onSuccess(response: BaseResponse<RegisterResponse>) {
-                        callback.onSuccess(response)
-                    }
-
-                    override fun onFailure(
-                        throwable: Throwable,
-                        statusCode: Int?,
-                        message: String?
-                    ) {
-                        callback.onFailure(throwable, statusCode, message)
-                    }
-                })
-    }
-
 
 
     private companion object {
@@ -53,6 +25,37 @@ class ApiServiceImpl : ApiService {
 
         const val ID = "id"
         const val STATUS = "status"
+    }
+
+    override fun register(
+        username: String,
+        password: String,
+        callback: ApiCallback<BaseResponse<RegisterResponse>>,
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun addPersonalTask(
+        title: String,
+        description: String,
+        callback: ApiCallback<BaseResponse<AddPersonalTaskResponse>>,
+    ) {
+        val body=FormBody.Builder()
+            .add(TITLE,title)
+            .add(DESCRIPTION,description)
+            .build()
+        client.postRequest(ApiEndPoint.toDoPersonal,body).enqueueCall(
+            object :ApiCallback<BaseResponse<AddPersonalTaskResponse>>{
+                override fun onSuccess(response: BaseResponse<AddPersonalTaskResponse>) {
+                    callback.onSuccess(response)
+                }
+
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    callback.onFailure(throwable, statusCode, message)
+                }
+
+            }
+        )
     }
 
 }
