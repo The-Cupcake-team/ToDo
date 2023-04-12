@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemTodoTeamTaskBinding
-import com.cupcake.todo.model.network.response.TeamTasksResponse
 
 class TeamTasksAdapter(
-    private val teamTasks: List<TeamTasksResponse>,
+    private val teamTasks: List<TeamTaskData>,
     private val listener: TeamTasksInteractionListener
 ) :
     RecyclerView.Adapter<TeamTasksAdapter.TeamTasksViewHolder>() {
@@ -29,7 +28,7 @@ class TeamTasksAdapter(
             textViewTaskTitle.text = currentTeamTask.title
             textViewRemainingPlans.text = currentTeamTask.description
             textViewTaskCreationTime.text = currentTeamTask.creationTime
-            textViewAssignee.text = currentTeamTask.assignee.take(2)
+            textViewAssignee.text = currentTeamTask.assignee.take(2).uppercase()
             root.setOnClickListener { listener.onClickTeamTask(currentTeamTask.id)}
         }
     }

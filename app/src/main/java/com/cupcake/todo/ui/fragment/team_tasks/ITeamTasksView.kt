@@ -6,7 +6,7 @@ interface ITeamTasksView {
 
     fun hideLoading()
 
-    fun onTeamTasksSuccess()
+    fun onTeamTasksSuccess(teamTasks: List<TeamTaskData>)
 
     fun onTeamTasksFailure(error: String)
 }
