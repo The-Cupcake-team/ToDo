@@ -19,12 +19,13 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
         TODO("Not yet implemented")
     }
 
-    override fun onRegisterSuccess() {
+    override fun onGetDataSuccess() {
         TODO("Not yet implemented")
     }
 
-    override fun onRegisterFailure(error: String) {
+    override fun onGetDataFailure(error: String) {
         TODO("Not yet implemented")
     }
+
 
 }
