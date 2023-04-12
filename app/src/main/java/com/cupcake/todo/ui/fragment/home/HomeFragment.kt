@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.cupcake.todo.databinding.FragmentHomeBinding
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.presenter.home.HomePresenter
@@ -23,6 +24,11 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
         HomePresenter(this).getAllPersonalTask()
         HomePresenter(this).getAllTeamTask()
 
+        /*this line just for make a test this time represent The time
+         it takes to fetch information from the API*/
+        Thread.sleep(2000)
+
+
 
     }
 
@@ -37,35 +43,40 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
     override fun onRecentPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
         Log.e("result", "onRecentPersonalTaskSuccess: ${personalTasks}")
     }
-
     override fun onToDoPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
         Log.e("result", "onToDoPersonalTaskSuccess: ${personalTasks}")
     }
-
     override fun onInProgressPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
         Log.e("result", "onInProgressPersonalTaskSuccess: ${personalTasks}")
     }
-
-
     override fun onDonePersonalTaskSuccess(personalTasks: List<PersonalTask>) {
         Log.e("result", "onDonePersonalTaskSuccess: ${personalTasks}")
     }
 
 
+
     override fun onGetLatestTeamTaskSuccess(teamTasks: List<TeamTask>) {
         Log.e("result", "onGetLatestTeamTaskSuccess: ${teamTasks}")
+        val teamTaskAdapter = TeamTaskAdapter(teamTasks)
+        binding.nestedRecyclerHome.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = teamTaskAdapter
+
+        }
     }
     override fun onToDoTeamTasksSuccess(teamTasks: List<TeamTask>) {
         Log.e("result", "onToDoTeamTasksSuccess: ${teamTasks}")
     }
-
     override fun onInProgressTeamTasksSuccess(teamTasks: List<TeamTask>) {
         Log.e("result", "onInProgressTeamTasksSuccess: ${teamTasks}")
-    }
 
+    }
     override fun onDoneTeamTasksSuccess(teamTasks: List<TeamTask>) {
         Log.e("result", "onDoneTeamTasksSuccess: ${teamTasks}")
+
     }
+
+
 
     override fun onGetDataFailure(error: String) {
         Log.e("result", "onGetDataFailure")
