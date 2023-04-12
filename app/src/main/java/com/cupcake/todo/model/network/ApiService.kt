@@ -3,6 +3,7 @@ package com.cupcake.todo.model.network
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.RegisterResponse
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.model.network.util.ApiCallback
 
 interface ApiService {
@@ -13,5 +14,7 @@ interface ApiService {
     )
 
     fun getAllPersonalTask(callback:  ApiCallback<BaseResponse<List<PersonalTask>>>)
+
+    fun getAllTeamTask(callback:  ApiCallback<BaseResponse<List<TeamTask>>>)
 
 }

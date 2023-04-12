@@ -4,9 +4,11 @@ import com.cupcake.todo.BuildConfig
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.RegisterResponse
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
 import com.cupcake.todo.model.network.util.enqueueCall
+import okhttp3.Callback
 import okhttp3.FormBody
 
 class ApiServiceImpl : ApiService {
@@ -47,6 +49,20 @@ class ApiServiceImpl : ApiService {
                     callback.onFailure(throwable, statusCode, message)
 
                 }
+            })
+    }
+
+    override fun getAllTeamTask(callback: ApiCallback<BaseResponse<List<TeamTask>>>) {
+        client.getRequest(ApiEndPoint.toDoTeam)
+            .enqueueCall(object: ApiCallback<BaseResponse<List<TeamTask>>> {
+                override fun onSuccess(response: BaseResponse<List<TeamTask>>) {
+                    callback.onSuccess(response)
+                }
+
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    callback.onFailure(throwable, statusCode, message)
+                }
+
             })
     }
 
