@@ -1,4 +1,4 @@
-package com.cupcake.todo.model
+package com.cupcake.todo.model.network.response
 
 data class TaskResponse<T>(
     val value: List<T>,

@@ -1,4 +1,4 @@
-package com.cupcake.todo.model.network
+package com.cupcake.todo.model.network.response
 
 data class TeamTask(
     val id: String,
