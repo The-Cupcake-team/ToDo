@@ -3,6 +3,7 @@ package com.cupcake.todo.model.network
 import com.cupcake.todo.BuildConfig
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.RegisterResponse
+import com.cupcake.todo.model.network.response.TeamTasksResponse
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
 import com.cupcake.todo.model.network.util.enqueueCall
@@ -40,6 +41,20 @@ class ApiServiceImpl : ApiService {
                 })
     }
 
+    override fun getTeamTasks(callback: ApiCallback<BaseResponse<List<TeamTasksResponse>>>) {
+        client.getRequest(ApiEndPoint.toDoTeam).enqueueCall(
+            object : ApiCallback<BaseResponse<List<TeamTasksResponse>>>{
+                override fun onSuccess(response: BaseResponse<List<TeamTasksResponse>>) {
+                    callback.onSuccess(response)
+                }
+
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    callback.onFailure(throwable,statusCode,message)
+                }
+
+            }
+        )
+    }
 
 
     private companion object {
