@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginHorizontal="@dimen/spacing_medium"
     android:layout_marginVertical="@dimen/spacing_small"
     android:background="@drawable/card_background">
@@ -49,19 +50,31 @@
         app:layout_constraintEnd_toEndOf="@+id/text_view_remaining_plans"
         app:layout_constraintTop_toTopOf="@+id/text_view_assignee" />
 
-    <TextView
-        android:id="@+id/text_view_assignee"
-        style="@style/TextStyle.Caption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ImageView
+        android:id="@+id/image_view_profile"
+        android:layout_width="@dimen/image_profile_size"
+        android:layout_height="@dimen/image_profile_size"
         android:layout_marginTop="@dimen/spacing_medium"
         android:layout_marginBottom="@dimen/spacing_medium"
-        android:background="@drawable/ic_assignee"
-        android:gravity="center_horizontal"
-        android:text="@string/ms"
+        android:src="@drawable/ic_assignee"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/text_view_remaining_plans"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_remaining_plans" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_remaining_plans"
+        android:contentDescription="@string/user_name"
+        />
+
+    <TextView
+        android:id="@+id/text_view_assignee"
+        style="@style/TextStyle.Caption.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view_profile"
+        app:layout_constraintEnd_toEndOf="@+id/image_view_profile"
+        app:layout_constraintStart_toStartOf="@+id/image_view_profile"
+        app:layout_constraintTop_toTopOf="@+id/image_view_profile"
+        tools:text="@string/ms" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
