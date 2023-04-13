@@ -41,5 +41,8 @@
         <item>Done</item>
     </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="added_successful">Added Successful </string>
+    <string name="added_failed">Added Failed </string>
+    <string name="error_title_message">Please enter a title</string>
+    <string name="error_descrption_message">Please enter a description</string>
 </resources>
