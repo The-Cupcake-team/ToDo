@@ -16,17 +16,41 @@ class AddPersonalTaskFragment : BaseFragment<FragmentAddTaskBinding>(), IAddPers
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentAddTaskBinding =
         FragmentAddTaskBinding::inflate
     private lateinit var presenter: AddPersonalTaskPresenter
+    private lateinit var title: String
+    private lateinit var description: String
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         hiddenAssignNoNeedInPersonalTask()
         presenter = AddPersonalTaskPresenter(this)
         onClickAddPersonalTask()
+        setupBackButton()
     }
 
     private fun onClickAddPersonalTask() {
         binding.buttonAddTask.setOnClickListener {
-            val title = binding.editTextTitle.text.toString()
-            val description = binding.editTextDescription.text.toString()
+            title = binding.editTextTitle.text.toString().trimEnd()
+            description = binding.editTextDescription.text.toString().trimEnd()
+            checkValue()
+        }
+    }
+
+    private fun checkValue() {
+        if (title.isNotBlank() && description.isNotBlank()) {
             presenter.addPersonalTask(title, description)
+        } else {
+            validateInput()
+        }
+    }
+
+    private fun validateInput() {
+        val titleInput = binding.editTextTitle
+        val descriptionInput = binding.editTextDescription
+        if (title.isBlank()) {
+            titleInput.error = getString(R.string.error_title_message)
+            titleInput.requestFocus()
+        }
+        if (description.isBlank()) {
+            descriptionInput.error = getString(R.string.error_descrption_message)
+            descriptionInput.requestFocus()
         }
     }
 
@@ -40,21 +64,23 @@ class AddPersonalTaskFragment : BaseFragment<FragmentAddTaskBinding>(), IAddPers
 
     override fun onSuccessAdded() {
         requireActivity().runOnUiThread {
-            Toast.makeText(requireContext(), R.string.added_successful, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(), R.string.added_successful, Toast.LENGTH_SHORT).show()
         }
-
     }
 
     override fun onFailureAdded(error: String) {
         requireActivity().runOnUiThread {
-            Toast.makeText(requireContext(), R.string.added_failed, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(), R.string.added_failed, Toast.LENGTH_SHORT).show()
         }
-
     }
 
     private fun hiddenAssignNoNeedInPersonalTask() {
         binding.textViewAssign.visibility = View.GONE
         binding.recyclerViewProfile.visibility = View.GONE
     }
-
+    private fun setupBackButton() {
+        binding.toolBar.setNavigationOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+    }
 }
