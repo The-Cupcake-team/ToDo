@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Brand colors -->
-    <color name="color_primary">#269AB1</color>
+    <color name="color_primary">#0059B3</color>
     <color name="color_on_primary">#FFFFFF</color>
     <color name="color_secondary">#B2CFDE</color>
     <color name="color_on_secondary">@color/color_text_tertiary</color>
@@ -24,5 +24,6 @@
     <color name="color_done">@color/color_primary</color>
     <color name="color_in_progress">@color/color_secondary</color>
     <color name="color_to_do">#81B2F3</color>
+    <color name="color_password_drawable">#99FFFFFF</color>
 
 </resources>
