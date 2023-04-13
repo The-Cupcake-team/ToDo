@@ -1,9 +1,9 @@
-package com.cupcake.todo.ui.fragment.team_tasks
+package com.cupcake.todo.ui.fragment.team_tasks.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.cupcake.todo.model.network.response.TeamTasksResponse
+import com.cupcake.todo.ui.fragment.team_tasks.TeamTaskData
 
-class TasksDiffUtil(private val oldTasks: List<TeamTasksResponse>, private val newTasks: List<TeamTasksResponse>) :
+class TasksDiffUtil(private val oldTasks: List<TeamTaskData>, private val newTasks: List<TeamTaskData>) :
     DiffUtil.Callback()
 {
     override fun getOldListSize() = oldTasks.size
