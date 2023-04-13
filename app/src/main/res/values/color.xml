@@ -25,5 +25,22 @@
     <color name="color_in_progress">@color/color_secondary</color>
     <color name="color_to_do">#81B2F3</color>
     <color name="color_password_drawable">#99FFFFFF</color>
+    <color name="color_button_pressed">#BF0059B3</color>
+    <color name="color_warning">#EC6240</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="white_38">#61FFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+
+    <color name="black_60">#000000</color>
+    <color name="black_87">#DE000000</color>
+
+    <color name="graph_color_light_steel_blue">#B2CFDE</color>
+    <color name="graph_color_light_sea_green">#269AB1</color>
+    <color name="graph_color_jordy_blue">#81B2F3</color>
+
+    <color name="selected_assigne_color">#6763CF</color>
 
 </resources>
