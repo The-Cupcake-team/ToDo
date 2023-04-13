@@ -2,6 +2,7 @@ package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
 import com.cupcake.todo.model.network.response.BaseResponse
+import com.cupcake.todo.model.network.response.LoginResponse
 import com.cupcake.todo.model.network.response.RegisterResponse
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
@@ -40,6 +41,24 @@ class ApiServiceImpl : ApiService {
                 })
     }
 
+    override fun login(
+        username: String,
+        password: String,
+        callback: ApiCallback<BaseResponse<LoginResponse>>
+    ) {
+        client.getRequest(ApiEndPoint.login,username,password).enqueueCall(
+            object: ApiCallback<BaseResponse<LoginResponse>> {
+                override fun onSuccess(response: BaseResponse<LoginResponse>) {
+                    callback.onSuccess(response)
+                }
+
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    callback.onFailure(throwable,statusCode,message)
+                }
+
+            }
+        )
+    }
 
 
     private companion object {
