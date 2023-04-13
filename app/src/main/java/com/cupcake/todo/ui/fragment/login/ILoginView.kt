@@ -6,5 +6,5 @@ interface ILoginView: IView {
     fun showLoading()
     fun hideLoading()
     fun onLoginSuccess()
-    fun onLoginFailure(statusCode: Int?,error: String?)
+    fun onLoginFailure(throwable: Throwable,statusCode: Int?,error: String?)
 }

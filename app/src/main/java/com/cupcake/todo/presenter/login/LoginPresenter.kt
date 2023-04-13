@@ -25,7 +25,7 @@ class LoginPresenter(
     }
 
     override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-        view.onLoginFailure(statusCode,message)
+        view.onLoginFailure(throwable,statusCode,message)
     }
 
 }
