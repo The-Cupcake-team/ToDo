@@ -1,5 +1,6 @@
 package com.cupcake.todo.model.network.interceptor
 
+import com.cupcake.todo.util.PrefsUtil
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -16,7 +17,7 @@ class AuthInterceptor : Interceptor {
     private companion object {
         const val AUTHORIZATION = "Authorization"
         const val BEARER = "bearer"
-        const val TOKEN = ""
+        val TOKEN = PrefsUtil.token
     }
 
 
