@@ -29,11 +29,11 @@ class AddPersonalTaskFragment : BaseFragment<FragmentAddTaskBinding>(), IAddPers
         binding.buttonAddTask.setOnClickListener {
             title = binding.editTextTitle.text.toString().trimEnd()
             description = binding.editTextDescription.text.toString().trimEnd()
-            checkValue()
+            checkInputValue()
         }
     }
 
-    private fun checkValue() {
+    private fun checkInputValue() {
         if (title.isNotBlank() && description.isNotBlank()) {
             presenter.addPersonalTask(title, description)
         } else {
