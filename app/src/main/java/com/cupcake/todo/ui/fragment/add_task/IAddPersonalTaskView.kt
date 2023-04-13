@@ -1,9 +1,11 @@
 package com.cupcake.todo.ui.fragment.add_task
 
-interface IView
-interface IAddPersonalTask : IView{
+import com.cupcake.todo.ui.fragment.register.IView
+
+
+interface IAddPersonalTask : IView {
     fun showLoading()
     fun hideLoading()
-    fun onIAddPersonalTaskSuccess()
-    fun onIAddPersonalTaskFailure(error: String)
+    fun onSuccessAdded()
+    fun onFailureAdded(error: String)
 }

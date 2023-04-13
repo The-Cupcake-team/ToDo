@@ -11,17 +11,21 @@ import com.cupcake.todo.databinding.FragmentAddTaskBinding
 import com.cupcake.todo.presenter.add_personal_task.AddPersonalTaskPresenter
 import com.cupcake.todo.ui.base.BaseFragment
 
-class AddPersonalTaskFragment : BaseFragment<FragmentAddTaskBinding>(),IAddPersonalTask {
+class AddPersonalTaskFragment : BaseFragment<FragmentAddTaskBinding>(), IAddPersonalTask {
     override val LOG_TAG: String = this::class.java.name
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentAddTaskBinding =
         FragmentAddTaskBinding::inflate
-private lateinit var presenter:AddPersonalTaskPresenter
+    private lateinit var presenter: AddPersonalTaskPresenter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        hideAssignRecycler()
-        presenter= AddPersonalTaskPresenter(this)
+        hiddenAssignNoNeedInPersonalTask()
+        presenter = AddPersonalTaskPresenter(this)
+        onClickAddPersonalTask()
+    }
+
+    private fun onClickAddPersonalTask() {
         binding.buttonAddTask.setOnClickListener {
-            val title=binding.editTextTitle.text.toString()
-            val description=binding.editTextDescription.text.toString()
+            val title = binding.editTextTitle.text.toString()
+            val description = binding.editTextDescription.text.toString()
             presenter.addPersonalTask(title, description)
         }
     }
@@ -34,21 +38,23 @@ private lateinit var presenter:AddPersonalTaskPresenter
         Log.v(LOG_TAG, "hideLoading")
     }
 
-    override fun onIAddPersonalTaskSuccess() {
+    override fun onSuccessAdded() {
         requireActivity().runOnUiThread {
-            Toast.makeText(requireContext(),R.string.added_successful, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.added_successful, Toast.LENGTH_SHORT).show()
         }
 
     }
 
-    override fun onIAddPersonalTaskFailure(error: String) {
+    override fun onFailureAdded(error: String) {
         requireActivity().runOnUiThread {
             Toast.makeText(requireContext(), R.string.added_failed, Toast.LENGTH_SHORT).show()
         }
 
     }
-    private fun hideAssignRecycler(){
-        binding.textViewAssign.visibility=View.GONE
-        binding.recyclerViewProfile.visibility=View.GONE
+
+    private fun hiddenAssignNoNeedInPersonalTask() {
+        binding.textViewAssign.visibility = View.GONE
+        binding.recyclerViewProfile.visibility = View.GONE
     }
+
 }

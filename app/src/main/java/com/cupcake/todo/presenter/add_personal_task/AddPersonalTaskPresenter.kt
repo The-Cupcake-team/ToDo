@@ -16,15 +16,17 @@ class AddPersonalTaskPresenter(
     fun addPersonalTask(title: String, description: String) {
         view.showLoading()
         service.addPersonalTask(title, description, this)
-        view.hideLoading()
+
     }
 
     override fun onSuccess(response: BaseResponse<AddPersonalTaskResponse>) {
-        view.onIAddPersonalTaskSuccess()
+        view.onSuccessAdded()
+        view.hideLoading()
     }
 
     override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-       view.onIAddPersonalTaskFailure(throwable.toString())
+        view.onFailureAdded(throwable.toString())
+        view.hideLoading()
     }
 
 
