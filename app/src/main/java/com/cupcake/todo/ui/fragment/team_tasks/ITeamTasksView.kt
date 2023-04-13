@@ -1,5 +1,7 @@
 package com.cupcake.todo.ui.fragment.team_tasks
 
+import com.cupcake.todo.presenter.model.TeamTaskData
+
 interface ITeamTasksView {
 
     fun showLoading()

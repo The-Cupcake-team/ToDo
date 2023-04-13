@@ -4,8 +4,9 @@ import com.cupcake.todo.model.network.ApiServiceImpl
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.TeamTasksResponse
 import com.cupcake.todo.model.network.util.ApiCallback
+import com.cupcake.todo.presenter.mapper.toTeamTask
 import com.cupcake.todo.ui.fragment.team_tasks.ITeamTasksView
-import com.cupcake.todo.ui.fragment.team_tasks.mapTeamTasksResponseToData
+
 
 class TeamTasksPresenter(
     private val view:ITeamTasksView,
@@ -20,7 +21,7 @@ class TeamTasksPresenter(
     }
 
     override fun onSuccess(response: BaseResponse<List<TeamTasksResponse>>) {
-        val teamTasksDataList = response.result?.map {  mapTeamTasksResponseToData(it) }
+        val teamTasksDataList = response.result?.map {  it.toTeamTask() }
         view.onTeamTasksSuccess(teamTasksDataList!!)
     }
 

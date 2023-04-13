@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemTodoTeamTaskBinding
-import com.cupcake.todo.ui.fragment.team_tasks.TeamTaskData
+import com.cupcake.todo.presenter.model.TeamTaskData
 
 class TeamTasksAdapter(
     private var teamTasks: List<TeamTaskData>,
