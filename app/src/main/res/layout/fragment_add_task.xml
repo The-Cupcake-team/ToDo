@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/color_background">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -36,19 +36,18 @@
         android:text="@string/assign_to"
         app:layout_constraintTop_toBottomOf="@id/top_bar" />
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/recycler_view_profile"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginTop="@dimen/spacing_normal"
-       android:paddingStart="@dimen/spacing_normal"
-       android:paddingEnd="@dimen/spacing_medium"
-       android:clipToPadding="false"
-       android:orientation="horizontal"
-       tools:listitem="@layout/item_profile_image"
-       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-       app:layout_constraintTop_toBottomOf="@id/text_view_assign"
-       />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/spacing_normal"
+        android:paddingEnd="@dimen/spacing_medium"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/text_view_assign"
+        tools:listitem="@layout/item_profile_image" />
 
     <TextView
         android:id="@+id/text_view_title"
@@ -69,12 +68,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_normal"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:padding="@dimen/spacing_medium"
-        android:hint="@string/add_task_title_hint"
-        android:textColorHint="@color/color_text_tertiary"
         android:background="@drawable/card_background"
+        android:hint="@string/add_task_title_hint"
+        android:maxLines="1"
+        android:padding="@dimen/spacing_medium"
+        android:singleLine="true"
+        android:textColorHint="@color/color_text_tertiary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_title" />
@@ -86,23 +85,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_large"
-        android:textColor="@color/color_text_primary"
         android:text="@string/task_desc"
+        android:textColor="@color/color_text_primary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_title" />
 
     <EditText
         android:id="@+id/edit_text_description"
         style="@style/TextStyle.Title"
-        android:background="@drawable/card_background"
         android:layout_width="match_parent"
         android:layout_height="@dimen/zero"
         android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:layout_marginBottom="@dimen/spacing_large"
         android:layout_marginTop="@dimen/spacing_normal"
-        android:padding="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:background="@drawable/card_background"
         android:gravity="top"
         android:hint="@string/add_task_desc_hint"
+        android:padding="@dimen/spacing_medium"
         android:textColorHint="@color/color_text_tertiary"
         app:layout_constraintBottom_toTopOf="@+id/button_add_task"
         app:layout_constraintTop_toBottomOf="@+id/text_view_description" />
