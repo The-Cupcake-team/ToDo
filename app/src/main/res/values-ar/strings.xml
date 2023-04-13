@@ -27,4 +27,9 @@
     <string name="update_task">تحديث المهمة</string>
     <string name="language">اللغة</string>
     <string name="dark_theme">مظهر داكن</string>
+    <string name="try_again">المحاولة مرة اخرى</string>
+    <string name="invalid_account">حساب غير صالح</string>
+    <string name="unable_to_login">عدم الإمكان من تسجيل الدخول</string>
+    <string name="network_error_message">حدث خلل ما, الرجاء محاولة تسجيل الدخول مرة اخرى بعد التأكد من اتصال الشبكة.</string>
+
 </resources>
