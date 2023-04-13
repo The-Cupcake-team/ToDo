@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-
-    <solid android:color="@color/white"/>
-    <corners android:radius="42dp"/>
+    <solid android:color="@color/selected_assigne_color"/>
+    <corners android:radius="@dimen/spacing_large"/>
     <padding
-        android:bottom="8dp"
-        android:left="8dp"
-        android:right="8dp"
-        android:top="8dp" />
-    <TextView
-        android:id="@+id/assignee_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black_60"
-        android:textSize="8sp" />
+        android:bottom="@dimen/spacing_normal"
+        android:left="@dimen/spacing_normal"
+        android:right="@dimen/spacing_normal"
+        android:top="@dimen/spacing_normal" />
+
+
 </shape>

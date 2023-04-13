@@ -1,4 +1,4 @@
-package com.cupcake.todo
+package com.cupcake.todo.ui.base
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     abstract val LOG_TAG: String
-    abstract val bindingInflater: (LayoutInflater) -> VB
+    abstract val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> VB
     private var _binding: ViewBinding? = null
     protected val binding get() = _binding as VB
 
@@ -19,7 +19,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = bindingInflater(layoutInflater)
+        _binding = bindingInflater(layoutInflater, container!!,false)
         return binding.root
     }
 
