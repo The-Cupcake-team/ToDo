@@ -103,9 +103,11 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     }
 
     override fun showLoading() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            binding.progressLoading.visibility = View.VISIBLE
-        }, 2000)
+        requireActivity().runOnUiThread {
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.progressLoading.visibility = View.VISIBLE
+            }, 2000)
+        }
     }
 
     override fun hideLoading() {
@@ -116,15 +118,23 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
         navigateToFragment(AddTaskFragment())
     }
 
-    override fun onLoginFailure(statusCode: Int?, error: String?) {
+    override fun onLoginFailure(throwable: Throwable, statusCode: Int?, error: String?) {
         if (statusCode == 401) {
-            Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
-            requireActivity().runOnUiThread{
-                Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+            requireActivity().runOnUiThread {
                 AlertDialog.Builder(requireContext())
-                    .setTitle("Invalid account")
+                    .setTitle(getString(R.string.invalid_account))
                     .setMessage(error)
-                    .setPositiveButton("Try again") { _, _ ->
+                    .setPositiveButton(getString(R.string.try_again)) { _, _ ->
+                        binding.textInputEditPassword.text!!.clear()
+                        binding.textInputEditUsername.text!!.clear()
+                    }.create().show()
+            }
+        } else {
+            requireActivity().runOnUiThread {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.unable_to_login))
+                    .setMessage(getString(R.string.network_error_message))
+                    .setPositiveButton(getString(R.string.try_again)) { _, _ ->
 
                     }.create().show()
             }
