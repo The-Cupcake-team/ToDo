@@ -27,4 +27,5 @@
     <string name="update_task">تحديث المهمة</string>
     <string name="language">اللغة</string>
     <string name="dark_theme">مظهر داكن</string>
+    <string name="all_tasks_chip">كل</string>
 </resources>
