@@ -11,4 +11,9 @@ interface ApiService {
         callback: ApiCallback<BaseResponse<RegisterResponse>>,
     )
 
+    fun updateStates(
+        id: String,
+        status: Int,
+        callBack: ApiCallback<BaseResponse<String>>
+    )
 }

@@ -40,6 +40,22 @@ class ApiServiceImpl : ApiService {
                 })
     }
 
+    override fun updateStates(id:String, status:Int,callBack : ApiCallback<BaseResponse<String>>) {
+        val updatestatusBody = FormBody.Builder()
+            .add(ID,id)
+            .add(STATUS, status.toString())
+            .build()
+        client.putRequest(ApiEndPoint.toDoPersonal ,updatestatusBody).enqueueCall(
+            object : ApiCallback<BaseResponse<String>> {
+                override fun onSuccess(response: BaseResponse<String>) {
+                    callBack.onSuccess(response)
+                }
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    callBack.onFailure(throwable,statusCode, message)
+                }
+            }
+        )
+    }
 
 
     private companion object {
