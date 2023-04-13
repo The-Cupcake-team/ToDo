@@ -22,9 +22,9 @@ class TeamTaskAdapter(private val items: List<TeamTask>): RecyclerView.Adapter<T
         val item = items[position]
         holder.binding.apply {
             textViewTaskTitle.text = item.title
-            textViewRemainingPlans.text = item.description
+            textViewDate.text = item.creationTime
             textViewAssignee.text = item.assignee.take(2)
-            textViewGoTPlans.text = item.creationTime
+            textViewDescription.text = item.description
         }
 
     }

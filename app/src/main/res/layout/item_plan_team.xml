@@ -37,7 +37,7 @@
             app:layout_constraintTop_toTopOf="@+id/icon_team_group" />
 
         <TextView
-            android:id="@+id/text_view_remaining_plans"
+            android:id="@+id/text_view_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_normal"
@@ -54,12 +54,12 @@
             android:layout_marginEnd="@dimen/spacing_normal"
             android:background="@drawable/ic_right_arrow"
             android:backgroundTint="@color/color_primary"
-            app:layout_constraintBottom_toBottomOf="@+id/text_view_go_t_plans"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_date"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_view_go_t_plans" />
+            app:layout_constraintTop_toTopOf="@+id/text_view_date" />
 
         <TextView
-            android:id="@+id/text_view_go_t_plans"
+            android:id="@+id/text_view_date"
             android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_small"

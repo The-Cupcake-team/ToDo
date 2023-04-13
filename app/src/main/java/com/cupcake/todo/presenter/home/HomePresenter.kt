@@ -15,20 +15,13 @@ class HomePresenter(
 
     fun getAllPersonalTask() {
         view.showLoading()
-        service.getAllPersonalTask(
-            object : ApiCallback<BaseResponse<List<PersonalTask>>> {
+        service.getAllPersonalTask(object : ApiCallback<BaseResponse<List<PersonalTask>>> {
+
                 override fun onSuccess(response: BaseResponse<List<PersonalTask>>) {
-                    getRecentTask(response.result!!)
-                    val recentTask = getRecentTask(response.result)
-                    val todoTask = getToDoPersonalTask(response.result)
-                    val intProgressTask = getInProgressPersonalTask(response.result)
-                    val doneTask = getDonePersonalTask(response.result)
-
-                    view.onToDoPersonalTaskSuccess(todoTask)
-                    view.onInProgressPersonalTaskSuccess(intProgressTask)
-                    view.onDonePersonalTaskSuccess(doneTask)
-                    view.onRecentPersonalTaskSuccess(recentTask)
-
+                    view.onToDoPersonalTaskSuccess(getToDoPersonalTask(response.result!!))
+                    view.onInProgressPersonalTaskSuccess(getInProgressPersonalTask(response.result))
+                    view.onDonePersonalTaskSuccess(getDonePersonalTask(response.result))
+                    view.onRecentPersonalTaskSuccess(getRecentTask(response.result))
                 }
 
                 override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
@@ -42,7 +35,7 @@ class HomePresenter(
 
     private fun getRecentTask(personalTask: List<PersonalTask>): List<PersonalTask> {
         return personalTask.filter {
-            it.creationTime == personalTask.maxByOrNull { it.creationTime }?.creationTime
+            it.status == TODO || it.status == INPROGRESS
         }
     }
 
@@ -70,8 +63,8 @@ class HomePresenter(
     fun getAllTeamTask() {
         view.showLoading()
 
-        service.getAllTeamTask(
-            object : ApiCallback<BaseResponse<List<TeamTask>>> {
+        service.getAllTeamTask(object : ApiCallback<BaseResponse<List<TeamTask>>> {
+
                 override fun onSuccess(response: BaseResponse<List<TeamTask>>) {
                     view.onGetLatestTeamTaskSuccess(getLatestTeamTasks(response.result!!))
                     view.onToDoTeamTasksSuccess(getToDoTeamTasks(response.result))
