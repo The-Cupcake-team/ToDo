@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Brand colors -->
-    <color name="color_primary">#269AB1</color>
+    <color name="color_primary">#0059B3</color>
     <color name="color_on_primary">#FFFFFF</color>
     <color name="color_secondary">#B2CFDE</color>
     <color name="color_on_secondary">@color/color_text_tertiary</color>

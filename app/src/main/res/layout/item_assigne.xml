@@ -6,6 +6,7 @@
     android:layout_marginEnd="@dimen/spacing_normal">
 
     <TextView
+        android:id="@+id/assigne_name_cut"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
@@ -17,6 +18,7 @@
         android:textSize="@dimen/font_size_caption" />
 
     <TextView
+        android:id="@+id/assigne_name"
         android:layout_width="52dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
