@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemProfileImageBinding
 
-class DetailsAdapter(val list: List<String>, var assigne: String) :
+class DetailsAdapter(private val list: List<String>, var assigne: String) :
     RecyclerView.Adapter<DetailsAdapter.DetailsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailsViewHolder {
@@ -19,14 +19,14 @@ class DetailsAdapter(val list: List<String>, var assigne: String) :
 
 
     override fun onBindViewHolder(holder: DetailsViewHolder, position: Int) {
-        val currentteamperson = list[position]
-        val assigneeChars = currentteamperson.take(2).uppercase()
+        val currentTeamPerson = list[position]
+        val assigneeChars = currentTeamPerson.take(2).uppercase()
         holder.binding.apply {
-            name.text = currentteamperson
+            name.text = currentTeamPerson
 
-            if (assigne == currentteamperson) {
-                correct.visibility = View.VISIBLE
-            }else{
+            if (assigne == currentTeamPerson) {
+                avatarMemberSelected.visibility = View.VISIBLE
+            } else {
                 nameChars.text = assigneeChars
             }
         }
