@@ -1,19 +1,16 @@
 package com.cupcake.todo.ui.fragment.home
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.cupcake.todo.databinding.FragmentHomeBinding
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.presenter.home.HomePresenter
 import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.util.toPersonalTask
-import okhttp3.internal.notify
 
 
 class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
@@ -60,39 +57,15 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
         )
 
         val details = mapOf(
-            "username" to "Asia",
-            "toDo" to personalTasks.first,
-            "inProgress" to personalTasks.second,
-            "done" to personalTasks.third
+            USERNAME to "Asia",
+            TODO to personalTasks.first,
+            IN_PROGRESS to personalTasks.second,
+            DONE to personalTasks.third
         )
 
         itemsList.add(HomeItem(details, HomeItemType.ITEM_TYPE_HEADER_DETAILS))
 
-
     }
-
-//    override fun onToDoPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
-//    }
-//
-//    override fun onToDoTeamTasksSuccess(teamTasks: List<TeamTask>) {
-//    }
-//
-//
-//    override fun onInProgressPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
-////        Log.e("result", "onInProgressPersonalTaskSuccess: ${personalTasks}")
-//    }
-//
-//    override fun onDonePersonalTaskSuccess(personalTasks: List<PersonalTask>) {
-//    }
-
-
-//    override fun onInProgressTeamTasksSuccess(teamTasks: List<TeamTask>) {
-////        Log.e("result", "onInProgressTeamTasksSuccess: ${teamTasks}")
-//
-//    }
-//
-//    override fun onDoneTeamTasksSuccess(teamTasks: List<TeamTask>) {
-//    }
 
     override fun onGetDataFailure(error: String) {
         Log.e("result", "onGetDataFailure${error}")
@@ -115,4 +88,10 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
     }
 
 
+    companion object{
+        const val USERNAME = "username"
+        const val TODO = "toDo"
+        const val IN_PROGRESS = "inProgress"
+        const val DONE = "done"
+    }
 }
