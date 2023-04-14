@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemHomeHeaderBinding
@@ -16,17 +17,17 @@ import com.cupcake.todo.model.network.response.TeamTask
 
 class HomeAdapter(
     private var items: List<HomeItem<Any>>,
-    private val onClickViewMore: (planType: String) -> Unit,
+//    private val onClickViewMore: (planType: String) -> Unit,
 ) : RecyclerView.Adapter<HomeAdapter.BasicViewHolder>() {
 
     sealed class BasicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setItems(items: List<HomeItem<Any>>) {
-        this.items = items
-        notifyDataSetChanged()
-    }
+//
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun setItems(items: List<HomeItem<Any>>) {
+//        this.items = items
+//        notifyDataSetChanged()
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasicViewHolder {
         return when (viewType) {
@@ -42,17 +43,16 @@ class HomeAdapter(
                     .inflate(R.layout.item_title_sction, parent, false)
                 TitleSectionViewHolder(view)
             }
+            ITEM_TYPE_TEAM_TASK -> {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_nested_team_task, parent, false)
+                TeamTaskViewHolder(view)
+            }
 
             ITEM_TYPE_PERSONAL_TASK -> {
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_personal_task, parent, false)
                 PersonalTaskViewHolder(view)
-            }
-
-            ITEM_TYPE_TEAM_TASK -> {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_nested_team_task, parent, false)
-                TeamTaskViewHolder(view)
             }
             else -> throw Exception("UNKNOWN VIEW TYPE")
         }
@@ -90,7 +90,7 @@ class HomeAdapter(
         val currentItem = items[position].item as String
         holder.binding.apply {
             textViewRecentTask.text = currentItem
-            textViewViewAll.setOnClickListener { onClickViewMore(currentItem) }
+
         }
     }
 
@@ -129,11 +129,14 @@ class HomeAdapter(
         val binding = ItemNestedTeamTaskBinding.bind(itemView)
     }
 
+
+
+
     companion object {
         private const val ITEM_TYPE_HEADER_DETAILS = 0
         private const val ITEM_TYPE_TITLE_SECTION = 1
-        private const val ITEM_TYPE_PERSONAL_TASK = 2
-        private const val ITEM_TYPE_TEAM_TASK = 3
+        private const val ITEM_TYPE_TEAM_TASK = 2
+        private const val ITEM_TYPE_PERSONAL_TASK = 3
     }
 
 }

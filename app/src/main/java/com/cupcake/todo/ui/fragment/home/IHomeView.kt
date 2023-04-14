@@ -20,4 +20,6 @@ interface IHomeView : IView {
 
 
     fun onGetDataFailure(error: String)
+    fun onGetDataFailureOnTeam(error: String, statusCode: Int, message: String)
+
 }

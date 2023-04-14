@@ -1,5 +1,6 @@
 package com.cupcake.todo.model.network.util
 
+import android.util.Log
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -26,12 +27,16 @@ inline fun <reified T : Any> Call.enqueueCall(callback: ApiCallback<T>) {
                             statusCode = response.code,
                             message = message,
                         )
+                        Log.e("result", "error in else call backs:${message}")
                     }
                 } else {
                     callback.onFailure(Exception("Response Body is null"))
+                    Log.e("result", "Response Body is null")
                 }
             } catch (error: Exception) {
                 callback.onFailure(error)
+                Log.e("result", "error in catch call backs:${error.message}")
+
             }
         }
 

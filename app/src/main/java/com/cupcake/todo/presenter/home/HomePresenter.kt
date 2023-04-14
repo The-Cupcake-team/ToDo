@@ -9,12 +9,18 @@ import com.cupcake.todo.ui.fragment.home.IHomeView
 
 class HomePresenter(
     private val view: IHomeView
-)  {
+) {
 
     private val service = ApiServiceImpl()
 
-    fun getAllPersonalTask() {
+    fun getTasks() {
         view.showLoading()
+        getAllPersonalTask()
+        getAllTeamTask()
+        view.hideLoading()
+    }
+
+    private fun getAllPersonalTask() {
         service.getAllPersonalTask(object : ApiCallback<BaseResponse<List<PersonalTask>>> {
 
                 override fun onSuccess(response: BaseResponse<List<PersonalTask>>) {
@@ -24,12 +30,11 @@ class HomePresenter(
                     view.onRecentPersonalTaskSuccess(getRecentTask(response.result))
                 }
 
-                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                    view.onGetDataFailure(throwable.toString())
-                }
+            override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                view.onGetDataFailure(throwable.toString())
+            }
 
-            })
-        view.hideLoading()
+        })
     }
 
 
@@ -60,9 +65,7 @@ class HomePresenter(
 
 
 
-    fun getAllTeamTask() {
-        view.showLoading()
-
+    private fun getAllTeamTask() {
         service.getAllTeamTask(object : ApiCallback<BaseResponse<List<TeamTask>>> {
 
                 override fun onSuccess(response: BaseResponse<List<TeamTask>>) {
@@ -77,11 +80,10 @@ class HomePresenter(
                 }
 
             })
-        view.hideLoading()
     }
 
     private fun getLatestTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
-        return teamTasks.take(2)
+        return teamTasks.take(4)
     }
 
     private fun getToDoTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
