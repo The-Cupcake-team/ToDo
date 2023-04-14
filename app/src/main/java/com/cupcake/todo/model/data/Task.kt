@@ -2,20 +2,22 @@ package com.cupcake.todo.model.data
 
 import android.os.Parcel
 import android.os.Parcelable
-
-open class Task(
+class Task(
     val id: String?,
     val title: String?,
     val description: String?,
     val status: Int,
-    val createTime: String?
+    val createTime: String? ,
+    val assigne : String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readInt(),
+        parcel.readString(),
         parcel.readString()
+
     )
 
     override fun describeContents(): Int {
@@ -28,6 +30,7 @@ open class Task(
         dest.writeString(description)
         dest.writeInt(status)
         dest.writeString(createTime)
+        dest.writeString(assigne)
     }
 
     companion object CREATOR : Parcelable.Creator<Task> {
