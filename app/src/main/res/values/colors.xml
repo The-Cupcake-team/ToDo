@@ -23,4 +23,5 @@
 
     <color name="selected_assigne_color">#6763CF</color>
     <color name="button_on_press">#1D7485</color>
+    <color name="color_warning">#EC6240</color>
 </resources>
