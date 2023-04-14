@@ -1,12 +1,9 @@
 package com.cupcake.todo.ui.fragment.home
 
-import android.annotation.SuppressLint
-import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemHomeHeaderBinding
@@ -16,11 +13,7 @@ import com.cupcake.todo.databinding.ItemTitleSctionBinding
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.ui.util.setupPieChart
-import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.PercentFormatter
 
 class HomeAdapter(
     private var items: List<HomeItem<Any>>,
@@ -89,12 +82,22 @@ class HomeAdapter(
     private fun bindDetails(holder: HeaderDetailsViewHolder, position: Int) {
         val currentItem = items[position].item as Map<String, *>
         holder.binding.apply {
-            textViewUserName.text = currentItem["username"].toString()
+            textViewUserName.text = currentItem[HomeFragment.USERNAME].toString()
 
-            include.textViewToDoPercent.text = "${currentItem["toDo"]} %"
-            include.textViewInProgressPercent.text = "${currentItem["inProgress"]} %"
-            include.textViewDonePercent.text = "${currentItem["done"]} %"
-            include.pieChart.setupPieChart(include.pieChart, taskDataValue(currentItem["toDo"] as Float, currentItem["inProgress"] as Float, currentItem["done"] as Float))
+            val toDoTaskCount = currentItem[HomeFragment.TODO]
+            val inProgressTaskCount = currentItem[HomeFragment.IN_PROGRESS]
+            val doneTaskCount = currentItem[HomeFragment.DONE]
+            include.textViewToDoPercent.text = "$toDoTaskCount %"
+            include.textViewInProgressPercent.text = "$inProgressTaskCount %"
+            include.textViewDonePercent.text = "$doneTaskCount %"
+            include.pieChart.setupPieChart(
+                include.pieChart,
+                taskDataValue(
+                    toDoTaskCount as Float,
+                    inProgressTaskCount as Float,
+                    doneTaskCount as Float
+                )
+            )
         }
     }
 
@@ -142,30 +145,19 @@ class HomeAdapter(
     }
 
 
-
+    private fun taskDataValue(toDo: Float, inProgress: Float, done: Float): MutableList<PieEntry> {
+        val dataValue = mutableListOf<PieEntry>()
+        dataValue.add(PieEntry(toDo, "ToDo"))
+        dataValue.add(PieEntry(inProgress, "InProgress"))
+        dataValue.add(PieEntry(done, "Done"))
+        return dataValue
+    }
 
     companion object {
         private const val ITEM_TYPE_HEADER_DETAILS = 0
         private const val ITEM_TYPE_TITLE_SECTION = 1
         private const val ITEM_TYPE_TEAM_TASK = 2
         private const val ITEM_TYPE_PERSONAL_TASK = 3
-    }
-
-
-//    private fun taskDataValue(map: Map<String, Any>): MutableList<PieEntry> {
-//        val dataValue = mutableMapOf<String, PieEntry>()
-//        dataValue["toDo"] = PieEntry(todo,"ToDo")
-//        dataValue["inProgress"] = PieEntry(inProgress,"InProgress")
-//        dataValue["done"] = PieEntry(done,"Done")
-//        return dataValue
-//    }
-
-    private fun taskDataValue(toDo: Float, inProgress: Float, done: Float): MutableList<PieEntry> {
-        val dataValue = mutableListOf<PieEntry>()
-        dataValue.add(PieEntry(toDo,"ToDo"))
-        dataValue.add(PieEntry(inProgress,"InProgress"))
-        dataValue.add(PieEntry(done,"Done"))
-        return dataValue
     }
 }
 
