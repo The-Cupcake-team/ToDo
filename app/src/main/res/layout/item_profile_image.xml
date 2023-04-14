@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <ImageView
         android:id="@+id/image_profile"
         android:layout_width="@dimen/small_profile"
         android:layout_height="@dimen/small_profile"
@@ -14,17 +14,20 @@
         android:background="@drawable/ic_assignee"
         android:backgroundTint="@color/color_secondary"
         app:layout_constraintStart_toStartOf="@id/container"
+        android:contentDescription="@string/avatar_team_member"
         app:layout_constraintTop_toTopOf="@id/container" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/correct"
+    <ImageView
+        android:id="@+id/avatar_member_selected"
         android:layout_width="@dimen/small_profile"
         android:layout_height="@dimen/small_profile"
         android:layout_marginStart="@dimen/spacing_normal"
         android:src="@drawable/ic_selected_assigne"
-        android:visibility="gone"
+        android:contentDescription="@string/avatar_team_member"
+        android:elevation="2dp"
         android:backgroundTint="@color/color_secondary"
         app:layout_constraintStart_toStartOf="@id/container"
+        android:visibility="invisible"
         app:layout_constraintTop_toTopOf="@id/container" />
 
     <TextView

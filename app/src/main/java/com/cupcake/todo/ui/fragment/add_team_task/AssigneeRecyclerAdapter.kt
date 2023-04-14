@@ -12,7 +12,7 @@ class AssigneeRecyclerAdapter(
     private val assignees : List<String>
 ): RecyclerView.Adapter<AssigneeRecyclerAdapter.ViewHolder>() {
 
-    var selectedPosition = -1
+    private var selectedPosition = -1
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -29,16 +29,16 @@ class AssigneeRecyclerAdapter(
                 name.text = assignee
                 nameChars.text = assigneeChars
                 if (selectedPosition == position){
-                    correct.visibility = View.VISIBLE
+                    avatarMemberSelected.visibility = View.VISIBLE
                 }else{
-                    correct.visibility = View.GONE
+                    avatarMemberSelected.visibility = View.GONE
                 }
                 root.setOnClickListener {
-                    if (selectedPosition != -1){
+                    if (selectedPosition != -1) {
                         notifyItemChanged(selectedPosition)
                     }
                     selectedPosition = position
-                    correct.visibility = View.VISIBLE
+                    avatarMemberSelected.visibility = View.VISIBLE
                     listener.onAssigneeItemClicked(assignee)
                 }
             }
@@ -50,7 +50,7 @@ class AssigneeRecyclerAdapter(
         val binding = ItemProfileImageBinding.bind(itemView)
     }
 
-    interface IAssigneeClickListener{
+    interface IAssigneeClickListener {
         fun onAssigneeItemClicked(assignee: String)
     }
 }
