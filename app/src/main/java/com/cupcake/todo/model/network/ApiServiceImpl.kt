@@ -112,6 +112,14 @@ class ApiServiceImpl : ApiService {
         )
     }
 
+    override fun updateStatus(
+        id: String,
+        status: Int,
+        callBack: ApiCallback<BaseResponse<String>>
+    ) {
+        TODO("Hassan")
+    }
+
     private companion object {
         const val USERNAME = "username"
         const val PASSWORD = "password"

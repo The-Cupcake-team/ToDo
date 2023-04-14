@@ -25,7 +25,7 @@ interface ApiService {
         callback: ApiCallback<BaseResponse<AddPersonalTaskResponse>>
     )
 
-    fun updateStates(
+    fun updateStatus(
         id: String,
         status: Int,
         callBack: ApiCallback<BaseResponse<String>>

@@ -12,7 +12,7 @@ class DetailsPresenter(private val view: IDetailsView) : ApiCallback<BaseRespons
 
     fun detailsUpDate(id: String, status: Int) {
         view.showLoading()
-        apiService.updateStates(id, status,this)
+        apiService.updateStatus(id, status,this)
         view.hideLoading()
     }
     val team = listOf("Mustafa", "Andrew", "Ameer", "Ethaar", "Tarek", "Asia", "Hassan",
