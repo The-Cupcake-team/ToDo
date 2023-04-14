@@ -1,5 +1,6 @@
 package com.cupcake.todo.presenter.details
 
+import com.cupcake.todo.model.data.Task
 import com.cupcake.todo.model.network.ApiServiceImpl
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.util.ApiCallback
@@ -10,9 +11,9 @@ class DetailsPresenter(private val view: IDetailsView) : ApiCallback<BaseRespons
 
     private val apiService = ApiServiceImpl()
 
-    fun DetailsupDate(id: String, status: Int) {
+    fun DetailsupDate(task: Task) {
         view.showLoading()
-        apiService.updateStates(id, status,this)
+        apiService.updateStates(task,this)
         view.hideLoading()
     }
     val assignee = listOf<String>("Mustafa", "Andrew", "Ameer", "Ethaar", "tarek", "Asia", "Hassan",

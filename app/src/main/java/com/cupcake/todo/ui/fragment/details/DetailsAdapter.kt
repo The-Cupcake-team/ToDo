@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemProfileImageBinding
 
-class DetailsAdapter(val list: List<String>, var assigne: String) :
+class DetailsAdapter(val list: List<String>, var assigne: String?) :
     RecyclerView.Adapter<DetailsAdapter.DetailsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailsViewHolder {

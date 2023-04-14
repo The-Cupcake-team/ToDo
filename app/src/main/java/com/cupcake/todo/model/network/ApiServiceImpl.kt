@@ -1,6 +1,7 @@
 package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
+import com.cupcake.todo.model.data.Task
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.RegisterResponse
 import com.cupcake.todo.model.network.util.ApiCallback
@@ -40,21 +41,30 @@ class ApiServiceImpl : ApiService {
                 })
     }
 
-    override fun updateStates(id:String, status:Int,callBack : ApiCallback<BaseResponse<String>>) {
-        val updatestatusBody = FormBody.Builder()
-            .add(ID,id)
-            .add(STATUS, status.toString())
-            .build()
-        client.putRequest(ApiEndPoint.toDoPersonal ,updatestatusBody).enqueueCall(
-            object : ApiCallback<BaseResponse<String>> {
-                override fun onSuccess(response: BaseResponse<String>) {
-                    callBack.onSuccess(response)
+    override fun updateStates(task: Task, callBack: ApiCallback<BaseResponse<String>>) {
+        val updatestatusBody = task?.let {
+            FormBody.Builder()
+                .add(ID, it.id.toString())
+                .add(STATUS, it.status.toString())
+                .build()
+        }
+        var endPoint = ApiEndPoint.toDoPersonal
+        if (!task.assigne.isNullOrEmpty())
+         endPoint = ApiEndPoint.toDoTeam
+
+        updatestatusBody?.let {
+            client.putRequest(endPoint, it).enqueueCall(
+                object : ApiCallback<BaseResponse<String>> {
+                    override fun onSuccess(response: BaseResponse<String>) {
+                        callBack.onSuccess(response)
+                    }
+
+                    override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                        callBack.onFailure(throwable, statusCode, message)
+                    }
                 }
-                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                    callBack.onFailure(throwable,statusCode, message)
-                }
-            }
-        )
+            )
+        }
     }
 
 
