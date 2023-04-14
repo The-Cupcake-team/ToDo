@@ -13,12 +13,16 @@ import com.cupcake.todo.databinding.ItemPersonalTaskBinding
 import com.cupcake.todo.databinding.ItemTitleSctionBinding
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
+import com.cupcake.todo.ui.fragment.personal_tasks.PersonalTasksFragment
+import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
 import com.cupcake.todo.ui.util.setupPieChart
 import com.github.mikephil.charting.data.PieEntry
 
 class HomeAdapter(
     private var items: List<HomeItem<Any>>,
-//    private val onClickViewMore: (planType: String) -> Unit,
+    private val onClickViewMore: (planType: String) -> Unit,
+    private val onClickPersonalTaskItem: (personalTask: PersonalTask) -> Unit,
+    private val onClickTeamTaskItem: (teamTask: TeamTask) -> Unit
 ) : RecyclerView.Adapter<HomeAdapter.BasicViewHolder>() {
 
     sealed class BasicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -98,6 +102,9 @@ class HomeAdapter(
         val currentItem = items[position].item as String
         holder.binding.apply {
             textViewRecentTask.text = currentItem
+            textViewViewAll.setOnClickListener {
+                onClickViewMore(currentItem)
+            }
 
         }
     }
@@ -105,7 +112,7 @@ class HomeAdapter(
     private fun bindTeamTask(holder: TeamTaskViewHolder, position: Int) {
         val currentItem = items[position].item as List<TeamTask>
         Log.d("HomeAdapter", "bindTeamTask: $currentItem")
-        val adapter = TeamTaskAdapter(currentItem)
+        val adapter = TeamTaskAdapter(currentItem, onClickTeamTaskItem)
         holder.binding.recyclerViewTeamTasks.adapter = adapter
 
     }
@@ -118,6 +125,9 @@ class HomeAdapter(
             textViewTaskTitle.text = currentItem.title
             textViewDescription.text = currentItem.description
             textViewDate.text = currentItem.creationTime
+            root.setOnClickListener {
+                onClickPersonalTaskItem(currentItem)
+            }
         }
     }
 
@@ -136,7 +146,6 @@ class HomeAdapter(
     class TeamTaskViewHolder(itemView: View) : BasicViewHolder(itemView) {
         val binding = ItemNestedTeamTaskBinding.bind(itemView)
     }
-
 
     companion object {
         private const val ITEM_TYPE_HEADER_DETAILS = 0

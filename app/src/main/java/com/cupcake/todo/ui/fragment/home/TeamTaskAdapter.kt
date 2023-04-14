@@ -4,9 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.databinding.ItemTeamTaskBinding
+import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
 
-class TeamTaskAdapter(private val items: List<TeamTask>): RecyclerView.Adapter<TeamTaskAdapter.TeamTaskViewHolder>() {
+class TeamTaskAdapter(
+    private val items: List<TeamTask>,
+    private val onClickTeamTaskItem: (teamTask: TeamTask) -> Unit
+): RecyclerView.Adapter<TeamTaskAdapter.TeamTaskViewHolder>() {
 
     class TeamTaskViewHolder(val binding: ItemTeamTaskBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -19,12 +23,16 @@ class TeamTaskAdapter(private val items: List<TeamTask>): RecyclerView.Adapter<T
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: TeamTaskViewHolder, position: Int) {
-        val item = items[position]
+        val item = items[position] as TeamTask
         holder.binding.apply {
             textViewTaskTitle.text = item.title
             textViewDate.text = item.creationTime
             textViewAssignee.text = item.assignee.take(2)
             textViewDescription.text = item.description
+
+            root.setOnClickListener {
+                onClickTeamTaskItem(item)
+            }
         }
 
     }
