@@ -5,7 +5,7 @@ import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
 import com.cupcake.todo.model.network.response.AddTeamTaskResponse
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.Register
-import com.cupcake.todo.model.network.response.TeamTaskResponse
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
 import com.cupcake.todo.model.network.util.enqueueCall
@@ -75,15 +75,18 @@ class ApiServiceImpl : ApiService {
             )
     }
 
-    override fun getTeamTasks(callback: ApiCallback<BaseResponse<List<TeamTaskResponse>>>) {
+    override fun getTeamTasks(
+        onSuccess: (response: BaseResponse<List<TeamTask>>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
+    ) {
         client.getRequest(ApiEndPoint.toDoTeam).enqueueCall(
-            object : ApiCallback<BaseResponse<List<TeamTaskResponse>>>{
-                override fun onSuccess(response: BaseResponse<List<TeamTaskResponse>>) {
-                    callback.onSuccess(response)
+            object : ApiCallback<BaseResponse<List<TeamTask>>>{
+                override fun onSuccess(response: BaseResponse<List<TeamTask>>) {
+                   onSuccess(response)
                 }
 
                 override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                    callback.onFailure(throwable,statusCode,message)
+                    onFailure(throwable,statusCode,message)
                 }
 
             }
