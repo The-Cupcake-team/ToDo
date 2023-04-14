@@ -1,5 +1,6 @@
 package com.cupcake.todo.model.network
 
+import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
 import com.cupcake.todo.model.network.response.AddTeamTaskResponse
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.RegisterResponse

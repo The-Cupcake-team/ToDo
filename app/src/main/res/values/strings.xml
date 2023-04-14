@@ -56,9 +56,4 @@
     <string name="check_your_internet">Check your internet connection and try again</string>
 
 
-    <string name="added_successful">Added Successful </string>
-    <string name="added_failed">Added Failed </string>
-    <string name="error_title_message">Please enter a title</string>
-    <string name="error_descrption_message">Please enter a description</string>
-
 </resources>
