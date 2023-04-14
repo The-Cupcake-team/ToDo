@@ -11,6 +11,7 @@
         android:id="@+id/chip_all"
         style="@style/ChipsStyle"
         android:checked="true"
+        android:clickable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/chip_background"

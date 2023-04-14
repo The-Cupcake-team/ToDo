@@ -4,6 +4,8 @@ import com.cupcake.todo.presenter.model.TeamTaskData
 
 interface ITeamTasksView {
 
+    fun showInternetErrorDialog()
+
     fun showLoading()
 
     fun hideLoading()
