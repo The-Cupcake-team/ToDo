@@ -1,11 +1,9 @@
 package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
-import com.cupcake.todo.model.network.response.AddTeamTaskResponse
-import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
+import com.cupcake.todo.model.data.Task
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.RegisterResponse
-import com.cupcake.todo.model.network.response.TeamTaskResponse
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
 import com.cupcake.todo.model.network.util.enqueueCall
@@ -43,82 +41,32 @@ class ApiServiceImpl : ApiService {
                 })
     }
 
-    override fun addTeamTask(
-        title: String,
-        description: String,
-        assignee: String,
-        callback: ApiCallback<BaseResponse<AddTeamTaskResponse>>
-    ) {
-        val teamTask = FormBody.Builder()
-            .add(TITLE, title)
-            .add(DESCRIPTION, description)
-            .add(ASSIGNEE, assignee)
-            .build()
+    override fun updateStates(task: Task, callBack: ApiCallback<BaseResponse<String>>) {
+        val updatestatusBody = task?.let {
+            FormBody.Builder()
+                .add(ID, it.id.toString())
+                .add(STATUS, it.status.toString())
+                .build()
+        }
+        var endPoint = ApiEndPoint.toDoPersonal
+        if (!task.assigne.isNullOrEmpty())
+         endPoint = ApiEndPoint.toDoTeam
 
-        client.postRequest(ApiEndPoint.toDoTeam, teamTask)
-            .enqueueCall(
-                object : ApiCallback<BaseResponse<AddTeamTaskResponse>>{
-                    override fun onSuccess(response: BaseResponse<AddTeamTaskResponse>) {
-                        callback.onSuccess(response)
+        updatestatusBody?.let {
+            client.putRequest(endPoint, it).enqueueCall(
+                object : ApiCallback<BaseResponse<String>> {
+                    override fun onSuccess(response: BaseResponse<String>) {
+                        callBack.onSuccess(response)
                     }
 
-                    override fun onFailure(
-                        throwable: Throwable,
-                        statusCode: Int?,
-                        message: String?
-                    ) {
-                        callback.onFailure(throwable, statusCode, message)
+                    override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                        callBack.onFailure(throwable, statusCode, message)
                     }
-
                 }
             )
+        }
     }
 
-    override fun getTeamTasks(callback: ApiCallback<BaseResponse<List<TeamTaskResponse>>>) {
-        client.getRequest(ApiEndPoint.toDoTeam).enqueueCall(
-            object : ApiCallback<BaseResponse<List<TeamTaskResponse>>>{
-                override fun onSuccess(response: BaseResponse<List<TeamTaskResponse>>) {
-                    callback.onSuccess(response)
-                }
-
-                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                    callback.onFailure(throwable,statusCode,message)
-                }
-
-            }
-        )
-    }
-
-    override fun addPersonalTask(
-        title: String,
-        description: String,
-        callback: ApiCallback<BaseResponse<AddPersonalTaskResponse>>,
-    ) {
-        val body=FormBody.Builder()
-            .add(TITLE,title)
-            .add(DESCRIPTION,description)
-            .build()
-        client.postRequest(ApiEndPoint.toDoPersonal,body).enqueueCall(
-            object :ApiCallback<BaseResponse<AddPersonalTaskResponse>>{
-                override fun onSuccess(response: BaseResponse<AddPersonalTaskResponse>) {
-                    callback.onSuccess(response)
-                }
-
-                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                    callback.onFailure(throwable, statusCode, message)
-                }
-
-            }
-        )
-    }
-
-    override fun updateStatus(
-        id: String,
-        status: Int,
-        callBack: ApiCallback<BaseResponse<String>>
-    ) {
-        TODO("Hassan")
-    }
 
     private companion object {
         const val USERNAME = "username"
