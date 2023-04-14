@@ -16,7 +16,7 @@ class AuthInterceptor : Interceptor {
     private companion object {
         const val AUTHORIZATION = "Authorization"
         const val BEARER = "bearer"
-        const val TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJodHRwczovL3RoZS1jaGFuY2Uub3JnLyIsInN1YiI6ImYzYjA2MmE4LTZhOGUtNDJlNC1iNjU5LTc3NDM3NDNjMGJiYyIsInRlYW1JZCI6IjkwOTJlZDcwLTMxNTMtNDEwNi1iYTE4LTYxYTU3Yjk0NmI2NCIsImlzcyI6Imh0dHBzOi8vdGhlLWNoYW5jZS5vcmcvIiwiZXhwIjoxNjgxNDg1NTgxfQ.CsgPzilGwT276V-qipUBDeGc77XRqJUFDpPYYRr1-1U"
+        const val TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJodHRwczovL3RoZS1jaGFuY2Uub3JnLyIsInN1YiI6ImFjZTIyY2RkLTk5YjAtNDQxYS1hMGJjLWMwMGE4NTVmNTZmMyIsInRlYW1JZCI6IjkwOTJlZDcwLTMxNTMtNDEwNi1iYTE4LTYxYTU3Yjk0NmI2NCIsImlzcyI6Imh0dHBzOi8vdGhlLWNoYW5jZS5vcmcvIiwiZXhwIjoxNjgxNjM2MzA5fQ.KfHAWPgNDYYinEhszYLsIZ52bIO-jiGUcIHZq2FkefI"
     }
 
 
