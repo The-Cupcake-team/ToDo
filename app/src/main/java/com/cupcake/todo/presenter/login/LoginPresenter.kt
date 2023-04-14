@@ -17,15 +17,16 @@ class LoginPresenter(
     fun login(username: String, password: String){
         view.showLoading()
         service.login(username,password,this)
-        view.hideLoading()
     }
     override fun onSuccess(response: BaseResponse<LoginResponse>) {
         PrefsUtil.token = response.result!!.token
         view.onLoginSuccess()
+        view.hideLoading()
     }
 
     override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
         view.onLoginFailure(throwable,statusCode,message)
+        view.hideLoading()
     }
 
 }

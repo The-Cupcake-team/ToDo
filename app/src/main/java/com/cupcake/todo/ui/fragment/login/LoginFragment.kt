@@ -28,6 +28,8 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
 
     private lateinit var username: String
     private lateinit var password: String
+
+    private lateinit var dialogBuilder: AlertDialog.Builder
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         init()
         addCallbacks()
@@ -56,10 +58,10 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
 
     private fun alertEmptyForm() {
         if (username.isBlank()) {
-            binding.textInputLayoutUsername.helperText = "Must not be empty "
+            binding.textInputLayoutUsername.helperText = getString(R.string.empty_form)
         }
         if (password.isBlank()) {
-            binding.textInputLayoutPassword.helperText = "Must not be empty "
+            binding.textInputLayoutPassword.helperText = getString(R.string.empty_form)
         }
         clearHelperText()
     }
@@ -103,11 +105,7 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     }
 
     override fun showLoading() {
-        requireActivity().runOnUiThread {
-            Handler(Looper.getMainLooper()).postDelayed({
-                binding.progressLoading.visibility = View.VISIBLE
-            }, 2000)
-        }
+        binding.progressLoading.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
@@ -119,25 +117,33 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     }
 
     override fun onLoginFailure(throwable: Throwable, statusCode: Int?, error: String?) {
-        if (statusCode == 401) {
-            requireActivity().runOnUiThread {
-                AlertDialog.Builder(requireContext())
-                    .setTitle(getString(R.string.invalid_account))
-                    .setMessage(error)
-                    .setPositiveButton(getString(R.string.try_again)) { _, _ ->
-                        binding.textInputEditPassword.text!!.clear()
-                        binding.textInputEditUsername.text!!.clear()
-                    }.create().show()
-            }
+        Log.v("Tarek","status = $statusCode , error = $error")
+        dialogBuilder = if (statusCode == 401) {
+            createDialog(
+                getString(R.string.invalid_account),
+                error!!,
+                getString(R.string.try_again)
+            )
         } else {
-            requireActivity().runOnUiThread {
-                AlertDialog.Builder(requireContext())
-                    .setTitle(getString(R.string.unable_to_login))
-                    .setMessage(getString(R.string.network_error_message))
-                    .setPositiveButton(getString(R.string.try_again)) { _, _ ->
-
-                    }.create().show()
-            }
+            createDialog(
+                getString(R.string.unable_to_login),
+                getString(R.string.network_error_message),
+                getString(R.string.try_again)
+            )
         }
+        requireActivity().runOnUiThread {
+            Handler(Looper.getMainLooper()).post { dialogBuilder.create().show() }
+        }
+    }
+
+    private fun createDialog(
+        title: String,
+        message: String,
+        positiveButton: String
+    ): AlertDialog.Builder {
+        return AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(positiveButton) { _, _ -> }
     }
 }
