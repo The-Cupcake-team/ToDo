@@ -28,11 +28,8 @@ class AssigneeRecyclerAdapter(
             holder.binding.apply {
                 name.text = assignee
                 nameChars.text = assigneeChars
-                if (selectedPosition == position){
-                    avatarMemberSelected.visibility = View.VISIBLE
-                }else{
-                    avatarMemberSelected.visibility = View.GONE
-                }
+
+                visibilityAvatarMemberSelected(holder.binding, position)
                 root.setOnClickListener {
                     if (selectedPosition != -1) {
                         notifyItemChanged(selectedPosition)
@@ -42,6 +39,16 @@ class AssigneeRecyclerAdapter(
                     listener.onAssigneeItemClicked(assignee)
                 }
             }
+    }
+    private fun visibilityAvatarMemberSelected(
+        binding: ItemProfileImageBinding,
+        currentPosition: Int
+    ){
+        if (selectedPosition == currentPosition){
+            binding.avatarMemberSelected.visibility = View.VISIBLE
+        }else{
+            binding.avatarMemberSelected.visibility = View.GONE
+        }
     }
 
     override fun getItemCount() = assignees.size
