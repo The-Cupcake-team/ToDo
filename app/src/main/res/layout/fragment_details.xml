@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/color_background"
     android:layout_height="match_parent"
+    android:background="@color/color_background"
     android:orientation="vertical">
 
 
@@ -12,9 +12,9 @@
         android:id="@+id/appbar_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -33,26 +33,40 @@
         android:id="@+id/recycler_view_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_profile_image"
         android:layout_marginTop="@dimen/spacing_medium"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/appbar_details"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-    <Spinner
-        android:id="@+id/spinner_status"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:background="@drawable/spinner_background"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/spacing_medium"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recycler_view_details"
-        tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+        app:layout_constraintTop_toBottomOf="@+id/appbar_details"
+        tools:listitem="@layout/item_profile_image" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/spinner_status"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/ic_drop_down"
+        app:endIconTint="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/recycler_view_details">
+
+        <AutoCompleteTextView
+            android:id="@+id/dropdown_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_popup_background"
+            android:fontFamily="@font/montserrat"
+            android:inputType="none"
+            android:paddingStart="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_large"
+            android:text="@string/to_do"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_caption" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/text_view_title"
@@ -100,8 +114,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_title"
-        tools:text="@tools:sample/lorem/random"/>
-
+        tools:text="@tools:sample/lorem/random" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
