@@ -2,17 +2,18 @@ package com.cupcake.todo.ui.fragment.details
 
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.view.isGone
 import com.cupcake.todo.databinding.FragmentDetailsBinding
-import com.cupcake.todo.model.data.Task
-import com.cupcake.todo.model.data.TaskPersonal
 import com.cupcake.todo.presenter.details.DetailsPresenter
+import com.cupcake.todo.presenter.model.PersonalTask
+import com.cupcake.todo.presenter.model.Task
+import com.cupcake.todo.presenter.model.TeamTask
 import com.cupcake.todo.ui.base.BaseFragment
 
 class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
@@ -26,22 +27,28 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter = DetailsPresenter(this)
+        binding.textViewDetails.movementMethod = ScrollingMovementMethod()
 
         task = (arguments?.getParcelable(TASK_DETAILS) as Task?)!!
 
-        if (task is TaskPersonal) {
-            binding.recyclerViewDetails.isGone = true
-        } else {
-            val mAdapter = DetailsAdapter(presenter.assignee, presenter.assignee[2])
-            binding.recyclerViewDetails.adapter = mAdapter
+        when(task){
+            is TeamTask -> {
+                log((task as TeamTask).assignee.toString())
+                val mAdapter = DetailsAdapter(presenter.team, (task as TeamTask).assignee as String)
+                binding.recyclerViewDetails.adapter = mAdapter
+            }
+            is PersonalTask -> {
+                binding.recyclerViewDetails.visibility = View.GONE
+            }
         }
+
 
         initSpinner()
 
         binding.apply {
             textViewTitle.text = task.title
             textViewDetails.text = task.description
-            textViewDate.text = task.createTime
+            textViewDate.text = task.creationTime
         }
 
     }
@@ -71,10 +78,10 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
         binding.dropdownMenu.apply {
             setAdapter(mAdapter)
-            task.status?.let { setSelection(it.toInt()) }
+            setSelection(task.status)
             onItemClickListener =
                 AdapterView.OnItemClickListener { _, _, position, _ ->
-                    task.id?.let { presenter.DetailsupDate(it, position) }
+                    task.id?.let { presenter.detailsUpDate(it, position) }
                 }
         }
     }
