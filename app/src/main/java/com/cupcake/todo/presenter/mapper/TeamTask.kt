@@ -1,10 +1,10 @@
 package com.cupcake.todo.presenter.mapper
 
 import com.cupcake.todo.model.network.response.TeamTaskResponse
-import com.cupcake.todo.presenter.model.TeamTaskData
+import com.cupcake.todo.presenter.model.TeamTask
 
-fun TeamTaskResponse.toTeamTask(): TeamTaskData {
-    return TeamTaskData(
+fun TeamTaskResponse.toTeamTask(): TeamTask {
+    return TeamTask(
         id= id,
         title= title,
         description= description,
