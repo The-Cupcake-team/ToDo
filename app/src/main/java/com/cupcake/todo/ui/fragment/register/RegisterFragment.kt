@@ -5,9 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentRegisterBinding
 import com.cupcake.todo.presenter.register.RegisterPresenter
 import com.cupcake.todo.ui.base.BaseFragment
+import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView {
     override val LOG_TAG: String = this::class.java.name
@@ -22,6 +25,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
             val password = binding.editTextPassword.text.toString()
             Log.v(LOG_TAG, " $username ,$password")
             presenter.register(username, password)
+            navigateToFragment(TeamTasksFragment())
+        }
+    }
+    private fun navigateToFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            add(R.id.fragmentContainer, fragment)
+            addToBackStack(fragment.javaClass.simpleName)
+            commit()
         }
     }
 
