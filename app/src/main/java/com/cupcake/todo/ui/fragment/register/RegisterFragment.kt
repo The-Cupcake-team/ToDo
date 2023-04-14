@@ -43,6 +43,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
 
             if (isValidInput()) {
                 presenter.register(username, password)
+                navigateToFragment(LoginFragment())
             } else {
                 showInputErrorMessage()
             }
@@ -61,9 +62,21 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
         }
     }
 
+    private fun clearHelperText() {
+        if (username.isNotBlank()) {
+            binding.containerUserName.helperText = ""
+        }
+        if (password.isNotBlank()) {
+            binding.containerPassword.helperText = ""
+        }
+    }
+
     private fun isValidInput(): Boolean {
-        return username.isNotBlank() && password.isNotBlank() &&
-                isValidUsername(username) && isValidPassword(password)
+        return if(username.isNotBlank() && password.isNotBlank() &&
+            isValidUsername(username) && isValidPassword(password)){
+            clearHelperText()
+            true
+        } else false
     }
 
     private fun showInputErrorMessage() {
@@ -95,11 +108,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
     }
 
     override fun showLoading() {
-        requireActivity().runOnUiThread {
-            Handler(Looper.getMainLooper()).postDelayed({
-                binding.progressLoading.visibility = View.VISIBLE
-            }, 2000)
-        }
+        binding.progressLoading.postDelayed({
+            binding.progressLoading.visibility = View.VISIBLE
+        }, 2000)
     }
 
     override fun hideLoading() {
