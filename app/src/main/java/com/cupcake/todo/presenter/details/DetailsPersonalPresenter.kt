@@ -10,12 +10,12 @@ class DetailsPresenter(private val view: IDetailsView) : ApiCallback<BaseRespons
 
     private val apiService = ApiServiceImpl()
 
-    fun DetailsupDate(id: String, status: Int) {
+    fun detailsUpDate(id: String, status: Int) {
         view.showLoading()
         apiService.updateStates(id, status,this)
         view.hideLoading()
     }
-    val assignee = listOf<String>("Mustafa", "Andrew", "Ameer", "Ethaar", "tarek", "Asia", "Hassan",
+    val team = listOf("Mustafa", "Andrew", "Ameer", "Ethaar", "Tarek", "Asia", "Hassan",
         "Ali","David", "Bilal", "Yousef", "Ali EG")
 
     override fun onSuccess(response: BaseResponse<String>) {
