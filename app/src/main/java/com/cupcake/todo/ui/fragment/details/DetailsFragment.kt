@@ -2,6 +2,7 @@ package com.cupcake.todo.ui.fragment.details
 
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentDetailsBinding
 import com.cupcake.todo.presenter.details.DetailsPresenter
 import com.cupcake.todo.presenter.model.PersonalTask
@@ -24,6 +27,7 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
     private lateinit var presenter: DetailsPresenter
     private lateinit var task: Task
+    private val items = listOf("To Do", "In progress", "Done")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter = DetailsPresenter(this)
@@ -71,18 +75,18 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
     private fun initSpinner() {
 
-        val items = listOf("To Do", "In progress", "Done")
-
         val mAdapter =
-            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
+            ArrayAdapter(requireContext(), R.layout.drop_down_list_item, items)
+
+        binding.dropdownMenu.setText(items[task.status])
 
         binding.dropdownMenu.apply {
             setAdapter(mAdapter)
+            showDropdown(mAdapter)
+
             log(task.toString())
-            setSelection(items.indexOf(items[task.status]))
-//            if (task.status in 0..2) {
-//                setText(task.status)
-//            }
+
+
             onItemClickListener =
                 AdapterView.OnItemClickListener { _, _, position, _ ->
                     when (task) {
@@ -99,6 +103,12 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
         }
     }
 
+    private fun AutoCompleteTextView.showDropdown(adapter: ArrayAdapter<String>?) {
+        if(!TextUtils.isEmpty(this.text.toString())){
+            adapter?.filter?.filter(null)
+        }
+    }
+
     companion object {
         private const val TASK_DETAILS = "details_task"
         fun newInstance(task: Task) = DetailsFragment().apply {
@@ -106,5 +116,10 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
                 putParcelable(TASK_DETAILS, task)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initSpinner()
     }
 }

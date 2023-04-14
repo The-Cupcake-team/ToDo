@@ -62,6 +62,7 @@
             android:fontFamily="@font/montserrat"
             android:inputType="none"
             android:paddingStart="@dimen/spacing_large"
+            android:focusable="false"
             android:paddingEnd="@dimen/spacing_large"
             tools:text="@string/to_do"
             android:textColor="@color/white"
