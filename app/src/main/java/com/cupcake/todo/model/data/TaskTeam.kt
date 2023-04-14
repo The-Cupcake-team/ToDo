@@ -4,7 +4,7 @@ class TaskTeam(
     id: String,
     title: String,
     description: String,
-    status: String,
+    status: Int,
     createTime: String,
-    teamId: String
+    assignee: String
 ) : Task(id, title, description, status, createTime)

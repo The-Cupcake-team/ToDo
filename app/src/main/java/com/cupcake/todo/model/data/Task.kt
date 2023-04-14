@@ -7,14 +7,14 @@ open class Task(
     val id: String?,
     val title: String?,
     val description: String?,
-    val status: String?,
+    val status: Int,
     val createTime: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
+        parcel.readInt(),
         parcel.readString()
     )
 
@@ -26,7 +26,7 @@ open class Task(
         dest.writeString(id)
         dest.writeString(title)
         dest.writeString(description)
-        dest.writeString(status)
+        dest.writeInt(status)
         dest.writeString(createTime)
     }
 
