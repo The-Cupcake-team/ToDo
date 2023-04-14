@@ -80,7 +80,7 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
 
     private fun navigateToFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager.beginTransaction().apply {
-            add(R.id.fragmentContainer, fragment)
+            replace(R.id.fragmentContainer, fragment)
             addToBackStack(fragment.javaClass.simpleName)
             commit()
         }
