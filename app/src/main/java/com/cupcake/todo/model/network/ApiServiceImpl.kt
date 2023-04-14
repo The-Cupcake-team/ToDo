@@ -4,6 +4,7 @@ import com.cupcake.todo.BuildConfig
 import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.RegisterResponse
+import com.cupcake.todo.model.network.response.TeamTaskResponse
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
 import com.cupcake.todo.model.network.util.enqueueCall
@@ -41,6 +42,20 @@ class ApiServiceImpl : ApiService {
                 })
     }
 
+    override fun getTeamTasks(callback: ApiCallback<BaseResponse<List<TeamTaskResponse>>>) {
+        client.getRequest(ApiEndPoint.toDoTeam).enqueueCall(
+            object : ApiCallback<BaseResponse<List<TeamTaskResponse>>>{
+                override fun onSuccess(response: BaseResponse<List<TeamTaskResponse>>) {
+                    callback.onSuccess(response)
+                }
+
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    callback.onFailure(throwable,statusCode,message)
+                }
+
+            }
+        )
+    }
 
     override fun addPersonalTask(
         title: String,
