@@ -109,7 +109,7 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     }
 
     override fun hideLoading() {
-        binding.progressLoading.visibility = View.GONE
+        binding.progressLoading.visibility = View.INVISIBLE
     }
 
     override fun onLoginSuccess() {
@@ -117,7 +117,6 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     }
 
     override fun onLoginFailure(throwable: Throwable, statusCode: Int?, error: String?) {
-        Log.v("Tarek","status = $statusCode , error = $error")
         dialogBuilder = if (statusCode == 401) {
             createDialog(
                 getString(R.string.invalid_account),
