@@ -35,22 +35,25 @@
     <string name="team_task">Team Task</string>
     <string name="ic_graph">ic_graph</string>
 
+    <string name="added_successful">Added Successful </string>
+    <string name="added_failed">Added Failed </string>
+    <string name="error_toast_message">Enter Title Please</string>
+    <string name="error_title_message">Please enter a title</string>
+    <string name="error_descrption_message">Please enter a description</string>
+    <string name="assignee_not_selected">Please Select a person</string>
+
     <string-array name="spinner_status">
         <item>To Do</item>
         <item>In Progress</item>
         <item>Done</item>
     </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="avatar_team_member">avatar team member</string>
 
     <string name="all_tasks_chip">All</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="ok">Ok</string>
     <string name="check_your_internet">Check your internet connection and try again</string>
 
-
-    <string name="added_successful">Added Successful </string>
-    <string name="added_failed">Added Failed </string>
-    <string name="error_title_message">Please enter a title</string>
-    <string name="error_descrption_message">Please enter a description</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
+import com.cupcake.todo.model.network.response.AddTeamTaskResponse
 import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.RegisterResponse
@@ -40,6 +41,37 @@ class ApiServiceImpl : ApiService {
                         callback.onFailure(throwable, statusCode, message)
                     }
                 })
+    }
+
+    override fun addTeamTask(
+        title: String,
+        description: String,
+        assignee: String,
+        callback: ApiCallback<BaseResponse<AddTeamTaskResponse>>
+    ) {
+        val teamTask = FormBody.Builder()
+            .add(TITLE, title)
+            .add(DESCRIPTION, description)
+            .add(ASSIGNEE, assignee)
+            .build()
+
+        client.postRequest(ApiEndPoint.toDoTeam, teamTask)
+            .enqueueCall(
+                object : ApiCallback<BaseResponse<AddTeamTaskResponse>>{
+                    override fun onSuccess(response: BaseResponse<AddTeamTaskResponse>) {
+                        callback.onSuccess(response)
+                    }
+
+                    override fun onFailure(
+                        throwable: Throwable,
+                        statusCode: Int?,
+                        message: String?
+                    ) {
+                        callback.onFailure(throwable, statusCode, message)
+                    }
+
+                }
+            )
     }
 
     override fun getTeamTasks(callback: ApiCallback<BaseResponse<List<TeamTaskResponse>>>) {
