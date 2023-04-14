@@ -1,10 +1,10 @@
 package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
-import com.cupcake.todo.model.network.response.AddTeamTaskResponse
 import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
+import com.cupcake.todo.model.network.response.AddTeamTaskResponse
 import com.cupcake.todo.model.network.response.BaseResponse
-import com.cupcake.todo.model.network.response.RegisterResponse
+import com.cupcake.todo.model.network.response.Register
 import com.cupcake.todo.model.network.response.TeamTaskResponse
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
@@ -18,7 +18,8 @@ class ApiServiceImpl : ApiService {
     override fun register(
         username: String,
         password: String,
-        callback: ApiCallback<BaseResponse<RegisterResponse>>,
+        onSuccess: (response: BaseResponse<Register>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
     ) {
         val registerBody = FormBody.Builder()
             .add(USERNAME, username)
@@ -28,9 +29,9 @@ class ApiServiceImpl : ApiService {
 
         client.postRequest(ApiEndPoint.register, registerBody)
             .enqueueCall(
-                object : ApiCallback<BaseResponse<RegisterResponse>> {
-                    override fun onSuccess(response: BaseResponse<RegisterResponse>) {
-                        callback.onSuccess(response)
+                object : ApiCallback<BaseResponse<Register>> {
+                    override fun onSuccess(response: BaseResponse<Register>) {
+                        onSuccess(response)
                     }
 
                     override fun onFailure(
@@ -38,7 +39,7 @@ class ApiServiceImpl : ApiService {
                         statusCode: Int?,
                         message: String?
                     ) {
-                        callback.onFailure(throwable, statusCode, message)
+                        onFailure(throwable, statusCode, message)
                     }
                 })
     }
