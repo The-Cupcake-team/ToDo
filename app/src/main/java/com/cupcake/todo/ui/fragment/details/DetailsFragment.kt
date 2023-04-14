@@ -16,33 +16,33 @@ import com.cupcake.todo.presenter.details.DetailsPresenter
 import com.cupcake.todo.ui.base.BaseFragment
 
 class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
+
     override val LOG_TAG: String = this::class.java.name
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentDetailsBinding =
         FragmentDetailsBinding::inflate
+
     private lateinit var presenter: DetailsPresenter
     private lateinit var task: Task
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter = DetailsPresenter(this)
-        arguments.let {
-            task = (it?.getSerializable(TAG) as Task?)!!
-        }
 
-// check recycler visible or adapter
+        task = (arguments?.getParcelable(TASK_DETAILS) as Task?)!!
+
         if (task is TaskPersonal) {
             binding.recyclerViewDetails.isGone = true
         } else {
-            //get team list
-            val madapter = DetailsAdapter(presenter.assignee,presenter.assignee.get(2))
-            binding.recyclerViewDetails.adapter = madapter
+            val mAdapter = DetailsAdapter(presenter.assignee, presenter.assignee[2])
+            binding.recyclerViewDetails.adapter = mAdapter
         }
 
         initSpinner()
 
-//show data of task
-     binding.textViewTitle.text = task.title
-        binding.textViewDetails.text = task.description
-        binding.textViewDate.text = task.createTime
+        binding.apply {
+            textViewTitle.text = task.title
+            textViewDetails.text = task.description
+            textViewDate.text = task.createTime
+        }
 
     }
 
@@ -66,39 +66,24 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
         val items = listOf("To Do", "In progress", "Done")
 
-        val mAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, items)
+        val mAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
 
-        binding.spinnerStatus.apply {
-            adapter = mAdapter
-
-            // default of spinner
-            binding.spinnerStatus.setSelection(task.status)
-
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                         presenter.DetailsupDate(task.id, position)
+        binding.dropdownMenu.apply {
+            setAdapter(mAdapter)
+            task.status?.let { setSelection(it.toInt()) }
+            onItemClickListener =
+                AdapterView.OnItemClickListener { _, _, position, _ ->
+                    task.id?.let { presenter.DetailsupDate(it, position) }
                 }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                    // default of spinner
-                    binding.spinnerStatus.setSelection(task.status)
-                }
-
-            }
         }
     }
 
     companion object {
-        const val TAG = "Details Fragment Tag"
+        private const val TASK_DETAILS = "details_task"
         fun newInstance(task: Task) = DetailsFragment().apply {
             arguments = Bundle().apply {
-                putSerializable(TAG, task)
+                putParcelable(TASK_DETAILS, task)
             }
         }
     }
