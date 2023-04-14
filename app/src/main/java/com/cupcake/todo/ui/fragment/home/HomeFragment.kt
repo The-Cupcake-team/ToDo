@@ -1,5 +1,7 @@
 package com.cupcake.todo.ui.fragment.home
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,7 +27,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         HomePresenter(this).getTasks()
-        setupRecyclerView()
+
     }
 
     private fun setupRecyclerView() {
@@ -36,47 +38,36 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
     }
 
 
-    override fun onGetLatestTeamTaskSuccess(teamTasks: List<TeamTask>) {
-        itemsList.add(HomeItem("Team task", HomeItemType.ITEM_TYPE_TITLE_SECTION))
-        itemsList.add(HomeItem(teamTasks, HomeItemType.ITEM_TYPE_TEAM_TASK))
-        setupRecyclerView()
-
-        Log.e("result", "itemsListin onGetLatestTeamTaskSuccess: ${teamTasks}")
-    }
-
-    override fun onRecentPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
-        itemsList.add(HomeItem("Recent task", HomeItemType.ITEM_TYPE_TITLE_SECTION))
-        itemsList.addAll(personalTasks.map { it.toPersonalTask() })
-    }
-
     override fun getTaskStatusCounts(personalTasks: Triple<Float, Float, Float>) {
-        Log.e(
-            "bk", "getTaskStatusCounts: first: " +
-                    "${personalTasks.first} " +
-                    "third: ${personalTasks.second} third: ${personalTasks.third}"
-        )
-
         val details = mapOf(
             USERNAME to "Asia",
             TODO to personalTasks.first,
             IN_PROGRESS to personalTasks.second,
             DONE to personalTasks.third
         )
-
-        itemsList.add(HomeItem(details, HomeItemType.ITEM_TYPE_HEADER_DETAILS))
+        itemsList.add(0, HomeItem(details, HomeItemType.ITEM_TYPE_HEADER_DETAILS))
+        setupRecyclerView()
 
     }
+
+
+    override fun onGetLatestTeamTaskSuccess(teamTasks: List<TeamTask>) {
+        itemsList.add( HomeItem("Team task", HomeItemType.ITEM_TYPE_TITLE_SECTION))
+        itemsList.add( HomeItem(teamTasks, HomeItemType.ITEM_TYPE_TEAM_TASK))
+        itemsList.add(HomeItem("Recent task", HomeItemType.ITEM_TYPE_TITLE_SECTION))
+
+    }
+
+    override fun onRecentPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
+        itemsList.addAll(personalTasks.map { it.toPersonalTask() })
+
+    }
+
 
     override fun onGetDataFailure(error: String) {
         Log.e("result", "onGetDataFailure${error}")
     }
 
-    override fun onGetDataFailureOnTeam(error: String, statusCode: Int, message: String) {
-        Log.e(
-            "result",
-            "onGetDataFailureOnTeam$error + status code: $statusCode ,+ meesage: $message"
-        )
-    }
 
     override fun showLoading() {
         Log.e("result", "showLoading(")
