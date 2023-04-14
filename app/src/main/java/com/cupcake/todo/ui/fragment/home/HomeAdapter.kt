@@ -1,10 +1,12 @@
 package com.cupcake.todo.ui.fragment.home
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemHomeHeaderBinding
@@ -13,10 +15,11 @@ import com.cupcake.todo.databinding.ItemPersonalTaskBinding
 import com.cupcake.todo.databinding.ItemTitleSctionBinding
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
-import com.cupcake.todo.ui.fragment.personal_tasks.PersonalTasksFragment
-import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
 import com.cupcake.todo.ui.util.setupPieChart
 import com.github.mikephil.charting.data.PieEntry
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class HomeAdapter(
     private var items: List<HomeItem<Any>>,
@@ -92,10 +95,9 @@ class HomeAdapter(
                 taskDataValue(
                     currentItem["toDo"] as Float,
                     currentItem["inProgress"] as Float,
-                    currentItem["done"] as Float
-                )
+                    currentItem["done"] as Float)
             )
-        }
+}
     }
 
     private fun bindTitleSection(holder: TitleSectionViewHolder, position: Int) {
@@ -117,6 +119,7 @@ class HomeAdapter(
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun bindPersonalTask(holder: PersonalTaskViewHolder, position: Int) {
         val currentItem = items[position].item as PersonalTask
         holder.binding.apply {
@@ -124,7 +127,7 @@ class HomeAdapter(
 
             textViewTaskTitle.text = currentItem.title
             textViewDescription.text = currentItem.description
-            textViewDate.text = currentItem.creationTime
+            textViewDate.text = formatDate(currentItem.creationTime)
             root.setOnClickListener {
                 onClickPersonalTaskItem(currentItem)
             }
@@ -161,6 +164,17 @@ class HomeAdapter(
         dataValue.add(PieEntry(inProgress, "InProgress"))
         dataValue.add(PieEntry(done, "Done"))
         return dataValue
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun formatDate(date: String): String {
+        val inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+        val outputFormat = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH)
+
+        val dateParser = LocalDateTime.parse(date, inputFormat)
+        val formattedDate = dateParser.format(outputFormat)
+
+        return formattedDate
     }
 }
 

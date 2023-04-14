@@ -1,11 +1,15 @@
 package com.cupcake.todo.ui.fragment.home
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.databinding.ItemTeamTaskBinding
-import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class TeamTaskAdapter(
     private val items: List<TeamTask>,
@@ -22,11 +26,12 @@ class TeamTaskAdapter(
 
     override fun getItemCount(): Int = items.size
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: TeamTaskViewHolder, position: Int) {
         val item = items[position] as TeamTask
         holder.binding.apply {
             textViewTaskTitle.text = item.title
-            textViewDate.text = item.creationTime
+            textViewDate.text = formatDate(item.creationTime)
             textViewAssignee.text = item.assignee.take(2)
             textViewDescription.text = item.description
 
@@ -35,5 +40,16 @@ class TeamTaskAdapter(
             }
         }
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun formatDate(date: String): String {
+        val inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+        val outputFormat = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH)
+
+        val dateParser = LocalDateTime.parse(date, inputFormat)
+        val formattedDate = dateParser.format(outputFormat)
+
+        return formattedDate
     }
 }
