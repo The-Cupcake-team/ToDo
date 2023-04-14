@@ -18,6 +18,5 @@ interface ApiService {
         id : String,
         status : Int,
         isPersonalTask: Boolean,
-        callback: ApiCallback<BaseResponse<String>>
     )
 }

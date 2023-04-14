@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentDetailsBinding
-import com.cupcake.todo.presenter.details.DetailsPresenter
 import com.cupcake.todo.presenter.model.PersonalTask
 import com.cupcake.todo.presenter.model.Task
 import com.cupcake.todo.presenter.model.TeamTask

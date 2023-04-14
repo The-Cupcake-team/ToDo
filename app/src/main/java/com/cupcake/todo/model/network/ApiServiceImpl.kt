@@ -60,7 +60,6 @@ class ApiServiceImpl : ApiService {
         id: String,
         status: Int,
         isPersonalTask: Boolean,
-        callback: ApiCallback<BaseResponse<String>>
     ) {
         val updateStatusBody = FormBody.Builder()
             .add(ID, id)
@@ -75,7 +74,7 @@ class ApiServiceImpl : ApiService {
             .enqueueCall(
                 object : ApiCallback<BaseResponse<String>> {
                     override fun onSuccess(response: BaseResponse<String>) {
-                        callback.onSuccess(response)
+                        onSuccess(response)
                     }
 
                     override fun onFailure(
@@ -83,7 +82,7 @@ class ApiServiceImpl : ApiService {
                         statusCode: Int?,
                         message: String?
                     ) {
-                        callback.onFailure(throwable, statusCode, message)
+                        onFailure(throwable, statusCode, message)
                     }
                 })
     }
