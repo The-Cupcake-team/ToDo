@@ -31,7 +31,7 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
         task = (arguments?.getParcelable(TASK_DETAILS) as Task?)!!
 
-        when(task){
+        when (task) {
             is TeamTask -> {
                 log((task as TeamTask).assignee.toString())
                 val mAdapter = DetailsAdapter(presenter.team, (task as TeamTask).assignee as String)
@@ -78,10 +78,23 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
         binding.dropdownMenu.apply {
             setAdapter(mAdapter)
-            setSelection(task.status)
+            log(task.toString())
+            setSelection(items.indexOf(items[task.status]))
+//            if (task.status in 0..2) {
+//                setText(task.status)
+//            }
             onItemClickListener =
                 AdapterView.OnItemClickListener { _, _, position, _ ->
-                    task.id?.let { presenter.detailsUpDate(it, position) }
+                    when (task) {
+                        is TeamTask -> {
+                            task.id?.let { presenter.detailsUpDate(it, position, false) }
+                            log("change team task to $position")
+                        }
+                        is PersonalTask -> {
+                            task.id?.let { presenter.detailsUpDate(it, position, true) }
+                            log("change personal task to $position")
+                        }
+                    }
                 }
         }
     }
