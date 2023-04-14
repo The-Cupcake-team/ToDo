@@ -5,9 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentRegisterBinding
 import com.cupcake.todo.presenter.register.RegisterPresenter
 import com.cupcake.todo.ui.base.BaseFragment
+import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView {
     override val LOG_TAG: String = this::class.java.name
@@ -24,6 +27,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
             presenter.register(username, password)
         }
     }
+    private fun navigateToFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            add(R.id.fragmentContainer, fragment)
+            addToBackStack(fragment.javaClass.simpleName)
+            commit()
+        }
+    }
 
     override fun showLoading() {
         Log.v(LOG_TAG, "showLoading")
@@ -34,6 +44,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
     }
 
     override fun onRegisterSuccess() {
+        navigateToFragment(TeamTasksFragment())
         Log.v(LOG_TAG, "onRegisterSuccess")
     }
 

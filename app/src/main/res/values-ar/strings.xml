@@ -33,4 +33,5 @@
     <string name="network_error_message">حدث خلل ما, الرجاء محاولة تسجيل الدخول مرة اخرى بعد التأكد من اتصال الشبكة.</string>
     <string name="empty_form">يجب أن لا تكون فارغة</string>
 
+    <string name="all_tasks_chip">كل</string>
 </resources>
