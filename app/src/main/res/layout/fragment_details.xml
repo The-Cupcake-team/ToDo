@@ -63,7 +63,7 @@
             android:inputType="none"
             android:paddingStart="@dimen/spacing_large"
             android:paddingEnd="@dimen/spacing_large"
-            android:text="@string/to_do"
+            tools:text="@string/to_do"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_caption" />
     </com.google.android.material.textfield.TextInputLayout>

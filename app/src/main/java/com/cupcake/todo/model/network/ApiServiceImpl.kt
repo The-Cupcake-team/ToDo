@@ -1,9 +1,9 @@
 package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
-import com.cupcake.todo.model.data.Task
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.RegisterResponse
+import com.cupcake.todo.model.network.response.TeamTaskResponse
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
 import com.cupcake.todo.model.network.util.enqueueCall
@@ -41,30 +41,51 @@ class ApiServiceImpl : ApiService {
                 })
     }
 
-    override fun updateStates(task: Task, callBack: ApiCallback<BaseResponse<String>>) {
-        val updatestatusBody = task?.let {
-            FormBody.Builder()
-                .add(ID, it.id.toString())
-                .add(STATUS, it.status.toString())
-                .build()
-        }
-        var endPoint = ApiEndPoint.toDoPersonal
-        if (!task.assigne.isNullOrEmpty())
-         endPoint = ApiEndPoint.toDoTeam
+    override fun getTeamTasks(callback: ApiCallback<BaseResponse<List<TeamTaskResponse>>>) {
+        client.getRequest(ApiEndPoint.toDoTeam).enqueueCall(
+            object : ApiCallback<BaseResponse<List<TeamTaskResponse>>>{
+                override fun onSuccess(response: BaseResponse<List<TeamTaskResponse>>) {
+                    callback.onSuccess(response)
+                }
 
-        updatestatusBody?.let {
-            client.putRequest(endPoint, it).enqueueCall(
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    callback.onFailure(throwable,statusCode,message)
+                }
+
+            }
+        )
+    }
+
+    override fun updateTaskStatus(
+        id: String,
+        status: Int,
+        isPersonalTask: Boolean,
+        callback: ApiCallback<BaseResponse<String>>
+    ) {
+        val updateStatusBody = FormBody.Builder()
+            .add(ID, id)
+            .add(STATUS, status.toString())
+            .build()
+
+        var endPoint = ApiEndPoint.toDoTeam
+        if (isPersonalTask) {
+            endPoint = ApiEndPoint.toDoPersonal
+        }
+        client.putRequest(endPoint, updateStatusBody)
+            .enqueueCall(
                 object : ApiCallback<BaseResponse<String>> {
                     override fun onSuccess(response: BaseResponse<String>) {
-                        callBack.onSuccess(response)
+                        callback.onSuccess(response)
                     }
 
-                    override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                        callBack.onFailure(throwable, statusCode, message)
+                    override fun onFailure(
+                        throwable: Throwable,
+                        statusCode: Int?,
+                        message: String?
+                    ) {
+                        callback.onFailure(throwable, statusCode, message)
                     }
-                }
-            )
-        }
+                })
     }
 
 
