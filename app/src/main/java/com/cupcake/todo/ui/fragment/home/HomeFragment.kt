@@ -1,7 +1,5 @@
 package com.cupcake.todo.ui.fragment.home
 
-import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -50,33 +48,51 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
     }
 
     override fun onRecentPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
-        itemsList.add(HomeItem("Asia", HomeItemType.ITEM_TYPE_HEADER_DETAILS))
         itemsList.add(HomeItem("Recent task", HomeItemType.ITEM_TYPE_TITLE_SECTION))
         itemsList.addAll(personalTasks.map { it.toPersonalTask() })
     }
 
-    override fun onToDoPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
+    override fun getTaskStatusCounts(personalTasks: Triple<Float, Float, Float>) {
+        Log.e(
+            "bk", "getTaskStatusCounts: first: " +
+                    "${personalTasks.first} " +
+                    "third: ${personalTasks.second} third: ${personalTasks.third}"
+        )
+
+        val details = mapOf(
+            "username" to "Asia",
+            "toDo" to personalTasks.first,
+            "inProgress" to personalTasks.second,
+            "done" to personalTasks.third
+        )
+
+        itemsList.add(HomeItem(details, HomeItemType.ITEM_TYPE_HEADER_DETAILS))
+
+
     }
 
-    override fun onToDoTeamTasksSuccess(teamTasks: List<TeamTask>) {
-    }
+//    override fun onToDoPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
+//    }
+//
+//    override fun onToDoTeamTasksSuccess(teamTasks: List<TeamTask>) {
+//    }
+//
+//
+//    override fun onInProgressPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
+////        Log.e("result", "onInProgressPersonalTaskSuccess: ${personalTasks}")
+//    }
+//
+//    override fun onDonePersonalTaskSuccess(personalTasks: List<PersonalTask>) {
+//    }
 
 
-    override fun onInProgressPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
-//        Log.e("result", "onInProgressPersonalTaskSuccess: ${personalTasks}")
-    }
-
-    override fun onDonePersonalTaskSuccess(personalTasks: List<PersonalTask>) {
-    }
-
-
-    override fun onInProgressTeamTasksSuccess(teamTasks: List<TeamTask>) {
-//        Log.e("result", "onInProgressTeamTasksSuccess: ${teamTasks}")
-
-    }
-
-    override fun onDoneTeamTasksSuccess(teamTasks: List<TeamTask>) {
-    }
+//    override fun onInProgressTeamTasksSuccess(teamTasks: List<TeamTask>) {
+////        Log.e("result", "onInProgressTeamTasksSuccess: ${teamTasks}")
+//
+//    }
+//
+//    override fun onDoneTeamTasksSuccess(teamTasks: List<TeamTask>) {
+//    }
 
     override fun onGetDataFailure(error: String) {
         Log.e("result", "onGetDataFailure${error}")

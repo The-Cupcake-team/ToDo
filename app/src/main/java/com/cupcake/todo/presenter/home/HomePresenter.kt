@@ -24,10 +24,11 @@ class HomePresenter(
         service.getAllPersonalTask(object : ApiCallback<BaseResponse<List<PersonalTask>>> {
 
                 override fun onSuccess(response: BaseResponse<List<PersonalTask>>) {
-                    view.onToDoPersonalTaskSuccess(getToDoPersonalTask(response.result!!))
-                    view.onInProgressPersonalTaskSuccess(getInProgressPersonalTask(response.result))
-                    view.onDonePersonalTaskSuccess(getDonePersonalTask(response.result))
-                    view.onRecentPersonalTaskSuccess(getRecentTask(response.result))
+                    //view.onToDoPersonalTaskSuccess(getToDoPersonalTask(response.result!!))
+                    //view.onInProgressPersonalTaskSuccess(getInProgressPersonalTask(response.result))
+                    //view.onDonePersonalTaskSuccess(getDonePersonalTask(response.result))
+                    view.onRecentPersonalTaskSuccess(getRecentTask(response.result!!))
+                    //view.getTaskStatusCounts(getTaskStatusCounts(response.result))
                 }
 
             override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
@@ -44,23 +45,23 @@ class HomePresenter(
         }
     }
 
-    private fun getToDoPersonalTask(personalTask: List<PersonalTask>): List<PersonalTask> {
-        return personalTask.filter {
-            it.status == TODO
-        }
-    }
+//    private fun getToDoPersonalTask(personalTask: List<PersonalTask>): List<PersonalTask> {
+//        return personalTask.filter {
+//            it.status == TODO
+//        }
+//    }
 
-    private fun getInProgressPersonalTask(personalTask: List<PersonalTask>): List<PersonalTask> {
-        return personalTask.filter {
-            it.status == INPROGRESS
-        }
-    }
+//    private fun getInProgressPersonalTask(personalTask: List<PersonalTask>): List<PersonalTask> {
+//        return personalTask.filter {
+//            it.status == INPROGRESS
+//        }
+//    }
 
-    private fun getDonePersonalTask(personalTask: List<PersonalTask>): List<PersonalTask> {
-        return personalTask.filter {
-            it.status == DONE
-        }
-    }
+//    private fun getDonePersonalTask(personalTask: List<PersonalTask>): List<PersonalTask> {
+//        return personalTask.filter {
+//            it.status == DONE
+//        }
+//    }
 
 
 
@@ -70,9 +71,10 @@ class HomePresenter(
 
                 override fun onSuccess(response: BaseResponse<List<TeamTask>>) {
                     view.onGetLatestTeamTaskSuccess(getLatestTeamTasks(response.result!!))
-                    view.onToDoTeamTasksSuccess(getToDoTeamTasks(response.result))
-                    view.onInProgressTeamTasksSuccess(getInProgressTeamTasks(response.result))
-                    view.onDoneTeamTasksSuccess(getDoneTeamTasks(response.result))
+                    //view.onToDoTeamTasksSuccess(getToDoTeamTasks(response.result))
+                    //view.onInProgressTeamTasksSuccess(getInProgressTeamTasks(response.result))
+                    //view.onDoneTeamTasksSuccess(getDoneTeamTasks(response.result))
+                    view.getTaskStatusCounts(getTaskStatusCounts(response.result))
                 }
 
                 override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
@@ -86,20 +88,33 @@ class HomePresenter(
         return teamTasks.take(4)
     }
 
-    private fun getToDoTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
-        return teamTasks.filter { it.status ==TODO }
-    }
+//    private fun getToDoTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
+//        return teamTasks.filter { it.status ==TODO }
+//    }
 
-    private fun getInProgressTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
-        return teamTasks.filter { it.status == INPROGRESS }
-    }
+//    private fun getInProgressTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
+//        return teamTasks.filter { it.status == INPROGRESS }
+//    }
 
-    private fun getDoneTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
-        return teamTasks.filter { it.status == DONE }
-    }
+//    private fun getDoneTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
+//        return teamTasks.filter { it.status == DONE }
+//    }
 
-    private fun getInProgressTasksNumberForTeam(teamTasks: List<TeamTask>): Int {
-        return teamTasks.size
+//    private fun getInProgressTasksNumberForTeam(teamTasks: List<TeamTask>): Int {
+//        return teamTasks.size
+//    }
+
+
+    private fun getTaskStatusCounts(
+        personalTasks: List<TeamTask>
+    ): Triple<Float, Float, Float> {
+        val totalTasks = personalTasks.size
+
+        val todoCount = (personalTasks.filter { it.status == TODO }.size) * 100.0f / totalTasks
+        val inProgressCount = (personalTasks.filter { it.status == INPROGRESS }.size) * 100.0f / totalTasks
+        val doneCount = (personalTasks.filter { it.status == DONE }.size) * 100.0f / totalTasks
+
+        return Triple(todoCount, inProgressCount, doneCount)
     }
 
     private companion object {
