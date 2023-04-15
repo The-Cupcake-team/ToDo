@@ -2,7 +2,6 @@ package com.cupcake.todo.ui.fragment.home
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -113,7 +112,6 @@ class HomeAdapter(
 
     private fun bindTeamTask(holder: TeamTaskViewHolder, position: Int) {
         val currentItem = items[position].item as List<TeamTask>
-        Log.d("HomeAdapter", "bindTeamTask: $currentItem")
         val adapter = TeamTaskAdapter(currentItem, onClickTeamTaskItem)
         holder.binding.recyclerViewTeamTasks.adapter = adapter
 
@@ -123,8 +121,6 @@ class HomeAdapter(
     private fun bindPersonalTask(holder: PersonalTaskViewHolder, position: Int) {
         val currentItem = items[position].item as PersonalTask
         holder.binding.apply {
-            Log.d("HomeAdapter", "bindPersonalTask: $currentItem")
-
             textViewTaskTitle.text = currentItem.title
             textViewDescription.text = currentItem.description
             textViewDate.text = formatDate(currentItem.creationTime)
