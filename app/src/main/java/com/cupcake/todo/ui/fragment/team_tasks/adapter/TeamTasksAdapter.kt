@@ -28,7 +28,7 @@ class TeamTasksAdapter(
         val currentTeamTask = teamTasks[position]
         holder.binding.apply {
             textViewTaskTitle.text = currentTeamTask.title
-            textViewRemainingPlans.text = currentTeamTask.description
+            textViewDescription.text = currentTeamTask.description
             textViewTaskCreationTime.text = currentTeamTask.creationTime
             textViewAssignee.text = currentTeamTask.assignee.take(2).uppercase()
             root.setOnClickListener { listener.onClickTeamTask(currentTeamTask.id)}

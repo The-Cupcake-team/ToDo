@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.cupcake.todo.databinding.FragmentHomeBinding
 import com.cupcake.todo.model.network.response.PersonalTask
-import com.cupcake.todo.presenter.home.HomePresenter
 import com.cupcake.todo.model.network.response.TeamTask
+import com.cupcake.todo.presenter.home.HomePresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.details.DetailsFragment
 import com.cupcake.todo.ui.fragment.personal_tasks.PersonalTasksFragment
@@ -18,7 +18,7 @@ import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
 import com.cupcake.todo.ui.util.toPersonalTask
 
 
-class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
 
     private lateinit var homeAdapter: HomeAdapter
     private var itemsList: MutableList<HomeItem<Any>> = mutableListOf()
@@ -55,11 +55,11 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(), IHomeView {
     override fun onGetLatestTeamTaskSuccess(teamTasks: List<TeamTask>) {
         itemsList.add(HomeItem(TEAM_TASK, HomeItemType.ITEM_TYPE_TITLE_SECTION))
         itemsList.add(HomeItem(teamTasks, HomeItemType.ITEM_TYPE_TEAM_TASK))
-        itemsList.add(HomeItem(RECENT_TASK, HomeItemType.ITEM_TYPE_TITLE_SECTION))
     }
 
 
     override fun onRecentPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
+        itemsList.add(HomeItem(RECENT_TASK, HomeItemType.ITEM_TYPE_TITLE_SECTION))
         itemsList.addAll(personalTasks.map { it.toPersonalTask() })
     }
 

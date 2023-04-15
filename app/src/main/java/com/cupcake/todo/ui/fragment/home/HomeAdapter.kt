@@ -15,10 +15,9 @@ import com.cupcake.todo.databinding.ItemPersonalTaskBinding
 import com.cupcake.todo.databinding.ItemTitleSctionBinding
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
+import com.cupcake.todo.ui.util.formatDate
 import com.cupcake.todo.ui.util.setupPieChart
 import com.github.mikephil.charting.data.PieEntry
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class HomeAdapter(
@@ -71,6 +70,7 @@ class HomeAdapter(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: BasicViewHolder, position: Int) {
         when (holder) {
             is HeaderDetailsViewHolder -> bindDetails(holder, position)
@@ -86,7 +86,7 @@ class HomeAdapter(
         val currentItem = items[position].item as Map<String, *>
         holder.binding.apply {
             textViewUserName.text = currentItem["username"].toString()
-
+            textViewImageUserName.text = currentItem["username"].toString().toString()
             include.textViewToDoPercent.text = "%.0f".format(currentItem["toDo"]) + " %"
             include.textViewInProgressPercent.text = "%.0f".format(currentItem["inProgress"]) + " %"
             include.textViewDonePercent.text = "%.0f".format(currentItem["done"]) + " %"
@@ -166,15 +166,6 @@ class HomeAdapter(
         return dataValue
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun formatDate(date: String): String {
-        val inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
-        val outputFormat = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH)
 
-        val dateParser = LocalDateTime.parse(date, inputFormat)
-        val formattedDate = dateParser.format(outputFormat)
-
-        return formattedDate
-    }
 }
 
