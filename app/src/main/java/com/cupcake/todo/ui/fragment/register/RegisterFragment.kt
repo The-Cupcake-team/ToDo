@@ -1,12 +1,11 @@
 package com.cupcake.todo.ui.fragment.register
 
-import android.app.AlertDialog
+
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentRegisterBinding
 import com.cupcake.todo.presenter.register.RegisterPresenter
@@ -37,15 +36,18 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
         setupBackButton()
     }
 
+
     private fun onSignUpButtonPressed() {
         binding.buttonSignUp.setOnClickListener {
-            assignUsernameAndPassword()
+            username = binding.textInputUsername.text.toString().trimEnd()
+            password = binding.textInputPassword.text.toString().trimEnd()
 
-            if (isValidInput()) {
+            if (isValidInput(username, password)) {
                 presenter.register(username, password)
+                showSuccessMessage()
                 navigateToFragment(LoginFragment())
             } else {
-                showInputErrorMessage()
+                showInputErrorMessage(username, password)
             }
         }
     }
@@ -62,24 +64,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
         }
     }
 
+
     private fun clearHelperText() {
         if (username.isNotBlank()) {
-            binding.containerUserName.helperText = ""
+            binding.containerUserName.helperText = null
         }
         if (password.isNotBlank()) {
-            binding.containerPassword.helperText = ""
+            binding.containerPassword.helperText = null
         }
     }
 
-    private fun isValidInput(): Boolean {
-        return if(username.isNotBlank() && password.isNotBlank() &&
-            isValidUsername(username) && isValidPassword(password)){
-            clearHelperText()
-            true
-        } else false
-    }
-
-    private fun showInputErrorMessage() {
+    private fun showInputErrorMessage(username: String, password: String) {
         if (username.isBlank()) {
             binding.containerUserName.helperText = getString(R.string.enter_user_name)
         } else if (!isValidUsername(username)) {
@@ -93,9 +88,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
         }
     }
 
-    private fun assignUsernameAndPassword() {
-        username = binding.textInputUsername.text.toString().trimEnd()
-        password = binding.textInputPassword.text.toString().trimEnd()
+
+    private fun isValidInput(username: String, password: String): Boolean {
+        if (username.isBlank() || !isValidUsername(username)) {
+            clearHelperText()
+            return false
+        }
+        if (password.isBlank() || !isValidPassword(password)) {
+            clearHelperText()
+            return false
+        }
+        return true
     }
 
     private fun isValidUsername(username: String): Boolean {
@@ -107,14 +110,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
         return password.length >= 8
     }
 
+
+    private fun showSuccessMessage() {
+        Toast.makeText(context, "Registration successful! \u2714", Toast.LENGTH_SHORT).show()
+    }
+
     override fun showLoading() {
-        binding.progressLoading.postDelayed({
-            binding.progressLoading.visibility = View.VISIBLE
-        }, 2000)
+        binding.progressLoading.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        binding.progressLoading.visibility = View.GONE
+        binding.progressLoading.visibility = View.INVISIBLE
     }
 
     override fun onRegisterSuccess() {
@@ -122,25 +128,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
     }
 
     override fun onRegisterFailure(error: String) {
-        val dialogBuilder = createDialog(
-            getString(R.string.registration_failed),
-            error,
-            getString(R.string.ok)
-        )
-        requireActivity().runOnUiThread {
-            Handler(Looper.getMainLooper()).post { dialogBuilder.create().show() }
-        }
+
     }
 
-    private fun createDialog(
-        title: String,
-        message: String,
-        positiveButton: String
-    ): AlertDialog.Builder {
-        return AlertDialog.Builder(requireContext())
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(positiveButton) { _, _ -> }
-    }
 
 }
