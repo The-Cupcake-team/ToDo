@@ -1,7 +1,10 @@
 package com.cupcake.todo.ui.util
 
 import android.os.Build
+import android.os.Bundle
+import android.os.Parcelable
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.ui.fragment.home.HomeItem
@@ -49,4 +52,31 @@ fun formatDate(date: String): String {
     val outputFormat = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH)
     return LocalDateTime.parse(date, inputFormat).format(outputFormat)
 
+}
+
+fun Fragment.addFragmentWithSendObject(fragment: Fragment, key: String, task: Any? = null) {
+    val fragmentManager = requireActivity().supportFragmentManager
+    val transaction = fragmentManager.beginTransaction()
+
+    task.let {
+        val bundle = Bundle()
+        bundle.putParcelable(key, task as Parcelable?)
+        fragment.arguments = bundle
+    }
+    transaction.apply {
+        replace(android.R.id.content, fragment)
+        addToBackStack(null)
+        commit()
+    }
+}
+
+fun Fragment.addFragment(fragment: Fragment) {
+    val fragmentManager = requireActivity().supportFragmentManager
+    val transaction = fragmentManager.beginTransaction()
+
+    transaction.apply {
+        replace(android.R.id.content, fragment)
+        addToBackStack(null)
+        commit()
+    }
 }
