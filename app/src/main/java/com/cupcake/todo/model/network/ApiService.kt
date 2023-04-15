@@ -19,7 +19,8 @@ interface ApiService {
         title: String,
         description: String,
         assignee: String,
-        callback: ApiCallback<BaseResponse<AddTeamTaskResponse>>
+        onSuccess: (response: BaseResponse<AddTeamTaskResponse>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit,
     )
 
     fun getTeamTasks(callback: ApiCallback<BaseResponse<List<TeamTaskResponse>>>)

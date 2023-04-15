@@ -48,7 +48,8 @@ class ApiServiceImpl : ApiService {
         title: String,
         description: String,
         assignee: String,
-        callback: ApiCallback<BaseResponse<AddTeamTaskResponse>>
+        onSuccess: (response: BaseResponse<AddTeamTaskResponse>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
     ) {
         val teamTask = FormBody.Builder()
             .add(TITLE, title)
@@ -60,7 +61,7 @@ class ApiServiceImpl : ApiService {
             .enqueueCall(
                 object : ApiCallback<BaseResponse<AddTeamTaskResponse>>{
                     override fun onSuccess(response: BaseResponse<AddTeamTaskResponse>) {
-                        callback.onSuccess(response)
+                        onSuccess(response)
                     }
 
                     override fun onFailure(
@@ -68,7 +69,7 @@ class ApiServiceImpl : ApiService {
                         statusCode: Int?,
                         message: String?
                     ) {
-                        callback.onFailure(throwable, statusCode, message)
+                        onFailure(throwable, statusCode, message)
                     }
 
                 }
