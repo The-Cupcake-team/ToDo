@@ -24,7 +24,9 @@ class HomeAdapter(
     private var items: List<HomeItem<Any>>,
     private val onClickViewMore: (planType: String) -> Unit,
     private val onClickPersonalTaskItem: (personalTask: PersonalTask) -> Unit,
-    private val onClickTeamTaskItem: (teamTask: TeamTask) -> Unit
+    private val onClickTeamTaskItem: (teamTask: TeamTask) -> Unit,
+    private val onClickPlanItem: (isPersonalPlane: Boolean) -> Unit
+
 ) : RecyclerView.Adapter<HomeAdapter.BasicViewHolder>() {
 
     sealed class BasicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -97,6 +99,14 @@ class HomeAdapter(
                     currentItem["inProgress"] as Float,
                     currentItem["done"] as Float)
             )
+
+            itemPlanPersonal.root.setOnClickListener {
+                onClickPlanItem(true)
+            }
+            itemPlanTeam.root.setOnClickListener {
+                onClickPlanItem(false)
+            }
+
 }
     }
 

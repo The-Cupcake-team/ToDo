@@ -1,12 +1,10 @@
 package com.cupcake.todo.ui.fragment.home
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.cupcake.todo.databinding.FragmentHomeBinding
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
@@ -15,6 +13,8 @@ import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.details.DetailsFragment
 import com.cupcake.todo.ui.fragment.personal_tasks.PersonalTasksFragment
 import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
+import com.cupcake.todo.ui.util.addFragment
+import com.cupcake.todo.ui.util.addFragmentWithSendObject
 import com.cupcake.todo.ui.util.toPersonalTask
 
 
@@ -41,7 +41,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
                 itemsList,
                 ::onClickViewMore,
                 ::onClickPersonalTaskItem,
-                ::onClickTeamTaskItem
+                ::onClickTeamTaskItem,
+                ::onClickPlanItem
             )
             binding.nestedRecyclerHome.adapter = homeAdapter
         }
@@ -88,19 +89,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
     }
 
     private fun onClickViewMore(planeType: String) {
-        when (planeType) {
-            RECENT_TASK -> addFragment(PersonalTasksFragment())
-            else -> addFragment(TeamTasksFragment())
-        }
+        addFragment(if (planeType == RECENT_TASK) PersonalTasksFragment() else TeamTasksFragment())
     }
 
     private fun onClickPersonalTaskItem(personalTask: PersonalTask) {
         addFragmentWithSendObject(DetailsFragment(), PERSONAL_TASK_DATA, personalTask)
-
     }
 
     private fun onClickTeamTaskItem(teamTask: TeamTask) {
         addFragmentWithSendObject(DetailsFragment(), TEAM_TASK_DATA, teamTask)
+    }
+
+    private fun onClickPlanItem(isPersonalPlane: Boolean) {
+        addFragment(if (isPersonalPlane) PersonalTasksFragment() else TeamTasksFragment())
     }
 
 
@@ -116,32 +117,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
         const val TEAM_TASK_DATA = "team task data"
     }
 
-    fun addFragmentWithSendObject(fragment: Fragment, key: String, task: Any? = null) {
-        val fragmentManager = requireActivity().supportFragmentManager
-        val transaction = fragmentManager.beginTransaction()
 
-        task.let {
-            val bundle = Bundle()
-            bundle.putParcelable(key, task as Parcelable?)
-            fragment.arguments = bundle
-        }
-        transaction.apply {
-            replace(android.R.id.content, fragment)
-            addToBackStack(null)
-            commit()
-        }
-    }
-
-    fun addFragment(fragment: Fragment) {
-        val fragmentManager = requireActivity().supportFragmentManager
-        val transaction = fragmentManager.beginTransaction()
-
-        transaction.apply {
-            replace(android.R.id.content, fragment)
-            addToBackStack(null)
-            commit()
-        }
-    }
 }
 
 

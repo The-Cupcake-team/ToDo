@@ -7,8 +7,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.databinding.ItemTeamTaskBinding
 import com.cupcake.todo.model.network.response.TeamTask
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import com.cupcake.todo.ui.util.formatDate
 import java.util.*
 
 class TeamTaskAdapter(
@@ -40,16 +39,5 @@ class TeamTaskAdapter(
             }
         }
 
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun formatDate(date: String): String {
-        val inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
-        val outputFormat = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH)
-
-        val dateParser = LocalDateTime.parse(date, inputFormat)
-        val formattedDate = dateParser.format(outputFormat)
-
-        return formattedDate
     }
 }
