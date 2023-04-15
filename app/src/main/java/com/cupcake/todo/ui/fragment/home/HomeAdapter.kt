@@ -23,7 +23,9 @@ class HomeAdapter(
     private var items: List<HomeItem<Any>>,
     private val onClickViewMore: (planType: String) -> Unit,
     private val onClickPersonalTaskItem: (personalTask: PersonalTask) -> Unit,
-    private val onClickTeamTaskItem: (teamTask: TeamTask) -> Unit
+    private val onClickTeamTaskItem: (teamTask: TeamTask) -> Unit,
+    private val onClickPlanItem: (isPersonalPlane: Boolean) -> Unit
+
 ) : RecyclerView.Adapter<HomeAdapter.BasicViewHolder>() {
 
     sealed class BasicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -85,17 +87,25 @@ class HomeAdapter(
         val currentItem = items[position].item as Map<String, *>
         holder.binding.apply {
             textViewUserName.text = currentItem["username"].toString()
-            textViewImageUserName.text = currentItem["username"].toString().toString()
-            include.textViewToDoPercent.text = "%.0f".format(currentItem["toDo"]) + " %"
-            include.textViewInProgressPercent.text = "%.0f".format(currentItem["inProgress"]) + " %"
-            include.textViewDonePercent.text = "%.0f".format(currentItem["done"]) + " %"
+            textViewImageUserName.text = currentItem["username"].toString()
+            include.textViewToDoPercent.text = "%.0f".format(currentItem[TODO]) + " %"
+            include.textViewInProgressPercent.text = "%.0f".format(currentItem[IN_PROGRESS]) + " %"
+            include.textViewDonePercent.text = "%.0f".format(currentItem[DONE]) + " %"
             include.pieChart.setupPieChart(
                 include.pieChart,
                 taskDataValue(
-                    currentItem["toDo"] as Float,
-                    currentItem["inProgress"] as Float,
-                    currentItem["done"] as Float)
+                    currentItem[TODO] as Float,
+                    currentItem[IN_PROGRESS] as Float,
+                    currentItem[DONE] as Float)
             )
+
+            itemPlanPersonal.root.setOnClickListener {
+                onClickPlanItem(true)
+            }
+            itemPlanTeam.root.setOnClickListener {
+                onClickPlanItem(false)
+            }
+
 }
     }
 
@@ -146,20 +156,23 @@ class HomeAdapter(
         val binding = ItemNestedTeamTaskBinding.bind(itemView)
     }
 
+    private fun taskDataValue(toDo: Float, inProgress: Float, done: Float): MutableList<PieEntry> {
+        val dataValue = mutableListOf<PieEntry>()
+        dataValue.add(PieEntry(toDo, TODO))
+        dataValue.add(PieEntry(inProgress, IN_PROGRESS))
+        dataValue.add(PieEntry(done, DONE))
+        return dataValue
+    }
+
     companion object {
         private const val ITEM_TYPE_HEADER_DETAILS = 0
         private const val ITEM_TYPE_TEAM_TASK = 1
         private const val ITEM_TYPE_TITLE_SECTION = 2
         private const val ITEM_TYPE_PERSONAL_TASK = 3
-    }
 
-
-    private fun taskDataValue(toDo: Float, inProgress: Float, done: Float): MutableList<PieEntry> {
-        val dataValue = mutableListOf<PieEntry>()
-        dataValue.add(PieEntry(toDo, "ToDo"))
-        dataValue.add(PieEntry(inProgress, "InProgress"))
-        dataValue.add(PieEntry(done, "Done"))
-        return dataValue
+        private const val TODO = "toDo"
+        private const val IN_PROGRESS = "inProgress"
+        private const val DONE = "done"
     }
 
 
