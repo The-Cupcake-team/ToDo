@@ -37,7 +37,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
     }
 
     override fun onRegisterSuccess() {
-        navigateToFragment(TeamTasksFragment())
+//        navigateToFragment(TeamTasksFragment())
         Log.v(LOG_TAG, "onRegisterSuccess")
     }
 

@@ -79,7 +79,7 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
     }
 
     override fun onClickTeamTask(id: String) {
-        navigateToFragment(DetailsFragment())
+        //navigateToFragment(DetailsFragment())
     }
 
     override fun showInternetErrorDialog() {
