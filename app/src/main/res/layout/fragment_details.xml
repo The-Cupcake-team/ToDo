@@ -80,7 +80,9 @@
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_status"
-        app:strokeWidth="0dp"/>
+        app:strokeWidth="0dp">
+
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/text_view_date"
@@ -126,4 +128,16 @@
         app:layout_constraintBottom_toBottomOf="@id/details_background"
         app:layout_constraintTop_toBottomOf="@+id/text_view_title"
         tools:text="@tools:sample/lorem/random" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
