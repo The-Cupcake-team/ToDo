@@ -1,6 +1,5 @@
 package com.cupcake.todo.ui.fragment.home
 
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
@@ -24,7 +23,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
     private lateinit var homeAdapter: HomeAdapter
     private var itemsList: MutableList<HomeItem<Any>> = mutableListOf()
     private val presenter: HomePresenter = HomePresenter(this)
-    lateinit var progressDialog: ProgressDialog
+
     override val LOG_TAG: String = this::class.java.name
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentHomeBinding =
         FragmentHomeBinding::inflate
@@ -74,6 +73,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
 
     override fun onGetDataFailure(error: String) {
         Log.e("result", "onGetDataFailure${error}")
+        presenter.getAllTasks()
+        itemsList.clear()
+
     }
 
     override fun showLoading() {
