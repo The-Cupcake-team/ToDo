@@ -1,24 +1,21 @@
 package com.cupcake.todo.ui.fragment.login
 
 import android.app.AlertDialog
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.UiThread
-import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentLoginBinding
 import com.cupcake.todo.presenter.login.LoginPresenter
 import com.cupcake.todo.ui.base.BaseFragment
-import com.cupcake.todo.ui.fragment.add_task.AddTaskFragment
 import com.cupcake.todo.ui.fragment.home.HomeFragment
 import com.cupcake.todo.ui.fragment.register.RegisterFragment
+import com.google.android.material.snackbar.Snackbar
 
 
 class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
@@ -43,6 +40,16 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     private fun addCallbacks() {
         onLoginButtonPressed()
         onSignupButtonPressed()
+        onFormTextChange()
+    }
+
+    private fun onFormTextChange() {
+        binding.textInputEditUsername.doOnTextChanged { _, _, _, _ ->
+            binding.textInputLayoutUsername.helperText = null
+        }
+        binding.textInputEditPassword.doOnTextChanged { _, _, _, _ ->
+            binding.textInputLayoutPassword.helperText = null
+        }
     }
 
     private fun onLoginButtonPressed() {
@@ -63,29 +70,13 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
         if (password.isBlank()) {
             binding.textInputLayoutPassword.helperText = getString(R.string.empty_form)
         }
-        clearHelperText()
     }
 
-    private fun validateForm(): Boolean {
-        if (username.isNotBlank() && password.isNotBlank()) {
-            clearHelperText()
-            return true
-        }
-        return false
-    }
-
-    private fun clearHelperText() {
-        if (username.isNotBlank()) {
-            binding.textInputLayoutUsername.helperText = ""
-        }
-        if (password.isNotBlank()) {
-            binding.textInputLayoutPassword.helperText = ""
-        }
-    }
+    private fun validateForm() = username.isNotBlank() && password.isNotBlank()
 
     private fun onSignupButtonPressed() {
         binding.textViewSignUp.setOnClickListener {
-            navigateToFragment(RegisterFragment())
+            this.navigateWithAddFragment(RegisterFragment())
         }
     }
 
@@ -104,36 +95,43 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     }
 
     override fun onLoginSuccess() {
-        navigateToFragment(HomeFragment())
+        this.navigateWithReplaceFragment(HomeFragment())
     }
 
     override fun onLoginFailure(throwable: Throwable, statusCode: Int?, error: String?) {
-        dialogBuilder = if (statusCode == 401) {
-            createDialog(
-                getString(R.string.invalid_account),
-                error!!,
-                getString(R.string.try_again)
-            )
+        if (statusCode == 401) {
+            requireActivity().runOnUiThread {
+                Snackbar.make(
+                    binding.loginScreen,
+                    getString(R.string.invalid_username_password),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
         } else {
-            createDialog(
-                getString(R.string.unable_to_login),
-                getString(R.string.network_error_message),
-                getString(R.string.try_again)
-            )
-        }
-        requireActivity().runOnUiThread {
-            Handler(Looper.getMainLooper()).post { dialogBuilder.create().show() }
+            dialogBuilder = AlertDialog.Builder(requireContext())
+                .setTitle(getString(R.string.unable_to_login))
+                .setMessage(getString(R.string.network_error_message))
+                .setPositiveButton(getString(R.string.network_error_message)) { _, _ -> }
+
+            requireActivity().runOnUiThread {
+                Handler(Looper.getMainLooper()).post { dialogBuilder.create().show() }
+            }
         }
     }
 
-    private fun createDialog(
-        title: String,
-        message: String,
-        positiveButton: String
-    ): AlertDialog.Builder {
-        return AlertDialog.Builder(requireContext())
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(positiveButton) { _, _ -> }
+    private fun Fragment.navigateWithReplaceFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentContainer, fragment)
+            commit()
+        }
     }
+
+    private fun Fragment.navigateWithAddFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            add(R.id.fragmentContainer, fragment)
+            addToBackStack(fragment::class.java.name)
+            commit()
+        }
+    }
+
 }
