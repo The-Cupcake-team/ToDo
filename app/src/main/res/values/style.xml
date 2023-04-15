@@ -99,7 +99,7 @@
 
 
     <style name="OutlineButton" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="strokeColor">@color/brand</item>
+        <item name="strokeColor">@color/color_primary</item>
     </style>
 
 </resources>

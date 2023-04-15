@@ -53,5 +53,10 @@
     <string name="unable_to_login">Unable to login</string>
     <string name="network_error_message">An unexpected error occurred. Please try logging in again after check your network connection</string>
     <string name="empty_form">Must not be empty</string>
+    <string name="check_your_internet">check your internet</string>
+    <string name="something_went_wrong">something went wrong</string>
+    <string name="ok">ok</string>
+    <string name="avatar_team_member">avatar team member</string>
+    <string name="all_tasks_chip">All</string>
 
 </resources>

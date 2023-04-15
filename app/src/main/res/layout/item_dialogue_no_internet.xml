@@ -56,7 +56,7 @@
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/ok"
             android:textAlignment="center"
-            android:textColor="@color/brand"
+            android:textColor="@color/color_primary"
             android:textSize="@dimen/font_size_body"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
