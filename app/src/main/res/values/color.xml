@@ -24,7 +24,7 @@
     <color name="color_done">@color/color_primary</color>
     <color name="color_in_progress">@color/color_secondary</color>
     <color name="color_to_do">#81B2F3</color>
-    <color name="color_password_drawable">#99FFFFFF</color>
+    <color name="color_password_drawable">#61000000</color>
     <color name="color_button_pressed">#BF0059B3</color>
     <color name="color_warning">#EC6240</color>
 

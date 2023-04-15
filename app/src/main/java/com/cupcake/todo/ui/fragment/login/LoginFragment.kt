@@ -42,7 +42,6 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
 
     private fun addCallbacks() {
         onLoginButtonPressed()
-        changeEndIconOfPasswordEditText()
         onSignupButtonPressed()
     }
 
@@ -95,15 +94,6 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
         password = binding.textInputEditPassword.text.toString().trimEnd()
     }
 
-    private fun changeEndIconOfPasswordEditText() {
-        binding.textInputLayoutPassword.setEndIconTintList(
-            ColorStateList.valueOf(
-                ContextCompat.getColor(
-                    requireContext(), R.color.color_password_drawable
-                )
-            )
-        )
-    }
 
     override fun showLoading() {
         binding.progressLoading.visibility = View.VISIBLE
