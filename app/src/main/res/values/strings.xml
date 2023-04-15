@@ -58,5 +58,6 @@
     <string name="ok">ok</string>
     <string name="avatar_team_member">avatar team member</string>
     <string name="all_tasks_chip">All</string>
+    <string name="invalid_username_password">Invalid Username or Password</string>
 
 </resources>

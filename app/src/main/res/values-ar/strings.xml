@@ -32,6 +32,7 @@
     <string name="unable_to_login">عدم الإمكان من تسجيل الدخول</string>
     <string name="network_error_message">حدث خلل ما, الرجاء محاولة تسجيل الدخول مرة اخرى بعد التأكد من اتصال الشبكة.</string>
     <string name="empty_form">يجب أن لا تكون فارغة</string>
+    <string name="invalid_username_password">الاسم او كلمة المرور غير صالح</string>
 
     <string name="all_tasks_chip">كل</string>
 </resources>
