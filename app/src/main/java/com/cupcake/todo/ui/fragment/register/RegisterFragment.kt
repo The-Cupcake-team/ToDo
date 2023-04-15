@@ -27,13 +27,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
             presenter.register(username, password)
         }
     }
-    private fun navigateToFragment(fragment: Fragment) {
-        requireActivity().supportFragmentManager.beginTransaction().apply {
-            add(R.id.fragmentContainer, fragment)
-            addToBackStack(fragment.javaClass.simpleName)
-            commit()
-        }
-    }
 
     override fun showLoading() {
         Log.v(LOG_TAG, "showLoading")

@@ -1,7 +1,6 @@
 package com.cupcake.todo.model.network
 
-import com.cupcake.todo.model.network.response.BaseResponse
-import com.cupcake.todo.model.network.response.RegisterResponse
+import com.cupcake.todo.model.network.response.*
 import com.cupcake.todo.model.network.util.ApiCallback
 
 interface ApiService {
@@ -10,6 +9,13 @@ interface ApiService {
         password: String,
         onSuccess: (response: BaseResponse<Register>) -> Unit,
         onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit,
+    )
+
+    fun login(
+        username: String,
+        password: String,
+        onSuccess: (response: BaseResponse<Login>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
     )
 
     fun addTeamTask(
@@ -25,12 +31,6 @@ interface ApiService {
         title:String,
         description:String,
         callback: ApiCallback<BaseResponse<AddPersonalTaskResponse>>
-    )
-
-    fun login(
-        username: String,
-        password: String,
-        callback: ApiCallback<BaseResponse<LoginResponse>>
     )
 
 }

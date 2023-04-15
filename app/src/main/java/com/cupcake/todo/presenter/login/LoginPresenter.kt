@@ -3,29 +3,30 @@ package com.cupcake.todo.presenter.login
 
 import com.cupcake.todo.model.network.ApiServiceImpl
 import com.cupcake.todo.model.network.response.BaseResponse
-import com.cupcake.todo.model.network.response.LoginResponse
+import com.cupcake.todo.model.network.response.Login
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.util.PrefsUtil
 import com.cupcake.todo.ui.fragment.login.ILoginView
 
 class LoginPresenter(
     private val view: ILoginView,
-): ApiCallback<BaseResponse<LoginResponse>>{
+) {
 
     private val service = ApiServiceImpl()
 
-    fun login(username: String, password: String){
+    fun login(username: String, password: String) {
         view.showLoading()
-        service.login(username,password,this)
+        service.login(username, password, ::onSuccess, ::onFailure)
     }
-    override fun onSuccess(response: BaseResponse<LoginResponse>) {
+
+    private fun onSuccess(response: BaseResponse<Login>) {
         PrefsUtil.token = response.result!!.token
         view.onLoginSuccess()
         view.hideLoading()
     }
 
-    override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-        view.onLoginFailure(throwable,statusCode,message)
+    private fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+        view.onLoginFailure(throwable, statusCode, message)
         view.hideLoading()
     }
 

@@ -17,6 +17,7 @@ import com.cupcake.todo.databinding.FragmentLoginBinding
 import com.cupcake.todo.presenter.login.LoginPresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.add_task.AddTaskFragment
+import com.cupcake.todo.ui.fragment.home.HomeFragment
 import com.cupcake.todo.ui.fragment.register.RegisterFragment
 
 
@@ -113,7 +114,7 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     }
 
     override fun onLoginSuccess() {
-        navigateToFragment(AddTaskFragment())
+        navigateToFragment(HomeFragment())
     }
 
     override fun onLoginFailure(throwable: Throwable, statusCode: Int?, error: String?) {
