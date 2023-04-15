@@ -1,5 +1,6 @@
 package com.cupcake.todo.ui.fragment.home
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
@@ -22,6 +23,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
 
     private lateinit var homeAdapter: HomeAdapter
     private var itemsList: MutableList<HomeItem<Any>> = mutableListOf()
+    private val presenter: HomePresenter = HomePresenter(this)
+    lateinit var progressDialog: ProgressDialog
     override val LOG_TAG: String = this::class.java.name
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentHomeBinding =
         FragmentHomeBinding::inflate
@@ -29,13 +32,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        HomePresenter(this).getTasks()
+        presenter.getAllTasks()
 
     }
 
     private fun setupRecyclerView() {
         activity?.runOnUiThread {
-            homeAdapter = HomeAdapter(itemsList, ::onClickViewMore, ::onClickPersonalTaskItem, ::onClickTeamTaskItem)
+            homeAdapter = HomeAdapter(
+                itemsList,
+                ::onClickViewMore,
+                ::onClickPersonalTaskItem,
+                ::onClickTeamTaskItem
+            )
             binding.nestedRecyclerHome.adapter = homeAdapter
         }
     }
@@ -52,6 +60,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
         setupRecyclerView()
 
     }
+
     override fun onGetLatestTeamTaskSuccess(teamTasks: List<TeamTask>) {
         itemsList.add(HomeItem(TEAM_TASK, HomeItemType.ITEM_TYPE_TITLE_SECTION))
         itemsList.add(HomeItem(teamTasks, HomeItemType.ITEM_TYPE_TEAM_TASK))
@@ -69,6 +78,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
 
     override fun showLoading() {
         Log.e("result", "showLoading(")
+
     }
 
     override fun hideLoading() {
@@ -82,10 +92,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
         }
     }
 
-    private fun onClickPersonalTaskItem(personalTask: PersonalTask){
+    private fun onClickPersonalTaskItem(personalTask: PersonalTask) {
         addFragmentWithSendObject(DetailsFragment(), PERSONAL_TASK_DATA, personalTask)
+
     }
-    private fun onClickTeamTaskItem(teamTask: TeamTask){
+
+    private fun onClickTeamTaskItem(teamTask: TeamTask) {
         addFragmentWithSendObject(DetailsFragment(), TEAM_TASK_DATA, teamTask)
     }
 

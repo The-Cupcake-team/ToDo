@@ -1,14 +1,6 @@
 package com.cupcake.todo.model.network
 
-import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
-import com.cupcake.todo.model.network.response.AddTeamTaskResponse
-import com.cupcake.todo.model.network.response.BaseResponse
-import com.cupcake.todo.model.network.response.Register
-import com.cupcake.todo.model.network.response.PersonalTask
-import com.cupcake.todo.model.network.response.RegisterResponse
-import com.cupcake.todo.model.network.response.TeamTask
-
-import com.cupcake.todo.model.network.response.TeamTaskResponse
+import com.cupcake.todo.model.network.response.*
 import com.cupcake.todo.model.network.util.ApiCallback
 
 interface ApiService {
@@ -20,9 +12,15 @@ interface ApiService {
     )
 
 
-    fun getAllPersonalTask(callback:  ApiCallback<BaseResponse<List<PersonalTask>>>)
+    fun getAllPersonalTask(
+        onSuccess: (response: BaseResponse<List<PersonalTask>>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit,
+    )
 
-    fun getAllTeamTask(callback:  ApiCallback<BaseResponse<List<TeamTask>>>)
+    fun getAllTeamTask(
+        onSuccess: (response: BaseResponse<List<TeamTask>>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
+    )
 
     fun addTeamTask(
         title: String,
@@ -34,8 +32,8 @@ interface ApiService {
     fun getTeamTasks(callback: ApiCallback<BaseResponse<List<TeamTaskResponse>>>)
 
     fun addPersonalTask(
-        title:String,
-        description:String,
+        title: String,
+        description: String,
         callback: ApiCallback<BaseResponse<AddPersonalTaskResponse>>
     )
 

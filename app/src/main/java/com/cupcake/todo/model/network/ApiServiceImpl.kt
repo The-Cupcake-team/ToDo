@@ -2,15 +2,9 @@ package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
 import com.cupcake.todo.model.network.response.*
-import com.cupcake.todo.model.network.response.PersonalTask
-import com.cupcake.todo.model.network.response.RegisterResponse
-import com.cupcake.todo.model.network.response.TeamTask
-
-
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
 import com.cupcake.todo.model.network.util.enqueueCall
-import okhttp3.Callback
 import okhttp3.FormBody
 
 class ApiServiceImpl : ApiService {
@@ -47,32 +41,36 @@ class ApiServiceImpl : ApiService {
                 })
     }
 
-    override fun getAllPersonalTask(callback: ApiCallback<BaseResponse<List<PersonalTask>>>) {
+    override fun getAllPersonalTask(
+        onSuccess: (response: BaseResponse<List<PersonalTask>>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
+    ) {
         client.getRequest(ApiEndPoint.toDoPersonal)
             .enqueueCall(object : ApiCallback<BaseResponse<List<PersonalTask>>> {
                 override fun onSuccess(response: BaseResponse<List<PersonalTask>>) {
-                    callback.onSuccess(response)
+                    onSuccess(response)
                 }
 
                 override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                    callback.onFailure(throwable, statusCode, message)
-
+                    onFailure(throwable, statusCode, message)
                 }
             })
     }
 
 
-    override fun getAllTeamTask(callback: ApiCallback<BaseResponse<List<TeamTask>>>) {
+    override fun getAllTeamTask(
+        onSuccess: (response: BaseResponse<List<TeamTask>>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
+    ) {
         client.getRequest(ApiEndPoint.toDoTeam)
             .enqueueCall(object : ApiCallback<BaseResponse<List<TeamTask>>> {
                 override fun onSuccess(response: BaseResponse<List<TeamTask>>) {
-                    callback.onSuccess(response)
+                    onSuccess(response)
                 }
 
                 override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                    callback.onFailure(throwable, statusCode, message)
+                    onFailure(throwable, statusCode, message)
                 }
-
             })
     }
 

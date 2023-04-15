@@ -4,7 +4,6 @@ import com.cupcake.todo.model.network.ApiServiceImpl
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
-import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.ui.fragment.home.IHomeView
 
 class HomePresenter(
@@ -13,26 +12,27 @@ class HomePresenter(
 
     private val service = ApiServiceImpl()
 
-    fun getTasks() {
+
+    fun getAllTasks() {
         view.showLoading()
-        getAllPersonalTask()
-        getAllTeamTask()
+        service.getAllPersonalTask(::onGetPersonalTaskSuccess, ::onFailure)
+        service.getAllTeamTask(::onGetTeamTaskSuccess, ::onFailure)
+    }
+
+    private fun onGetPersonalTaskSuccess(response: BaseResponse<List<PersonalTask>>) {
+        response.result?.let { getRecentTask(it) }?.let { view.onRecentPersonalTaskSuccess(it) }
         view.hideLoading()
     }
 
-    private fun getAllPersonalTask() {
-        service.getAllPersonalTask(object : ApiCallback<BaseResponse<List<PersonalTask>>> {
+    private fun onGetTeamTaskSuccess(response: BaseResponse<List<TeamTask>>) {
+        response.result?.let { getLatestTeamTasks(it) }?.let { view.onGetLatestTeamTaskSuccess(it) }
+        response.result?.let { getTaskStatusCounts(it) }?.let { view.getTaskStatusCounts(it) }
+        view.hideLoading()
+    }
 
-            override fun onSuccess(response: BaseResponse<List<PersonalTask>>) {
-                view.onRecentPersonalTaskSuccess(getRecentTask(response.result!!))
-                //view.getTaskStatusCounts(getTaskStatusCounts(response.result))
-            }
 
-            override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                view.onGetDataFailure(throwable.toString())
-            }
-
-        })
+    private fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+        view.onGetDataFailure(throwable.toString())
     }
 
 
@@ -42,24 +42,8 @@ class HomePresenter(
         }
     }
 
-
-    private fun getAllTeamTask() {
-        service.getAllTeamTask(object : ApiCallback<BaseResponse<List<TeamTask>>> {
-
-            override fun onSuccess(response: BaseResponse<List<TeamTask>>) {
-                view.onGetLatestTeamTaskSuccess(getLatestTeamTasks(response.result!!))
-                view.getTaskStatusCounts(getTaskStatusCounts(response.result))
-            }
-
-            override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                view.onGetDataFailure(throwable.toString())
-            }
-
-        })
-    }
-
     private fun getLatestTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
-        return teamTasks.take(4)
+        return teamTasks.take(3)
     }
 
 
