@@ -1,13 +1,10 @@
-package com.cupcake.todo.presenter.details
+package com.cupcake.todo.ui.fragment.details
 
 import com.cupcake.todo.model.network.ApiServiceImpl
 import com.cupcake.todo.model.network.response.BaseResponse
-import com.cupcake.todo.model.network.util.ApiCallback
-import com.cupcake.todo.presenter.model.Task
-import com.cupcake.todo.ui.fragment.details.IDetailsView
 
 
-class DetailsPresenter(private val view: IDetailsView) : ApiCallback<BaseResponse<String>> {
+class DetailsPresenter(private val view: IDetailsView) {
 
     private val apiService = ApiServiceImpl()
 
@@ -17,8 +14,7 @@ class DetailsPresenter(private val view: IDetailsView) : ApiCallback<BaseRespons
         isPersonalTask: Boolean
     ) {
         view.showLoading()
-        apiService.updateTaskStatus(id, status, isPersonalTask, this)
-        view.hideLoading()
+        apiService.updateTaskStatus(id, status, isPersonalTask, ::onSuccess, ::onFailure)
     }
 
     val team = listOf(
@@ -26,11 +22,13 @@ class DetailsPresenter(private val view: IDetailsView) : ApiCallback<BaseRespons
         "Ali", "David", "Bilal", "Yousef", "Ali EG"
     )
 
-    override fun onSuccess(response: BaseResponse<String>) {
+    private fun onSuccess(response: BaseResponse<String>) {
         view.onUpDateSuccess()
+        view.hideLoading()
     }
 
-    override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+    private fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
         view.onUpDateFailure(throwable.toString())
+        view.hideLoading()
     }
 }
