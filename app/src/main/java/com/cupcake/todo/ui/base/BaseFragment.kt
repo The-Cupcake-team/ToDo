@@ -30,11 +30,4 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         Log.v(LOG_TAG, value)
     }
 
-    protected fun navigateToFragment(fragment: Fragment){
-        requireActivity().supportFragmentManager.beginTransaction().apply {
-            add(R.id.fragmentContainer,fragment)
-            addToBackStack(fragment.javaClass.name)
-            commit()
-        }
-    }
 }
