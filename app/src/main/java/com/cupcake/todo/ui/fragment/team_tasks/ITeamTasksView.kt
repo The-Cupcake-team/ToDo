@@ -1,6 +1,6 @@
 package com.cupcake.todo.ui.fragment.team_tasks
 
-import com.cupcake.todo.presenter.model.TeamTask
+import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
 
 interface ITeamTasksView {
 

@@ -1,4 +1,4 @@
-package com.cupcake.todo.ui.fragment.details
+package com.cupcake.todo.ui.fragment.details.adapter
 
 import android.view.LayoutInflater
 import android.view.View

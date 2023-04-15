@@ -1,7 +1,7 @@
 package com.cupcake.todo.presenter.mapper
 
 import com.cupcake.todo.model.network.response.TeamTaskResponse
-import com.cupcake.todo.presenter.model.TeamTask
+import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
 
 fun TeamTaskResponse.toTeamTask(): TeamTask {
     return TeamTask(

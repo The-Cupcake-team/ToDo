@@ -1,4 +1,4 @@
-package com.cupcake.todo.presenter.model
+package com.cupcake.todo.ui.fragment.personal_tasks.model
 
 import android.os.Parcel
 import android.os.Parcelable
