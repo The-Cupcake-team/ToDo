@@ -27,7 +27,8 @@ interface ApiService {
     fun addPersonalTask(
         title:String,
         description:String,
-        callback: ApiCallback<BaseResponse<AddPersonalTaskResponse>>
+        onSuccess: (response: BaseResponse<AddPersonalTaskResponse>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit,
     )
 
 }
