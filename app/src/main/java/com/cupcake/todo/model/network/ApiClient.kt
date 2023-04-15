@@ -2,9 +2,9 @@ package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
 import com.cupcake.todo.model.network.interceptor.AuthInterceptor
-import com.cupcake.todo.model.network.interceptor.LoginInterceptor
 import com.cupcake.todo.model.network.util.MethodRequest
 import okhttp3.Call
+import okhttp3.Credentials
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -12,11 +12,21 @@ import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 
 class ApiClient {
-    private val okHttpClient = OkHttpClient()
 
+
+    private val authInterceptor = AuthInterceptor()
     private val logInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
+
+    private val okHttpClient = OkHttpClient().newBuilder()
+        .addInterceptor(logInterceptor)
+        .build()
+    private val authOkHttpClient = okHttpClient
+        .newBuilder()
+        .addInterceptor(authInterceptor)
+        .addInterceptor(logInterceptor)
+        .build()
 
     fun getRequest(
         path: String,
@@ -53,15 +63,24 @@ class ApiClient {
         username: String? = null,
         password: String? = null,
     ): Call {
-        val httpClient = okHttpClient.newBuilder().apply {
-            addInterceptor(AuthInterceptor())
-            if (!username.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                addInterceptor(LoginInterceptor(username, password))
-            }
-            addInterceptor(logInterceptor)
-        }.build()
 
-        return httpClient.newCall(request)
+        if (!username.isNullOrEmpty() && !password.isNullOrEmpty()) {
+            return loginOkHttpClient(request, username, password)
+        }
+
+        return authOkHttpClient.newCall(request)
+    }
+
+    private fun loginOkHttpClient(
+        request: Request,
+        username: String,
+        password: String
+    ): Call {
+        val basicAuthentication = Credentials.basic(username, password)
+        val loginRequest = request.newBuilder()
+            .addHeader(AUTHORIZATION, basicAuthentication)
+            .build()
+        return okHttpClient.newCall(loginRequest)
     }
 
     private fun getHttpUrl(path: String): HttpUrl {
@@ -75,6 +94,7 @@ class ApiClient {
 
     private companion object {
         const val HTTPS = "https"
+        const val AUTHORIZATION = "Authorization"
     }
 
 }

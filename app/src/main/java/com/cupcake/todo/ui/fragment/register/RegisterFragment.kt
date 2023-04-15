@@ -25,7 +25,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
             val password = binding.editTextPassword.text.toString()
             Log.v(LOG_TAG, " $username ,$password")
             presenter.register(username, password)
-            navigateToFragment(TeamTasksFragment())
         }
     }
     private fun navigateToFragment(fragment: Fragment) {
@@ -45,6 +44,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
     }
 
     override fun onRegisterSuccess() {
+        navigateToFragment(TeamTasksFragment())
         Log.v(LOG_TAG, "onRegisterSuccess")
     }
 

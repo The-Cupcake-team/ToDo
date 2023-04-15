@@ -1,14 +1,11 @@
 package com.cupcake.todo.model.network
 
 import com.cupcake.todo.BuildConfig
-import com.cupcake.todo.model.network.response.AddTeamTaskResponse
-import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
-import com.cupcake.todo.model.network.response.BaseResponse
+import com.cupcake.todo.model.network.response.*
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.RegisterResponse
 import com.cupcake.todo.model.network.response.TeamTask
 
-import com.cupcake.todo.model.network.response.TeamTaskResponse
 
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
@@ -20,10 +17,12 @@ class ApiServiceImpl : ApiService {
 
     private val client = ApiClient()
 
+
     override fun register(
         username: String,
         password: String,
-        callback: ApiCallback<BaseResponse<RegisterResponse>>,
+        onSuccess: (response: BaseResponse<Register>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
     ) {
         val registerBody = FormBody.Builder()
             .add(USERNAME, username)
@@ -32,15 +31,20 @@ class ApiServiceImpl : ApiService {
             .build()
 
         client.postRequest(ApiEndPoint.register, registerBody)
-            .enqueueCall(object : ApiCallback<BaseResponse<RegisterResponse>> {
-                override fun onSuccess(response: BaseResponse<RegisterResponse>) {
-                    callback.onSuccess(response)
-                }
+            .enqueueCall(
+                object : ApiCallback<BaseResponse<Register>> {
+                    override fun onSuccess(response: BaseResponse<Register>) {
+                        onSuccess(response)
+                    }
 
-                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                    callback.onFailure(throwable, statusCode, message)
-                }
-            })
+                    override fun onFailure(
+                        throwable: Throwable,
+                        statusCode: Int?,
+                        message: String?
+                    ) {
+                        onFailure(throwable, statusCode, message)
+                    }
+                })
     }
 
     override fun getAllPersonalTask(callback: ApiCallback<BaseResponse<List<PersonalTask>>>) {
@@ -60,7 +64,7 @@ class ApiServiceImpl : ApiService {
 
     override fun getAllTeamTask(callback: ApiCallback<BaseResponse<List<TeamTask>>>) {
         client.getRequest(ApiEndPoint.toDoTeam)
-            .enqueueCall(object: ApiCallback<BaseResponse<List<TeamTask>>> {
+            .enqueueCall(object : ApiCallback<BaseResponse<List<TeamTask>>> {
                 override fun onSuccess(response: BaseResponse<List<TeamTask>>) {
                     callback.onSuccess(response)
                 }
@@ -71,6 +75,7 @@ class ApiServiceImpl : ApiService {
 
             })
     }
+
 
     override fun addTeamTask(
         title: String,
@@ -84,10 +89,9 @@ class ApiServiceImpl : ApiService {
             .add(ASSIGNEE, assignee)
             .build()
 
-
         client.postRequest(ApiEndPoint.toDoTeam, teamTask)
             .enqueueCall(
-                object : ApiCallback<BaseResponse<AddTeamTaskResponse>>{
+                object : ApiCallback<BaseResponse<AddTeamTaskResponse>> {
                     override fun onSuccess(response: BaseResponse<AddTeamTaskResponse>) {
                         callback.onSuccess(response)
                     }
@@ -106,13 +110,13 @@ class ApiServiceImpl : ApiService {
 
     override fun getTeamTasks(callback: ApiCallback<BaseResponse<List<TeamTaskResponse>>>) {
         client.getRequest(ApiEndPoint.toDoTeam).enqueueCall(
-            object : ApiCallback<BaseResponse<List<TeamTaskResponse>>>{
+            object : ApiCallback<BaseResponse<List<TeamTaskResponse>>> {
                 override fun onSuccess(response: BaseResponse<List<TeamTaskResponse>>) {
                     callback.onSuccess(response)
                 }
 
                 override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                    callback.onFailure(throwable,statusCode,message)
+                    callback.onFailure(throwable, statusCode, message)
                 }
 
             }
@@ -124,12 +128,12 @@ class ApiServiceImpl : ApiService {
         description: String,
         callback: ApiCallback<BaseResponse<AddPersonalTaskResponse>>,
     ) {
-        val body=FormBody.Builder()
-            .add(TITLE,title)
-            .add(DESCRIPTION,description)
+        val body = FormBody.Builder()
+            .add(TITLE, title)
+            .add(DESCRIPTION, description)
             .build()
-        client.postRequest(ApiEndPoint.toDoPersonal,body).enqueueCall(
-            object :ApiCallback<BaseResponse<AddPersonalTaskResponse>>{
+        client.postRequest(ApiEndPoint.toDoPersonal, body).enqueueCall(
+            object : ApiCallback<BaseResponse<AddPersonalTaskResponse>> {
                 override fun onSuccess(response: BaseResponse<AddPersonalTaskResponse>) {
                     callback.onSuccess(response)
                 }
