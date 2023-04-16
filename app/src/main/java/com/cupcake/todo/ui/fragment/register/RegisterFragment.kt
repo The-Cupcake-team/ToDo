@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentRegisterBinding
 import com.cupcake.todo.presenter.register.RegisterPresenter
@@ -54,7 +56,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
 
     private fun onLoginTextPressed() {
         binding.textViewLogin.setOnClickListener {
-            navigateToFragment(LoginFragment())
+            this.navigateWithAddFragment(LoginFragment())
         }
     }
 
@@ -67,9 +69,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
 
     private fun clearHelperText() {
         if (username.isNotBlank()) {
+            binding.textInputUsername.doOnTextChanged { _, _, _, _ ->  }
             binding.containerUserName.helperText = null
         }
         if (password.isNotBlank()) {
+            binding.textInputPassword.doOnTextChanged { _, _, _, _ ->  }
             binding.containerPassword.helperText = null
         }
     }
@@ -124,11 +128,26 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
     }
 
     override fun onRegisterSuccess() {
-        navigateToFragment(LoginFragment())
+        this.navigateWithReplaceFragment(LoginFragment())
     }
 
     override fun onRegisterFailure(error: String) {
 
+    }
+
+    private fun Fragment.navigateWithReplaceFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentContainer, fragment)
+            commit()
+        }
+    }
+
+    private fun Fragment.navigateWithAddFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            add(R.id.fragmentContainer, fragment)
+            addToBackStack(fragment::class.java.name)
+            commit()
+        }
     }
 
 
