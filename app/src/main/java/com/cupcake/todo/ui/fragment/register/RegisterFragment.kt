@@ -17,6 +17,7 @@ import com.cupcake.todo.presenter.register.RegisterPresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.login.LoginFragment
 import com.google.android.material.snackbar.Snackbar
+import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView {
     override val LOG_TAG: String = this::class.java.name
@@ -84,6 +85,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
             this.navigateWithAddFragment(LoginFragment())
         }
     }
+    private fun navigateToFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            add(R.id.fragmentContainer, fragment)
+            addToBackStack(fragment.javaClass.simpleName)
+            commit()
+        }
+    }
 
     private fun setupBackButton() {
         binding.toolBar.setNavigationOnClickListener {
@@ -143,6 +151,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
     override fun onRegisterSuccess() {
         showSuccessMessage()
         this.navigateWithReplaceFragment(LoginFragment())
+        Log.v(LOG_TAG, "onRegisterSuccess")
     }
 
     override fun onRegisterFailure(error: String) {

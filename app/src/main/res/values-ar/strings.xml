@@ -32,4 +32,5 @@
     <string name="enter_password">الرجاء ادخال رمز الحساب</string>
     <string name="password_requirment">يجب ان يكون الرمز 8 احرف على الاقل</string>
     <string name="register_successful">تم التسجيل بنجاح</string>
+    <string name="all_tasks_chip">كل</string>
 </resources>

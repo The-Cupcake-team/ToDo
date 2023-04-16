@@ -1,8 +1,11 @@
 package com.cupcake.todo.model.network
 
-import com.cupcake.todo.BuildConfig
+
+import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
+import com.cupcake.todo.model.network.response.AddTeamTaskResponse
 import com.cupcake.todo.model.network.response.BaseResponse
-import com.cupcake.todo.model.network.response.RegisterResponse
+import com.cupcake.todo.model.network.response.Register
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
 import com.cupcake.todo.model.network.util.enqueueCall
@@ -15,7 +18,8 @@ class ApiServiceImpl : ApiService {
     override fun register(
         username: String,
         password: String,
-        callback: ApiCallback<BaseResponse<RegisterResponse>>,
+        onSuccess: (response: BaseResponse<Register>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit,
     ) {
         val registerBody = FormBody.Builder()
             .add(USERNAME, username)
@@ -25,21 +29,97 @@ class ApiServiceImpl : ApiService {
 
         client.postRequest(ApiEndPoint.register, registerBody)
             .enqueueCall(
-                object : ApiCallback<BaseResponse<RegisterResponse>> {
-                    override fun onSuccess(response: BaseResponse<RegisterResponse>) {
-                        callback.onSuccess(response)
+                object : ApiCallback<BaseResponse<Register>> {
+                    override fun onSuccess(response: BaseResponse<Register>) {
+                        onSuccess(response)
                     }
 
                     override fun onFailure(
                         throwable: Throwable,
                         statusCode: Int?,
-                        message: String?
+                        message: String?,
                     ) {
-                        callback.onFailure(throwable, statusCode, message)
+                        onFailure(throwable, statusCode, message)
                     }
                 })
     }
 
+    override fun addTeamTask(
+        title: String,
+        description: String,
+        assignee: String,
+        onSuccess: (response: BaseResponse<AddTeamTaskResponse>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
+    ) {
+        val teamTask = FormBody.Builder()
+            .add(TITLE, title)
+            .add(DESCRIPTION, description)
+            .add(ASSIGNEE, assignee)
+            .build()
+
+        client.postRequest(ApiEndPoint.toDoTeam, teamTask)
+            .enqueueCall(
+                object : ApiCallback<BaseResponse<AddTeamTaskResponse>> {
+                    override fun onSuccess(response: BaseResponse<AddTeamTaskResponse>) {
+                        onSuccess(response)
+                    }
+
+                    override fun onFailure(
+                        throwable: Throwable,
+                        statusCode: Int?,
+                        message: String?,
+                    ) {
+                        onFailure(throwable, statusCode, message)
+                    }
+
+                }
+            )
+    }
+
+    override fun getTeamTasks(
+        onSuccess: (response: BaseResponse<List<TeamTask>>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
+    ) {
+        client.getRequest(ApiEndPoint.toDoTeam).enqueueCall(
+            object : ApiCallback<BaseResponse<List<TeamTask>>>{
+                override fun onSuccess(response: BaseResponse<List<TeamTask>>) {
+                   onSuccess(response)
+                }
+
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    onFailure(throwable,statusCode,message)
+                }
+
+            }
+        )
+    }
+
+    override fun addPersonalTask(
+        title: String,
+        description: String,
+        onSuccess: (response: BaseResponse<AddPersonalTaskResponse>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit,
+    ) {
+        val addPersonalTaskBody = FormBody.Builder()
+            .add(TITLE, title)
+            .add(DESCRIPTION, description)
+            .build()
+        client.postRequest(ApiEndPoint.toDoPersonal, addPersonalTaskBody)
+            .enqueueCall(
+                object : ApiCallback<BaseResponse<AddPersonalTaskResponse>> {
+                    override fun onSuccess(response: BaseResponse<AddPersonalTaskResponse>) {
+                        onSuccess(response)
+                    }
+
+                    override fun onFailure(
+                        throwable: Throwable,
+                        statusCode: Int?,
+                        message: String?,
+                    ) {
+                        onFailure(throwable, statusCode, message)
+                    }
+                })
+    }
 
 
     private companion object {
