@@ -15,7 +15,7 @@ class AddTeamTaskPresenter(
                                     "Ali","David", "Bilal", "Yousef", "Ali EG")
 
     fun addTeamTask(title: String, description: String, assignee: String){
-        service.addTeamTask(title, description, assignee, this)
+        service.addTeamTask(title, description, assignee, ::onSuccess, ::onFailure)
     }
     override fun onSuccess(response: BaseResponse<AddTeamTaskResponse>) {
         view.onAddedTeamTaskSuccess(response.result.toString())
