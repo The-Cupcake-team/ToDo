@@ -1,9 +1,7 @@
 package com.cupcake.todo.ui.util
 
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
@@ -13,8 +11,7 @@ import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -46,15 +43,13 @@ fun PieChart.setupPieChart(pieChartView: PieChart, dataValue: MutableList<PieEnt
     pieChart.invalidate()
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
-fun formatDate(date: String): String {
-    val inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
-    val outputFormat = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH)
-    return LocalDateTime.parse(date, inputFormat).format(outputFormat)
-
+fun formatDate(date: String): String? {
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.US)
+    val outputFormat = SimpleDateFormat("d MMMM yyyy", Locale.US)
+    return inputFormat.parse(date)?.let { outputFormat.format(it) }
 }
 
-fun Fragment.addFragmentWithSendObject(fragment: Fragment, key: String, task: Any? = null) {
+fun Fragment.navigateWithSendObject(fragment: Fragment, key: String, task: Any? = null) {
     val fragmentManager = requireActivity().supportFragmentManager
     val transaction = fragmentManager.beginTransaction()
 
@@ -70,7 +65,7 @@ fun Fragment.addFragmentWithSendObject(fragment: Fragment, key: String, task: An
     }
 }
 
-fun Fragment.addFragment(fragment: Fragment) {
+fun Fragment.navigateTo(fragment: Fragment) {
     val fragmentManager = requireActivity().supportFragmentManager
     val transaction = fragmentManager.beginTransaction()
 

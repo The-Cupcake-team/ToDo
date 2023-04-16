@@ -13,8 +13,8 @@ import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.details.DetailsFragment
 import com.cupcake.todo.ui.fragment.personal_tasks.PersonalTasksFragment
 import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
-import com.cupcake.todo.ui.util.addFragment
-import com.cupcake.todo.ui.util.addFragmentWithSendObject
+import com.cupcake.todo.ui.util.navigateTo
+import com.cupcake.todo.ui.util.navigateWithSendObject
 import com.cupcake.todo.ui.util.toPersonalTask
 
 
@@ -89,19 +89,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
     }
 
     private fun onClickViewMore(planeType: String) {
-        addFragment(if (planeType == RECENT_TASK) PersonalTasksFragment() else TeamTasksFragment())
+        val selectedTaskFragment =
+            if (planeType == RECENT_TASK) PersonalTasksFragment() else TeamTasksFragment()
+        navigateTo(selectedTaskFragment)
     }
 
     private fun onClickPersonalTaskItem(personalTask: PersonalTask) {
-        addFragmentWithSendObject(DetailsFragment(), PERSONAL_TASK_DATA, personalTask)
+        navigateWithSendObject(DetailsFragment(), PERSONAL_TASK_DATA, personalTask)
     }
 
     private fun onClickTeamTaskItem(teamTask: TeamTask) {
-        addFragmentWithSendObject(DetailsFragment(), TEAM_TASK_DATA, teamTask)
+        navigateWithSendObject(DetailsFragment(), TEAM_TASK_DATA, teamTask)
     }
 
     private fun onClickPlanItem(isPersonalPlane: Boolean) {
-        addFragment(if (isPersonalPlane) PersonalTasksFragment() else TeamTasksFragment())
+        val selectedTaskFragment =
+            if (isPersonalPlane) PersonalTasksFragment() else TeamTasksFragment()
+        navigateTo(selectedTaskFragment)
+
     }
 
 
