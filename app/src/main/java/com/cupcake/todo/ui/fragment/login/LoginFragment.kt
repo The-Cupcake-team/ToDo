@@ -55,7 +55,7 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     private fun onLoginButtonPressed() {
         binding.buttonLogin.setOnClickListener {
             assignUsernameAndPassword()
-            if (validateForm()) {
+            if (checkFormsNotEmpty()) {
                 presenter.login(username, password)
             } else {
                 alertEmptyForm()
@@ -72,7 +72,7 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
         }
     }
 
-    private fun validateForm() = username.isNotBlank() && password.isNotBlank()
+    private fun checkFormsNotEmpty() = username.isNotBlank() && password.isNotBlank()
 
     private fun onSignupButtonPressed() {
         binding.textViewSignUp.setOnClickListener {
