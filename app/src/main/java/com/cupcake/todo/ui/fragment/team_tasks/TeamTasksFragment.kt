@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentTeamTasksBinding
 import com.cupcake.todo.databinding.ItemDialogueNoInternetBinding
-import com.cupcake.todo.presenter.model.TeamTaskData
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.presenter.teamtasks.TeamTasksPresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.details.DetailsFragment
@@ -23,7 +23,7 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentTeamTasksBinding =
         FragmentTeamTasksBinding::inflate
     private var presenter = TeamTasksPresenter(this)
-    private var teamTasks = listOf<TeamTaskData>()
+    private var teamTasks = listOf<TeamTask>()
     private var adapter = TeamTasksAdapter(teamTasks, this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
             binding.chipToDo, binding.chipInProgress,
             binding.chipDone, binding.chipAll
         )
-        var filteredTasks: List<TeamTaskData>
+        var filteredTasks: List<TeamTask>
         chips.forEachIndexed { index, chip ->
             chip.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
@@ -62,14 +62,14 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
     }
 
 
-    private fun filterTasksByStatus(status: Int): List<TeamTaskData> {
+    private fun filterTasksByStatus(status: Int): List<TeamTask> {
         if (status == 3) {
             return teamTasks
         }
         return teamTasks.filter { it.status == status }
     }
 
-    private fun displayTeamTasks(teamTasks: List<TeamTaskData>) {
+    private fun displayTeamTasks(teamTasks: List<TeamTask>) {
         activity?.runOnUiThread {
             this.teamTasks = teamTasks
             adapter = TeamTasksAdapter(teamTasks, this)
@@ -103,7 +103,7 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
         Log.v(LOG_TAG, "showLoading")
     }
 
-    override fun onTeamTasksSuccess(teamTasks: List<TeamTaskData>) {
+    override fun onTeamTasksSuccess(teamTasks: List<TeamTask>) {
         Log.v(LOG_TAG, "TeamTasksSuccess")
         displayTeamTasks(teamTasks)
     }

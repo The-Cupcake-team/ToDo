@@ -6,23 +6,25 @@
     android:layout_height="wrap_content"
     android:background="@color/color_background"
     tools:context=".ui.fragment.home.HomeFragment">
+
     <ImageView
         android:id="@+id/image_view_profile"
         android:layout_width="@dimen/image_profile_size"
         android:layout_height="@dimen/image_profile_size"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_medium"
+        android:contentDescription="@string/user_name"
         android:src="@drawable/ic_assignee"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/user_name"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_view_image_user_name"
         style="@style/TextStyle.Caption.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxWidth="14dp"
+        android:maxLines="1"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/image_view_profile"
         app:layout_constraintEnd_toEndOf="@+id/image_view_profile"
@@ -88,24 +90,4 @@
         app:layout_constraintStart_toEndOf="@+id/item_plan_personal"
         app:layout_constraintTop_toTopOf="@+id/item_plan_personal" />
 
-    <TextView
-        android:id="@+id/text_view_recent_task"
-        style="@style/TextStyle.Title.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/radius_medium"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:text="@string/recent_task"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_plan_personal" />
-
-    <TextView
-        android:id="@+id/text_view_view_all"
-        style="@style/TextStyle.Body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/radius_medium"
-        android:text="@string/view_all"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/text_view_recent_task" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,6 @@
 package com.cupcake.todo.ui.fragment.team_tasks
 
-import com.cupcake.todo.presenter.model.TeamTaskData
+import com.cupcake.todo.model.network.response.TeamTask
 
 interface ITeamTasksView {
 
@@ -10,7 +10,7 @@ interface ITeamTasksView {
 
     fun hideLoading()
 
-    fun onTeamTasksSuccess(teamTasks: List<TeamTaskData>)
+    fun onTeamTasksSuccess(teamTasks: List<TeamTask>)
 
     fun onTeamTasksFailure(error: String)
 }
