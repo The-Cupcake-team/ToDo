@@ -27,5 +27,10 @@
     <string name="update_task">تحديث المهمة</string>
     <string name="language">اللغة</string>
     <string name="dark_theme">مظهر داكن</string>
+    <string name="enter_user_name">الرجاء ادخال اسم الحساب</string>
+    <string name="user_name_requirment">اسم الحساب يجب ان يكون 4 احرف على الاقل</string>
+    <string name="enter_password">الرجاء ادخال رمز الحساب</string>
+    <string name="password_requirment">يجب ان يكون الرمز 8 احرف على الاقل</string>
+    <string name="register_successful">تم التسجيل بنجاح</string>
     <string name="all_tasks_chip">كل</string>
 </resources>

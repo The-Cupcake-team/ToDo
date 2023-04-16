@@ -23,13 +23,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:navigationIcon="@drawable/ic_left_arrow"
-                app:navigationIconTint="@color/black_87"
-                app:titleTextAppearance="@style/TextStyle.Title.Large"
+                app:navigationIconTint="@color/color_text_primary"
                 app:title="@string/sign_up"
-                app:titleTextColor="@color/black_87" />
+                app:titleTextAppearance="@style/TextStyle.Title.Large"
+                app:titleTextColor="@color/color_text_primary" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -40,35 +41,66 @@
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
             android:contentDescription="@string/sign_up"
-            app:layout_constraintDimensionRatio="16:12"
             android:src="@drawable/image_signup"
+            app:layout_constraintDimensionRatio="16:12"
             app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
-        <EditText
-            android:id="@+id/edit_text_user_name"
-            style="@style/EditTextSignUp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/container_user_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_input"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_large"
+            android:autofillHints="username"
             android:drawableStart="@drawable/ic_user"
             android:hint="@string/user_name"
-            app:layout_constraintBottom_toTopOf="@id/edit_text_password"
+            android:inputType="text"
+            android:textColorHint="@color/color_text_tertiary"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:helperText=""
+            app:helperTextTextColor="@color/color_warning"
+            app:layout_constraintBottom_toTopOf="@id/container_password"
             app:layout_constraintTop_toBottomOf="@id/image_sign_up"
-            android:autofillHints="username"
-            android:inputType="text"/>
+            app:startIconDrawable="@drawable/ic_user">
 
-        <EditText
-            android:id="@+id/edit_text_password"
-            style="@style/EditTextSignUp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_input_username"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/card_background"
+                android:maxLength="20" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/container_password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_input"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:drawableStart="@drawable/ic_lock"
-            android:drawableEnd="@drawable/ic_open_eye"
-            android:hint="@string/password"
-            app:layout_constraintTop_toBottomOf="@id/edit_text_user_name"
             android:autofillHints="password"
-            android:inputType="textPassword" />
+            android:hint="@string/password"
+            android:textColorHint="@color/color_text_tertiary"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:endIconDrawable="@drawable/custom_password_toggle"
+            app:endIconMode="password_toggle"
+            app:helperText=""
+            app:helperTextTextColor="@color/color_warning"
+            app:layout_constraintTop_toBottomOf="@id/container_user_name"
+            app:startIconDrawable="@drawable/ic_lock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_input_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/card_background"
+                android:inputType="textPassword"
+                android:maxLength="20" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_sign_up"
@@ -82,14 +114,24 @@
             android:textAllCaps="false"
             android:textColor="@color/color_on_primary"
             android:textSize="@dimen/font_size_title"
-            app:layout_constraintTop_toBottomOf="@id/edit_text_password"/>
+            app:layout_constraintTop_toBottomOf="@id/container_password" />
+
+        <ProgressBar
+            android:id="@+id/progress_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/text_view_question"
+            app:layout_constraintEnd_toEndOf="@id/button_sign_up"
+            app:layout_constraintStart_toStartOf="@id/button_sign_up"
+            app:layout_constraintTop_toBottomOf="@id/button_sign_up" />
 
         <TextView
             android:id="@+id/text_view_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
             android:layout_marginTop="120dp"
+            android:fontFamily="@font/montserrat"
             android:text="@string/joined_us_before"
             android:textColor="@color/color_text_secondary"
             android:textSize="@dimen/font_size_caption"

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.cupcake.todo.R
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     abstract val LOG_TAG: String
@@ -25,5 +26,13 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     protected fun log(value: String) {
         Log.v(LOG_TAG, value)
+    }
+
+    protected fun navigateToFragment(fragment: Fragment){
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            add(R.id.fragmentContainer,fragment)
+            addToBackStack(fragment.javaClass.name)
+            commit()
+        }
     }
 }

@@ -48,12 +48,22 @@
         <item>Done</item>
     </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="empty_form">Must not be empty</string>
+    <string name="unable_to_registration">Registration failed due to an unknown error.</string>
+    <string name="registration_failed">Registration Failed</string>
+    <string name="ok">OK</string>
+    <string name="enter_user_name">Please enter a username</string>
+    <string name="user_name_requirment">Username must be at least 4 characters with no special characters</string>
+    <string name="enter_password">Please enter a password</string>
+    <string name="password_requirment">Password must be at least 8 characters</string>
+    <string name="register_successful">Registration successful! ✔</string>
     <string name="avatar_team_member">avatar team member</string>
 
     <string name="all_tasks_chip">All</string>
     <string name="something_went_wrong">Something went wrong</string>
-    <string name="ok">Ok</string>
     <string name="check_your_internet">Check your internet connection and try again</string>
+
 
 
 </resources>
