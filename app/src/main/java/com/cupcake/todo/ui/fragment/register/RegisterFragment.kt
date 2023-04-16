@@ -1,11 +1,14 @@
 package com.cupcake.todo.ui.fragment.register
 
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.cupcake.todo.R
@@ -13,6 +16,7 @@ import com.cupcake.todo.databinding.FragmentRegisterBinding
 import com.cupcake.todo.presenter.register.RegisterPresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.login.LoginFragment
+import com.google.android.material.snackbar.Snackbar
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView {
     override val LOG_TAG: String = this::class.java.name
@@ -36,8 +40,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
         onSignUpButtonPressed()
         onLoginTextPressed()
         setupBackButton()
+        validateForm()
     }
-
 
     private fun onSignUpButtonPressed() {
         binding.buttonSignUp.setOnClickListener {
@@ -46,10 +50,31 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
 
             if (isValidInput(username, password)) {
                 presenter.register(username, password)
-                showSuccessMessage()
-                navigateToFragment(LoginFragment())
+                onRegisterSuccess()
             } else {
                 showInputErrorMessage(username, password)
+            }
+        }
+    }
+
+    private fun validateForm() {
+        binding.textInputUsername.doOnTextChanged { text, _, _, _ ->
+            if (text.isNullOrBlank()) {
+                binding.containerUserName.helperText = getString(R.string.enter_user_name)
+            } else if (!isValidUsername(text.toString())) {
+                binding.containerUserName.helperText = getString(R.string.user_name_requirment)
+            } else {
+                binding.containerUserName.helperText = null
+            }
+        }
+
+        binding.textInputPassword.doOnTextChanged { text, _, _, _ ->
+            if (text.isNullOrBlank()) {
+                binding.containerPassword.helperText = getString(R.string.enter_password)
+            } else if (!isValidPassword(text.toString())) {
+                binding.containerPassword.helperText = getString(R.string.password_requirment)
+            } else {
+                binding.containerPassword.helperText = null
             }
         }
     }
@@ -63,18 +88,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
     private fun setupBackButton() {
         binding.toolBar.setNavigationOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
-        }
-    }
-
-
-    private fun clearHelperText() {
-        if (username.isNotBlank()) {
-            binding.textInputUsername.doOnTextChanged { _, _, _, _ ->  }
-            binding.containerUserName.helperText = null
-        }
-        if (password.isNotBlank()) {
-            binding.textInputPassword.doOnTextChanged { _, _, _, _ ->  }
-            binding.containerPassword.helperText = null
         }
     }
 
@@ -92,17 +105,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
         }
     }
 
-
     private fun isValidInput(username: String, password: String): Boolean {
-        if (username.isBlank() || !isValidUsername(username)) {
-            clearHelperText()
-            return false
-        }
-        if (password.isBlank() || !isValidPassword(password)) {
-            clearHelperText()
-            return false
-        }
-        return true
+        val isValidUsername = username.isNotBlank() && isValidUsername(username)
+        val isValidPassword = password.isNotBlank() && isValidPassword(password)
+        return isValidUsername && isValidPassword
     }
 
     private fun isValidUsername(username: String): Boolean {
@@ -116,7 +122,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
 
 
     private fun showSuccessMessage() {
-        Toast.makeText(context, "Registration successful! \u2714", Toast.LENGTH_SHORT).show()
+        val snackBar = Snackbar.make(
+            requireView(),
+            getString(R.string.register_successful),
+            Snackbar.LENGTH_SHORT
+        )
+        val snackBarView = snackBar.view
+        snackBarView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green))
+        snackBar.show()
     }
 
     override fun showLoading() {
@@ -128,12 +141,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
     }
 
     override fun onRegisterSuccess() {
+        showSuccessMessage()
         this.navigateWithReplaceFragment(LoginFragment())
     }
 
     override fun onRegisterFailure(error: String) {
 
     }
+
 
     private fun Fragment.navigateWithReplaceFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager.beginTransaction().apply {

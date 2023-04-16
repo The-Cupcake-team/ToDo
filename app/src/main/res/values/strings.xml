@@ -49,5 +49,6 @@
     <string name="user_name_requirment">Username must be at least 4 characters with no special characters</string>
     <string name="enter_password">Please enter a password</string>
     <string name="password_requirment">Password must be at least 8 characters</string>
+    <string name="register_successful">Registration successful! ✔</string>
 
 </resources>

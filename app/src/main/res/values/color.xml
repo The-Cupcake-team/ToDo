@@ -24,5 +24,6 @@
     <color name="color_done">@color/color_primary</color>
     <color name="color_in_progress">@color/color_secondary</color>
     <color name="color_to_do">#81B2F3</color>
+    <color name="green">#47C571</color>
 
 </resources>
