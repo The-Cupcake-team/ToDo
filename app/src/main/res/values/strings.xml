@@ -55,9 +55,7 @@
     <string name="empty_form">Must not be empty</string>
     <string name="check_your_internet">check your internet</string>
     <string name="something_went_wrong">something went wrong</string>
-    <string name="ok">ok</string>
 
-    <string name="empty_form">Must not be empty</string>
     <string name="unable_to_registration">Registration failed due to an unknown error.</string>
     <string name="registration_failed">Registration Failed</string>
     <string name="ok">OK</string>
@@ -69,8 +67,6 @@
     <string name="avatar_team_member">avatar team member</string>
     <string name="all_tasks_chip">All</string>
     <string name="invalid_username_password">Invalid Username or Password</string>
-    <string name="something_went_wrong">Something went wrong</string>
-    <string name="check_your_internet">Check your internet connection and try again</string>
 
 
 </resources>

@@ -1,10 +1,8 @@
 package com.cupcake.todo.ui.fragment.register
 
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +15,6 @@ import com.cupcake.todo.presenter.register.RegisterPresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.login.LoginFragment
 import com.google.android.material.snackbar.Snackbar
-import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView {
     override val LOG_TAG: String = this::class.java.name
