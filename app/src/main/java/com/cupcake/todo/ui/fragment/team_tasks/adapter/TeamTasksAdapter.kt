@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemTodoTeamTaskBinding
-import com.cupcake.todo.presenter.model.TeamTaskData
+import com.cupcake.todo.model.network.response.TeamTask
 
 class TeamTasksAdapter(
-    private var teamTasks: List<TeamTaskData>,
+    private var teamTasks: List<TeamTask>,
     private val listener: TeamTasksInteractionListener
 ) :
     RecyclerView.Adapter<TeamTasksAdapter.TeamTasksViewHolder>() {
@@ -39,7 +39,7 @@ class TeamTasksAdapter(
         val binding = ItemTodoTeamTaskBinding.bind(viewItem)
     }
 
-    fun updateTasks(newTask: List<TeamTaskData>){
+    fun updateTasks(newTask: List<TeamTask>){
         val diffResult = DiffUtil.calculateDiff(TasksDiffUtil(teamTasks, newTask))
         teamTasks = newTask
         diffResult.dispatchUpdatesTo(this)
