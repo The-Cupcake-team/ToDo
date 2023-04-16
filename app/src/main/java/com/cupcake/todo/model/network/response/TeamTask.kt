@@ -2,7 +2,7 @@ package com.cupcake.todo.model.network.response
 
 import com.google.gson.annotations.SerializedName
 
-data class TeamTaskResponse(
+data class TeamTask(
     @SerializedName("id")
     val id: String,
     @SerializedName("title")
