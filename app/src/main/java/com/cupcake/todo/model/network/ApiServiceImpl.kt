@@ -157,7 +157,6 @@ class ApiServiceImpl : ApiService {
                 })
     }
 
-
     private companion object {
         const val USERNAME = "username"
         const val PASSWORD = "password"
