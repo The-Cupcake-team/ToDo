@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.ChipGroup
+    android:id="@+id/chip_group_task_states"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spacing_medium">
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_all"
+        style="@style/ChipsStyle"
+        android:checked="true"
+        android:clickable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chip_background"
+        android:text="@string/all_tasks_chip"
+        android:textSize="@dimen/font_size_caption"
+        app:chipCornerRadius="@dimen/radius_normal" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_to_Do"
+        style="@style/ChipsStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chip_background"
+        android:text="@string/to_do"
+        app:chipCornerRadius="@dimen/radius_normal" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_in_progress"
+        style="@style/ChipsStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chip_background"
+        android:checked="false"
+        android:text="@string/inprogress"
+        app:chipCornerRadius="@dimen/radius_normal" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_done"
+        style="@style/ChipsStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chip_background"
+        android:text="@string/done"
+        app:chipCornerRadius="@dimen/radius_normal" />
+
+</com.google.android.material.chip.ChipGroup>

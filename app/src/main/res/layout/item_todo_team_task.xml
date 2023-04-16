@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_medium"
+    android:layout_marginVertical="@dimen/spacing_small"
+    android:background="@drawable/card_background">
+
+    <TextView
+        android:id="@+id/text_view_task_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/personal_plans"
+        android:textColor="@color/color_text_primary"
+        android:textSize="@dimen/font_size_body"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:ellipsize="end"
+        android:fontFamily="@font/montserrat"
+        android:maxLines="2"
+        android:text="@string/this_is_my_firs_task_i_should_do_some_thing_but_i_dont_know"
+        android:textColor="@color/color_text_primary"
+        android:textSize="@dimen/font_size_body"
+        app:layout_constraintEnd_toEndOf="@+id/text_view_task_title"
+        app:layout_constraintStart_toStartOf="@+id/text_view_task_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_task_title" />
+
+    <TextView
+
+        android:id="@+id/text_view_task_creation_time"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:maxLength="20"
+        android:text="@string/_23_march_20_00"
+        android:textSize="@dimen/font_size_caption"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_assignee"
+        app:layout_constraintEnd_toEndOf="@+id/text_view_description"
+        app:layout_constraintTop_toTopOf="@+id/text_view_assignee" />
+
+
+    <ImageView
+        android:id="@+id/image_view_profile"
+        android:layout_width="@dimen/team_Task_profile_image_size"
+        android:layout_height="@dimen/team_Task_profile_image_size"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:src="@drawable/ic_assignee"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/text_view_description"
+        android:contentDescription=""
+        app:layout_constraintTop_toBottomOf="@+id/text_view_description" />
+
+
+    <TextView
+        android:id="@+id/text_view_assignee"
+        style="@style/TextStyle.Caption.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view_profile"
+        app:layout_constraintEnd_toEndOf="@+id/image_view_profile"
+        app:layout_constraintStart_toStartOf="@+id/image_view_profile"
+        app:layout_constraintTop_toTopOf="@+id/image_view_profile"
+        tools:text="@string/ms" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

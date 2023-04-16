@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero">0dp</dimen>
+
+    <dimen name="spacing_small">4dp</dimen>
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_xnormal">12dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+
+
+    <dimen name="font_size_title">16sp</dimen>
+    <dimen name="font_size_body">14sp</dimen>
+    <dimen name="font_size_caption">12sp</dimen>
+    <dimen name="font_size_title_medium">20sp</dimen>
+    <dimen name="font_size_title_large">22sp</dimen>
+    <dimen name="font_size_title_x_large">24sp</dimen>
+
+    <dimen name="radius_normal">8dp</dimen>
+    <dimen name="radius_medium">16dp</dimen>
+
+    <dimen name="height_input">56dp</dimen>
+    <dimen name="user_avatar">28dp</dimen>
+
+    <dimen name="item_card_categories_width">160dp</dimen>
+    <dimen name="item_card_categories_height">97dp</dimen>
+    <dimen name="item_card_recent_task_height">91dp</dimen>
+    <dimen name="item_card_recent_task_width">328dp</dimen>
+    <dimen name="item_card_team_task_width">179dp</dimen>
+    <dimen name="item_card_team_task_height">152dp</dimen>
+
+    <dimen name="small_icon_size">16dp</dimen>
+    <dimen name="default_icon_size">24dp</dimen>
+
+
+    <dimen name="image_profile_size">48dp</dimen>
+    <dimen name="view_graph_size">132dp</dimen>
+    <dimen name="item_plan_task_height">100dp</dimen>
+    <dimen name="item_plan_task_width">160dp</dimen>
+    <dimen name="icon_go_to_plan">14dp</dimen>
+
+
+    <dimen name="app_bar_height">64dp</dimen>
+    <dimen name="small_profile">48dp</dimen>
+
+    <dimen name="team_Task_profile_image_size">32dp</dimen>
+
+</resources>
+

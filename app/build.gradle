@@ -1,6 +1,14 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android-extensions'
+}
+
+def getSecretKeys(){
+    def keyFile = project.rootProject.file('local.properties')
+    def properties = new Properties()
+    properties.load(new FileInputStream(keyFile))
+    return properties
 }
 
 android {
@@ -15,6 +23,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'HOST',  getSecretKeys()['HOST']
+        buildConfigField 'String', 'TEAM_ID',  getSecretKeys()['TEAM_ID']
+
     }
 
     buildTypes {
@@ -30,6 +42,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    viewBinding {
+        enable = true
+    }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -41,4 +59,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    def okhttp_version = "4.10.0"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
