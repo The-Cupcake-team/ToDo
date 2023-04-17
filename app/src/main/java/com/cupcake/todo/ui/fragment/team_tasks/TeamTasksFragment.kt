@@ -20,7 +20,7 @@ import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksInteractionListe
 class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksView,
     TeamTasksInteractionListener {
     override val LOG_TAG: String = this::class.java.name
-    override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentTeamTasksBinding =
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentTeamTasksBinding =
         FragmentTeamTasksBinding::inflate
     private var presenter = TeamTasksPresenter(this)
     private var teamTasks = listOf<TeamTask>()

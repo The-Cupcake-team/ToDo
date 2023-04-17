@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.cupcake.todo.R
 import com.cupcake.todo.util.PrefsUtil
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     abstract val LOG_TAG: String
-    abstract val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> VB
+    abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
     private var _binding: ViewBinding? = null
     protected val binding get() = _binding as VB
 
@@ -21,7 +20,8 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = bindingInflater(layoutInflater, container!!,false)
+        Log.v("ameer", "int ${LOG_TAG}")
+        _binding = bindingInflater(layoutInflater, container,false)
         PrefsUtil.initPrefsUtil(requireContext())
         return binding.root
     }

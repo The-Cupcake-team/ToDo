@@ -14,7 +14,7 @@ class AddTeamTaskFragment : BaseFragment<FragmentAddTaskBinding>(),
     IAddTeamTaskView,
     AssigneeRecyclerAdapter.IAssigneeClickListener {
     override val LOG_TAG: String = "testttttttt"
-    override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentAddTaskBinding =
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddTaskBinding =
         FragmentAddTaskBinding::inflate
 
     private lateinit var presenter: AddTeamTaskPresenter

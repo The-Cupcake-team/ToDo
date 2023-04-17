@@ -9,17 +9,18 @@ import com.cupcake.todo.databinding.FragmentTasksBinding
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.personal_tasks.PersonalTasksFragment
 import com.cupcake.todo.ui.fragment.tasks.adapter.ViewPagerTasksAdapter
+import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 
 class TasksFragment : BaseFragment<FragmentTasksBinding>() {
     override val LOG_TAG: String = this::class.java.name
-    override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentTasksBinding
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentTasksBinding
         get() = FragmentTasksBinding::inflate
 
     private val fragmentTasks = mapOf(
         0 to PersonalTasksFragment(),
-        1 to PersonalTasksFragment(),
+        1 to TeamTasksFragment(),
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,6 +36,7 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>() {
                 tab.text = titleTabTasks[position]
             }.attach()
         }
+
     }
 }
 
