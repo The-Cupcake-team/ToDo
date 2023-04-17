@@ -40,4 +40,10 @@
     <string name="password_requirment">يجب ان يكون الرمز 8 احرف على الاقل</string>
     <string name="register_successful">تم التسجيل بنجاح</string>
     <string name="all_tasks_chip">كل</string>
+
+    <string-array name="task">
+        <item>شخصي</item>
+        <item>تيم</item>
+    </string-array>
+
 </resources>

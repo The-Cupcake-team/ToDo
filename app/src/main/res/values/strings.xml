@@ -69,4 +69,10 @@
     <string name="invalid_username_password">Invalid Username or Password</string>
 
 
+    <string-array name="task">
+        <item>Personal</item>
+        <item>Team</item>
+    </string-array>
+
+
 </resources>
