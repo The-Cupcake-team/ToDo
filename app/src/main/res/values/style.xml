@@ -102,4 +102,14 @@
         <item name="strokeColor">@color/color_primary</item>
     </style>
 
+    <style name="FloatingActionButtonStyle" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="shapeAppearance">@style/FloatingActionButtonShapeStyle</item>
+        <item name="backgroundTint">@color/color_primary</item>
+        <item name="tint">@color/color_on_primary</item>
+    </style>
+
+    <style name="FloatingActionButtonShapeStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">@dimen/radius_medium</item>
+    </style>
+
 </resources>
