@@ -11,6 +11,7 @@ import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.google.android.material.tabs.TabLayout
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -74,4 +75,8 @@ fun Fragment.navigateTo(fragment: Fragment) {
         addToBackStack(null)
         commit()
     }
+}
+
+fun TabLayout.isPersonalTabTaskSelected(): Boolean {
+    return selectedTabPosition == 0
 }
