@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import com.cupcake.todo.databinding.FragmentPersonalTasksBinding
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.ui.base.BaseFragment
+import com.cupcake.todo.ui.fragment.personal_tasks.adapter.PersonalTasksAdapter
+import com.cupcake.todo.ui.fragment.personal_tasks.adapter.PersonalTasksInteraction
 
-class PersonalTasksFragment : BaseFragment<FragmentPersonalTasksBinding>(), IPersonalTasksView {
+class PersonalTasksFragment : BaseFragment<FragmentPersonalTasksBinding>(), IPersonalTasksView,
+    PersonalTasksInteraction {
     override val LOG_TAG: String = this::class.java.name
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentPersonalTasksBinding
         get() = FragmentPersonalTasksBinding::inflate
@@ -20,19 +23,26 @@ class PersonalTasksFragment : BaseFragment<FragmentPersonalTasksBinding>(), IPer
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
+        // show loading
     }
 
     override fun hideLoading() {
-        TODO("Not yet implemented")
+        // hide loading
     }
 
     override fun bindPersonalTasksToAdapter(personalTasks: List<PersonalTask>) {
-        TODO("Not yet implemented")
+        activity?.runOnUiThread {
+            val adapter = PersonalTasksAdapter(personalTasks,this)
+            binding.recyclerViewPersonalTask.adapter = adapter
+        }
     }
 
     override fun handlePersonalTasksFetchError(error: String) {
-        TODO("Not yet implemented")
+        // show snackbar
+    }
+
+    override fun onClickPersonalTask(personalTask: PersonalTask) {
+        // nav to details screen
     }
 
 
