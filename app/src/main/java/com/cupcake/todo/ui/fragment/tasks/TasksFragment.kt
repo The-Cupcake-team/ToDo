@@ -65,7 +65,6 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>() {
                 view.visibility = View.VISIBLE
             } else {
                 view.alpha = 1.0F - abs(position)
-                view.translationX = -position * (view.width / 2)
                 view.visibility = View.VISIBLE
             }
         }
