@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,7 +96,9 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     }
 
     override fun onLoginSuccess() {
-        this.navigateWithReplaceFragment(HomeFragment())
+        var  userName = username.split("_").first()
+        userName = userName[0].uppercase() + userName.substring(1)
+        this.navigateWithReplaceFragment(HomeFragment.newInstane(userName))
     }
 
     override fun onLoginFailure(throwable: Throwable, statusCode: Int?, error: String?) {
