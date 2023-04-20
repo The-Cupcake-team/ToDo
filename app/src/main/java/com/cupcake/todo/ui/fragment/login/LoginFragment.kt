@@ -20,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     override val LOG_TAG: String = this::class.java.name
-    override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentLoginBinding =
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding =
         FragmentLoginBinding::inflate
     private lateinit var presenter: LoginPresenter
 

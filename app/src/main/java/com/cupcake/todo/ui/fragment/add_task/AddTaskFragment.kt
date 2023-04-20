@@ -7,7 +7,7 @@ import com.cupcake.todo.ui.base.BaseFragment
 
 class AddTaskFragment : BaseFragment<FragmentAddTaskBinding>() {
     override val LOG_TAG: String = this::class.java.name
-    override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentAddTaskBinding =
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddTaskBinding =
         FragmentAddTaskBinding::inflate
 
 }

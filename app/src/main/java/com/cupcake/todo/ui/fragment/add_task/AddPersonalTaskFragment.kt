@@ -13,7 +13,7 @@ import com.cupcake.todo.ui.base.BaseFragment
 
 class AddPersonalTaskFragment : BaseFragment<FragmentAddTaskBinding>(), IAddPersonalTask {
     override val LOG_TAG: String = this::class.java.name
-    override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentAddTaskBinding =
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAddTaskBinding =
         FragmentAddTaskBinding::inflate
     private lateinit var presenter: AddPersonalTaskPresenter
     private lateinit var title: String

@@ -27,7 +27,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
     private val presenter: HomePresenter = HomePresenter(this)
 
     override val LOG_TAG: String = this::class.java.name
-    override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentHomeBinding =
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding =
         FragmentHomeBinding::inflate
 
 
