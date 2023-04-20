@@ -12,11 +12,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import com.cupcake.todo.R
-import com.cupcake.todo.databinding.FragmentDetailsBinding
 import com.cupcake.todo.data.network.response.PersonalTask
 import com.cupcake.todo.data.network.response.TeamTask
+import com.cupcake.todo.databinding.FragmentDetailsBinding
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.details.adapter.DetailsAdapter
+import com.cupcake.todo.ui.util.extension.formatDate
 import com.google.android.material.snackbar.Snackbar
 
 class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
@@ -50,12 +51,12 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
             binding.apply {
                 textViewTitle.text = it.title
                 textViewDetails.text = it.description
-                textViewDate.text = it.createTime
+                textViewDate.text = formatDate(it.createTime)
             }
         } ?: binding.apply {
             textViewTitle.text = personalTask?.title
             textViewDetails.text = personalTask?.description
-            textViewDate.text = personalTask?.createTime
+            textViewDate.text = formatDate(personalTask?.createTime!!)
             recyclerViewDetails.visibility = View.GONE
         }
     }

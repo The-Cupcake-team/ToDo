@@ -8,4 +8,4 @@
     android:maxLines="1"
     android:padding="@dimen/spacing_medium"
     android:textSize="@dimen/font_size_caption"
-    android:textColor="@color/color_text_primary" />
+    android:textColor="@color/color_card" />
