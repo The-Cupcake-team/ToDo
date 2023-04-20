@@ -14,7 +14,7 @@
     <string name="recent_task">Recent task</string>
     <string name="view_all">view all</string>
     <string name="search">search</string>
-    <string name="todo">ToDo</string>
+    <string name="to_do">ToDo</string>
     <string name="in_progress">inProgress</string>
     <string name="done">Done</string>
     <string name="task_tittle">Title</string>

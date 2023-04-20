@@ -63,7 +63,7 @@ class PersonalTasksFragment : BaseFragment<FragmentPersonalTasksBinding>(), IPer
         activity?.runOnUiThread {
             this.personalTasks = personalTasks
             adapter.updateTasks(personalTasks)
-            binding.recyclerViewPersonalTask.adapter = adapter
+            binding.recyclerViewPersonalTasks.adapter = adapter
         }
     }
 

@@ -29,10 +29,11 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
     private val personalTask by lazy { arguments?.getParcelable<PersonalTask>(PERSONAL_TASK_DETAILS) }
 
     private lateinit var presenter: DetailsPresenter
-    private val toDo = requireActivity().getString(R.string.todo)
-    private val inProgress = requireActivity().getString(R.string.in_progress)
-    private val done = requireActivity().getString(R.string.done)
-    private val items = listOf(toDo, inProgress, done)
+
+    //    private val toDo = context?.getString(R.string.to_do)
+//    private val inProgress = context?.getString(R.string.in_progress)
+//    private val done = context?.getString(R.string.done)
+    private val items = listOf("toDo", "inProgress", "done")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter = DetailsPresenter(this)
@@ -42,7 +43,7 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
         setupBackButton()
     }
 
-    private fun bindTasksData(){
+    private fun bindTasksData() {
         teamTask?.let {
             val mAdapter = DetailsAdapter(presenter.team, it.assignee)
             binding.recyclerViewDetails.adapter = mAdapter
@@ -94,6 +95,7 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
             onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
                 teamTask?.id?.let { presenter.detailsUpDate(it, position, false) }
+                personalTask?.id?.let { presenter.detailsUpDate(it, position, true) }
                 val changeStatusTo = requireActivity().getString(R.string.change_status_to)
                 view?.let {
                     Snackbar.make(
