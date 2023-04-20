@@ -57,7 +57,6 @@
     <string name="something_went_wrong">something went wrong</string>
 
     <string name="unable_to_registration">Registration failed due to an unknown error.</string>
-    <string name="registration_failed">Registration Failed</string>
     <string name="ok">OK</string>
     <string name="enter_user_name">Please enter a username</string>
     <string name="user_name_requirment">Username must be at least 4 characters with no special characters</string>
@@ -68,6 +67,10 @@
     <string name="all_tasks_chip">All</string>
     <string name="invalid_username_password">Invalid Username or Password</string>
     <string name="change_status_to">change status to</string>
+
+    <string name="unable_to_register">Unable to register</string>
+    <string name="network_error_message_register">An unexpected error occurred. Please try to sign up again after check your network connection</string>
+
 
 
     <string-array name="task">

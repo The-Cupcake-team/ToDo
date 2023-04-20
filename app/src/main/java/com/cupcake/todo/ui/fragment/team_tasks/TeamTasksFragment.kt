@@ -16,6 +16,8 @@ import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksAdapter
 import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksInteractionListener
 import com.cupcake.todo.ui.util.TaskStatus
 import com.cupcake.todo.ui.util.navigateTo
+import com.cupcake.todo.ui.util.extension.hidden
+import com.cupcake.todo.ui.util.extension.show
 import com.cupcake.todo.ui.util.stateTasks
 
 class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksView,
@@ -80,11 +82,11 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
     }
 
     override fun showLoading() {
-        Log.v(LOG_TAG, "showLoading")
+        binding.loading.root.show()
     }
 
     override fun hideLoading() {
-        Log.v(LOG_TAG, "showLoading")
+        binding.loading.root.hidden()
     }
 
     override fun onTeamTasksSuccess(teamTasks: List<TeamTask>) {
