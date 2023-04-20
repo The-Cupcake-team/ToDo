@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemTodoTeamTaskBinding
-import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
+import com.cupcake.todo.model.network.response.TeamTask
 
 class TeamTasksAdapter(
     private var teamTasks: List<TeamTask>,
@@ -29,7 +29,7 @@ class TeamTasksAdapter(
         holder.binding.apply {
             textViewTaskTitle.text = currentTeamTask.title
             textViewDescription.text = currentTeamTask.description
-            textViewTaskCreationTime.text = currentTeamTask.creationTime
+            textViewTaskCreationTime.text = currentTeamTask.createTime
             textViewAssignee.text = currentTeamTask.assignee?.take(2)?.uppercase()
             root.setOnClickListener { listener.onClickTeamTask(currentTeamTask)}
         }

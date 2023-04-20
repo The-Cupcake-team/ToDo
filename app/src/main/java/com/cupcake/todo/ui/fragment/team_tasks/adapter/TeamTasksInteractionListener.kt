@@ -1,6 +1,6 @@
 package com.cupcake.todo.ui.fragment.team_tasks.adapter
 
-import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
+import com.cupcake.todo.model.network.response.TeamTask
 
 
 interface TeamTasksInteractionListener {

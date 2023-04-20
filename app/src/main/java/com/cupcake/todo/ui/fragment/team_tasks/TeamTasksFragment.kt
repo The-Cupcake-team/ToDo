@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.cupcake.todo.databinding.FragmentTeamTasksBinding
 import com.cupcake.todo.databinding.ItemDialogueNoInternetBinding
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.presenter.teamtasks.TeamTasksPresenter
 import com.cupcake.todo.ui.base.BaseFragment
-import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
+import com.cupcake.todo.ui.fragment.details.DetailsFragment
 import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksAdapter
 import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksInteractionListener
+import com.cupcake.todo.ui.util.navigateTo
 
 class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksView,
     TeamTasksInteractionListener {
@@ -76,7 +78,7 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
     }
 
     override fun onClickTeamTask(teamTask: TeamTask) {
-       // navigateToFragment(DetailsFragment())
+        navigateTo(DetailsFragment.newInstance(teamTask))
     }
 
     override fun showInternetErrorDialog() {

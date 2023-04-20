@@ -13,7 +13,7 @@ import com.cupcake.todo.databinding.ItemNestedTeamTaskBinding
 import com.cupcake.todo.databinding.ItemPersonalTaskBinding
 import com.cupcake.todo.databinding.ItemTitleSctionBinding
 import com.cupcake.todo.model.network.response.PersonalTask
-import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.ui.util.formatDate
 import com.cupcake.todo.ui.util.setupPieChart
 import com.github.mikephil.charting.data.PieEntry
@@ -133,7 +133,7 @@ class HomeAdapter(
         holder.binding.apply {
             textViewTaskTitle.text = currentItem.title
             textViewDescription.text = currentItem.description
-            textViewDate.text = formatDate(currentItem.creationTime)
+            textViewDate.text = formatDate(currentItem.createTime)
             root.setOnClickListener {
                 onClickPersonalTaskItem(currentItem)
             }

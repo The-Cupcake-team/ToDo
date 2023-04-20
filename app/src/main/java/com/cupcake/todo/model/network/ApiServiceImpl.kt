@@ -5,7 +5,6 @@ import com.cupcake.todo.model.network.response.*
 import com.cupcake.todo.model.network.util.ApiCallback
 import com.cupcake.todo.model.network.util.ApiEndPoint
 import com.cupcake.todo.model.network.util.enqueueCall
-import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
 import okhttp3.FormBody
 
 class ApiServiceImpl : ApiService {
@@ -78,7 +77,7 @@ class ApiServiceImpl : ApiService {
         title: String,
         description: String,
         assignee: String,
-        onSuccess: (response: BaseResponse<AddTeamTaskResponse>) -> Unit,
+        onSuccess: (response: BaseResponse<TeamTask>) -> Unit,
         onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
     ) {
         val teamTask = FormBody.Builder()
@@ -89,8 +88,8 @@ class ApiServiceImpl : ApiService {
 
         client.postRequest(ApiEndPoint.toDoTeam, teamTask)
             .enqueueCall(
-                object : ApiCallback<BaseResponse<AddTeamTaskResponse>> {
-                    override fun onSuccess(response: BaseResponse<AddTeamTaskResponse>) {
+                object : ApiCallback<BaseResponse<TeamTask>> {
+                    override fun onSuccess(response: BaseResponse<TeamTask>) {
                         onSuccess(response)
                     }
 
@@ -136,7 +135,7 @@ class ApiServiceImpl : ApiService {
                 }
 
                 override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
-                    onFailure(throwable, statusCode, message)
+                    onFailure(throwable,statusCode,message)
                 }
 
             }
@@ -146,7 +145,7 @@ class ApiServiceImpl : ApiService {
     override fun addPersonalTask(
         title: String,
         description: String,
-        onSuccess: (response: BaseResponse<AddPersonalTaskResponse>) -> Unit,
+        onSuccess: (response: BaseResponse<PersonalTask>) -> Unit,
         onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit,
     ) {
         val addPersonalTaskBody = FormBody.Builder()
@@ -155,8 +154,8 @@ class ApiServiceImpl : ApiService {
             .build()
         client.postRequest(ApiEndPoint.toDoPersonal, addPersonalTaskBody)
             .enqueueCall(
-                object : ApiCallback<BaseResponse<AddPersonalTaskResponse>> {
-                    override fun onSuccess(response: BaseResponse<AddPersonalTaskResponse>) {
+                object : ApiCallback<BaseResponse<PersonalTask>> {
+                    override fun onSuccess(response: BaseResponse<PersonalTask>) {
                         onSuccess(response)
                     }
 

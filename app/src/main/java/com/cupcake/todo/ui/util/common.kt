@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import com.cupcake.todo.model.network.response.PersonalTask
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.ui.fragment.home.HomeItem
 import com.cupcake.todo.ui.fragment.home.HomeItemType
-import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet

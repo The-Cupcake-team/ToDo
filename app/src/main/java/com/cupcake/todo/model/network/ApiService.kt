@@ -1,12 +1,10 @@
 package com.cupcake.todo.model.network
 
-import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
-import com.cupcake.todo.model.network.response.AddTeamTaskResponse
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.Login
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.Register
-import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
+import com.cupcake.todo.model.network.response.TeamTask
 
 
 interface ApiService {
@@ -39,7 +37,7 @@ interface ApiService {
         title: String,
         description: String,
         assignee: String,
-        onSuccess: (response: BaseResponse<AddTeamTaskResponse>) -> Unit,
+        onSuccess: (response: BaseResponse<TeamTask>) -> Unit,
         onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit,
     )
 
@@ -51,7 +49,7 @@ interface ApiService {
     fun addPersonalTask(
         title: String,
         description: String,
-        onSuccess: (response: BaseResponse<AddPersonalTaskResponse>) -> Unit,
+        onSuccess: (response: BaseResponse<PersonalTask>) -> Unit,
         onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit,
     )
 

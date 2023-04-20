@@ -3,8 +3,8 @@ package com.cupcake.todo.presenter.home
 import com.cupcake.todo.model.network.ApiServiceImpl
 import com.cupcake.todo.model.network.response.BaseResponse
 import com.cupcake.todo.model.network.response.PersonalTask
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.ui.fragment.home.IHomeView
-import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
 
 class HomePresenter(
     private val view: IHomeView
