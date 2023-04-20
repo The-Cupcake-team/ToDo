@@ -9,6 +9,8 @@ import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.personal_tasks.adapter.PersonalTasksAdapter
 import com.cupcake.todo.ui.fragment.personal_tasks.adapter.PersonalTasksInteraction
+import com.cupcake.todo.ui.util.TaskStatus
+import com.cupcake.todo.ui.util.stateTasks
 
 class PersonalTasksFragment : BaseFragment<FragmentPersonalTasksBinding>(), IPersonalTasksView,
     PersonalTasksInteraction {
@@ -16,10 +18,31 @@ class PersonalTasksFragment : BaseFragment<FragmentPersonalTasksBinding>(), IPer
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentPersonalTasksBinding
         get() = FragmentPersonalTasksBinding::inflate
 
-    val presenter by lazy { PersonalTasksPresenter(this) }
+    private var personalTasks = listOf<PersonalTask>()
+    private val presenter by lazy { PersonalTasksPresenter(this) }
+    private val adapter by lazy { PersonalTasksAdapter(personalTasks, this) }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter.personalTasks()
+        filterTasksUsingStates()
+    }
+
+    private fun filterTasksUsingStates() {
+        binding.chipsStates.stateTasks(
+            { status ->
+                filterTasksByStatus(status)
+            }, { tasks ->
+                adapter.updateTasks(tasks)
+            }
+        )
+    }
+
+    private fun filterTasksByStatus(status: Int): List<PersonalTask> {
+        if (status == TaskStatus.All.state) {
+            return personalTasks
+        }
+        return personalTasks.filter { it.status == status }
     }
 
     override fun showLoading() {
@@ -31,8 +54,13 @@ class PersonalTasksFragment : BaseFragment<FragmentPersonalTasksBinding>(), IPer
     }
 
     override fun bindPersonalTasksToAdapter(personalTasks: List<PersonalTask>) {
+        displayPersonalTasks(personalTasks)
+    }
+
+    private fun displayPersonalTasks(personalTasks: List<PersonalTask>) {
         activity?.runOnUiThread {
-            val adapter = PersonalTasksAdapter(personalTasks,this)
+            this.personalTasks = personalTasks
+            adapter.updateTasks(personalTasks)
             binding.recyclerViewPersonalTask.adapter = adapter
         }
     }

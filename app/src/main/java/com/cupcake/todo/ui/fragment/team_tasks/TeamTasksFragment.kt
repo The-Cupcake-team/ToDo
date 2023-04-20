@@ -6,22 +6,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentTeamTasksBinding
 import com.cupcake.todo.databinding.ItemDialogueNoInternetBinding
 import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.presenter.teamtasks.TeamTasksPresenter
 import com.cupcake.todo.ui.base.BaseFragment
-import com.cupcake.todo.ui.fragment.details.DetailsFragment
 import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksAdapter
 import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksInteractionListener
+import com.cupcake.todo.ui.util.TaskStatus
+import com.cupcake.todo.ui.util.stateTasks
 
 class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksView,
     TeamTasksInteractionListener {
     override val LOG_TAG: String = this::class.java.name
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentTeamTasksBinding =
         FragmentTeamTasksBinding::inflate
+
     private var presenter = TeamTasksPresenter(this)
     private var teamTasks = listOf<TeamTask>()
     private var adapter = TeamTasksAdapter(teamTasks, this)
@@ -33,37 +33,18 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
 
 
     private fun filterTasksUsingStates() {
-        val binding = binding.chipStates
-        val chips = listOf(
-            binding.chipToDo, binding.chipInProgress,
-            binding.chipDone, binding.chipAll
-        )
-        var filteredTasks: List<TeamTask>
-        chips.forEachIndexed { index, chip ->
-            chip.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    val status = when (index) {
-                        TaskStatus.ToDo.state -> TaskStatus.ToDo
-                        TaskStatus.InProgress.state -> TaskStatus.InProgress
-                        TaskStatus.Done.state -> TaskStatus.Done
-                        TaskStatus.All.state -> TaskStatus.All
-                        else -> null
-                    }
-                    status?.let { taskStatus ->
-                        filteredTasks = filterTasksByStatus(taskStatus.state)
-                        adapter.updateTasks(filteredTasks)
-                        chips.forEach { it.isChecked = false; it.isClickable = true }
-                        chip.isChecked = true
-                        chip.isClickable = false
-                    }
-                }
+        binding.chipStates.stateTasks(
+            { status ->
+                filterTasksByStatus(status)
+            }, { tasks ->
+                adapter.updateTasks(tasks)
             }
-        }
+        )
     }
 
 
     private fun filterTasksByStatus(status: Int): List<TeamTask> {
-        if (status == 3) {
+        if (status == TaskStatus.All.state) {
             return teamTasks
         }
         return teamTasks.filter { it.status == status }
@@ -112,13 +93,6 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
         Log.v(LOG_TAG, "onTeamTasksFailure $error")
     }
 
-
-    sealed class TaskStatus(val state: Int) {
-        object ToDo : TaskStatus(0)
-        object InProgress : TaskStatus(1)
-        object Done : TaskStatus(2)
-        object All : TaskStatus(3)
-    }
 
 }
 

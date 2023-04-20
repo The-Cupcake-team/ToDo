@@ -3,6 +3,7 @@ package com.cupcake.todo.ui.fragment.personal_tasks.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemPersonalTaskBinding
@@ -36,5 +37,11 @@ class PersonalTasksAdapter(
             textViewTaskTitle.text = currentItem.title
             root.setOnClickListener { listener.onClickPersonalTask(currentItem) }
         }
+    }
+
+    fun updateTasks(newTask: List<PersonalTask>) {
+        val diffResult = DiffUtil.calculateDiff(PersonalDiffUtil(personalTasks, newTask))
+        personalTasks = newTask
+        diffResult.dispatchUpdatesTo(this)
     }
 }

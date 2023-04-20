@@ -3,6 +3,7 @@ package com.cupcake.todo.ui.util
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
+import com.cupcake.todo.databinding.ItemChipGroupBinding
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.ui.fragment.home.HomeItem
@@ -13,7 +14,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.google.android.material.tabs.TabLayout
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 
 fun TeamTask.toTeamTask(): HomeItem<Any> {
@@ -80,3 +81,33 @@ fun Fragment.navigateTo(fragment: Fragment) {
 fun TabLayout.isPersonalTabTaskSelected(): Boolean {
     return selectedTabPosition == 0
 }
+
+fun <T> ItemChipGroupBinding.stateTasks(
+    filterTasksByStatus: (status: Int) -> List<T>,
+    updateTasks: (tasks: List<T>) -> Unit
+) {
+    val chips = listOf(
+        chipToDo, chipInProgress,
+        chipDone, chipAll
+    )
+    chips.forEachIndexed { index, chip ->
+        chip.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                val status = when (index) {
+                    TaskStatus.ToDo.state -> TaskStatus.ToDo
+                    TaskStatus.InProgress.state -> TaskStatus.InProgress
+                    TaskStatus.Done.state -> TaskStatus.Done
+                    TaskStatus.All.state -> TaskStatus.All
+                    else -> null
+                }
+                status?.let { taskStatus ->
+                    updateTasks(filterTasksByStatus(taskStatus.state))
+                    chips.forEach { it.isChecked = false; it.isClickable = true }
+                    chip.isChecked = true
+                    chip.isClickable = false
+                }
+            }
+        }
+    }
+}
+
