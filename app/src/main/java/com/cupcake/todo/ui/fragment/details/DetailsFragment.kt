@@ -13,11 +13,11 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentDetailsBinding
-import com.cupcake.todo.ui.fragment.personal_tasks.model.PersonalTask
-import com.cupcake.todo.ui.fragment.personal_tasks.model.Task
-import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
+import com.cupcake.todo.model.network.response.PersonalTask
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.details.adapter.DetailsAdapter
+import com.google.android.material.snackbar.Snackbar
 
 class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
@@ -25,32 +25,33 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentDetailsBinding =
         FragmentDetailsBinding::inflate
 
+    private val teamTask by lazy { arguments?.getParcelable<TeamTask>(TEAM_TASK_DETAILS) }
+    private val personalTask by lazy { arguments?.getParcelable<PersonalTask>(PERSONAL_TASK_DETAILS) }
+
     private lateinit var presenter: DetailsPresenter
-    private lateinit var task: Task
-    private val items = listOf("To Do", "In progress", "Done")
+    private val toDo = requireActivity().getString(R.string.todo)
+    private val inProgress = requireActivity().getString(R.string.in_progress)
+    private val done = requireActivity().getString(R.string.done)
+    private val items = listOf(toDo, inProgress, done)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter = DetailsPresenter(this)
 
         binding.textViewDetails.movementMethod = ScrollingMovementMethod()
 
-        task = (arguments?.getParcelable(TASK_DETAILS) as Task?)!!
-
-        when (task) {
-            is TeamTask -> {
-                log((task as TeamTask).assignee.toString())
-                val mAdapter = DetailsAdapter(presenter.team, (task as TeamTask).assignee as String)
-                binding.recyclerViewDetails.adapter = mAdapter
+        teamTask?.let {
+            val mAdapter = DetailsAdapter(presenter.team, it.assignee)
+            binding.recyclerViewDetails.adapter = mAdapter
+            binding.apply {
+                textViewTitle.text = it.title
+                textViewDetails.text = it.description
+                textViewDate.text = it.createTime
             }
-            is PersonalTask -> {
-                binding.recyclerViewDetails.visibility = View.GONE
-            }
-        }
-
-        binding.apply {
-            textViewTitle.text = task.title
-            textViewDetails.text = task.description
-            textViewDate.text = task.creationTime
+        } ?: binding.apply {
+            textViewTitle.text = personalTask?.title
+            textViewDetails.text = personalTask?.description
+            textViewDate.text = personalTask?.createTime
+            recyclerViewDetails.visibility = View.GONE
         }
 
         initSpinner()
@@ -60,14 +61,12 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
         requireActivity().runOnUiThread {
             binding.progressBarLoading.visibility = View.VISIBLE
         }
-        Log.v(LOG_TAG, "showLoading")
     }
 
     override fun hideLoading() {
         requireActivity().runOnUiThread {
             binding.progressBarLoading.visibility = View.GONE
         }
-        Log.v(LOG_TAG, "hideLoading")
     }
 
     override fun onUpDateSuccess() {
@@ -84,22 +83,22 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
         binding.dropdownMenu.apply {
 
-            setText(items[task.status])
+            teamTask?.let { setText(items[it.status]) }
+            personalTask?.let { setText(items[it.status]) }
 
             setAdapter(mAdapter)
 
             showDropdown(mAdapter)
 
             onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-                when (task) {
-                    is TeamTask -> {
-                        task.id?.let { presenter.detailsUpDate(it, position, false) }
-                        log("change team task to $position")
-                    }
-                    is PersonalTask -> {
-                        task.id?.let { presenter.detailsUpDate(it, position, true) }
-                        log("change personal task to $position")
-                    }
+                teamTask?.id?.let { presenter.detailsUpDate(it, position, false) }
+                val changeStatusTo = requireActivity().getString(R.string.change_status_to)
+                view?.let {
+                    Snackbar.make(
+                        it.rootView,
+                        "$changeStatusTo ${items[position]}",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -112,12 +111,15 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
     }
 
     companion object {
-        private const val TASK_DETAILS = "details_task"
-        fun newInstance(task: Task) = DetailsFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(TASK_DETAILS, task)
+        private const val TEAM_TASK_DETAILS = "team_task"
+        private const val PERSONAL_TASK_DETAILS = "personal_task"
+        fun newInstance(teamTask: TeamTask? = null, personalTask: PersonalTask? = null) =
+            DetailsFragment().apply {
+                arguments = Bundle().apply {
+                    teamTask?.let { putParcelable(TEAM_TASK_DETAILS, it) }
+                    personalTask?.let { putParcelable(PERSONAL_TASK_DETAILS, it) }
+                }
             }
-        }
     }
 
     override fun onResume() {
