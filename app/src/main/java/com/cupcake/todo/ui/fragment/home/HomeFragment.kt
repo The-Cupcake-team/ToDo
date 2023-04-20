@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.cupcake.todo.databinding.FragmentHomeBinding
 import com.cupcake.todo.model.network.response.PersonalTask
-import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.presenter.home.HomePresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.details.DetailsFragment
 import com.cupcake.todo.ui.fragment.personal_tasks.PersonalTasksFragment
+import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
 import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
 import com.cupcake.todo.ui.util.navigateTo
 import com.cupcake.todo.ui.util.navigateWithSendObject

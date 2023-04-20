@@ -2,8 +2,8 @@ package com.cupcake.todo.presenter.teamtasks
 
 import com.cupcake.todo.model.network.ApiServiceImpl
 import com.cupcake.todo.model.network.response.BaseResponse
-import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.model.network.util.ApiCallback
+import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
 import com.cupcake.todo.ui.fragment.team_tasks.ITeamTasksView
 import java.io.IOException
 

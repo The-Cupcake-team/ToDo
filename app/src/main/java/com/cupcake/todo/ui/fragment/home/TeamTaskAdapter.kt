@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.databinding.ItemTeamTaskBinding
-import com.cupcake.todo.model.network.response.TeamTask
+import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
 import com.cupcake.todo.ui.util.formatDate
 import java.util.*
 
@@ -30,8 +30,8 @@ class TeamTaskAdapter(
         val item = items[position] as TeamTask
         holder.binding.apply {
             textViewTaskTitle.text = item.title
-            textViewDate.text = formatDate(item.creationTime)
-            textViewAssignee.text = item.assignee.take(2)
+            textViewDate.text = item.creationTime?.let { formatDate(it) }
+            textViewAssignee.text = item.assignee?.take(2)
             textViewDescription.text = item.description
 
             root.setOnClickListener {
