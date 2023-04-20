@@ -15,8 +15,8 @@
     <string name="recent_task">المهام الأخيرة</string>
     <string name="view_all">عرض الكل</string>
     <string name="search">البحث</string>
-    <string name="todo">لاحقا</string>
-    <string name="in_progress">في تقدم</string>
+    <string name="to_do">لاحقا</string>
+    <string name="inprogress">في تقدم</string>
     <string name="done">انتهي</string>
     <string name="task_tittle">العنوان</string>
     <string name="task_desc">الوصف</string>
