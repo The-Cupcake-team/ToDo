@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentHomeBinding
 import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.TeamTask
@@ -20,6 +21,7 @@ import com.cupcake.todo.ui.util.toPersonalTask
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
 
+    private var userName: String? = null
     private lateinit var homeAdapter: HomeAdapter
     private var itemsList: MutableList<HomeItem<Any>> = mutableListOf()
     private val presenter: HomePresenter = HomePresenter(this)
@@ -32,6 +34,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.getAllTasks()
+        userName = arguments?.getString(USERNAME)
+
 
     }
 
@@ -51,7 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
 
     override fun getTaskStatusCounts(personalTasks: Triple<Float, Float, Float>) {
         val details = mapOf(
-            USERNAME to "Asia",
+            USERNAME to userName,
             TODO to personalTasks.first,
             IN_PROGRESS to personalTasks.second,
             DONE to personalTasks.third
@@ -62,30 +66,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
     }
 
     override fun onGetLatestTeamTaskSuccess(teamTasks: List<TeamTask>) {
-        itemsList.add(HomeItem(TEAM_TASK, HomeItemType.ITEM_TYPE_TITLE_SECTION))
+        val titleHeader = context?.getString(R.string.team_task)
+        itemsList.add(HomeItem(titleHeader!!, HomeItemType.ITEM_TYPE_TITLE_SECTION))
         itemsList.add(HomeItem(teamTasks, HomeItemType.ITEM_TYPE_TEAM_TASK))
     }
 
 
     override fun onRecentPersonalTaskSuccess(personalTasks: List<PersonalTask>) {
-        itemsList.add(HomeItem(RECENT_TASK, HomeItemType.ITEM_TYPE_TITLE_SECTION))
+        val titleHeader = context?.getString(R.string.recent_task)
+        itemsList.add(HomeItem(titleHeader!!, HomeItemType.ITEM_TYPE_TITLE_SECTION))
         itemsList.addAll(personalTasks.map { it.toPersonalTask() })
     }
 
     override fun onGetDataFailure(error: String) {
-        Log.e("result", "onGetDataFailure${error}")
+        Log.e(LOG_TAG, "onGetDataFailure${error}")
         presenter.getAllTasks()
         itemsList.clear()
 
     }
 
     override fun showLoading() {
-        Log.e("result", "showLoading(")
+        Log.e(LOG_TAG, "showLoading(")
 
     }
 
     override fun hideLoading() {
-        Log.e("result", "hideLoading(")
+        Log.e(LOG_TAG, "hideLoading(")
     }
 
     private fun onClickViewMore(planeType: String) {
@@ -106,7 +112,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
         val selectedTaskFragment =
             if (isPersonalPlane) PersonalTasksFragment() else TeamTasksFragment()
         navigateTo(selectedTaskFragment)
-
     }
 
 
@@ -115,11 +120,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
         const val TODO = "toDo"
         const val IN_PROGRESS = "inProgress"
         const val DONE = "done"
-        const val TEAM_TASK = "Team task"
         const val RECENT_TASK = "Recent task"
+        const val LOG_TAG = "TAG"
 
         const val PERSONAL_TASK_DATA = "personal task data"
         const val TEAM_TASK_DATA = "team task data"
+
+        fun newInstance(userName: String) =
+            HomeFragment().apply {
+                arguments = Bundle().apply {
+                    putString(USERNAME, userName)
+                }
+            }
     }
 
 

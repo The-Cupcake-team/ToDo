@@ -13,6 +13,7 @@
     <string name="team_plans">مهام الفريق</string>
     <string name="go_to_plans">اذهب إلي المهام</string>
     <string name="recent_task">المهام الأخيرة</string>
+    <string name="team_task">مهمام الفريق</string>
     <string name="view_all">عرض الكل</string>
     <string name="search">البحث</string>
     <string name="todo">لاحقا</string>
@@ -26,6 +27,7 @@
     <string name="assign_to">تكليف</string>
     <string name="update_task">تحديث المهمة</string>
     <string name="language">اللغة</string>
+    <string name="plans_remaining">الخطط المتبقية</string>
     <string name="dark_theme">مظهر داكن</string>
     <string name="try_again">المحاولة مرة اخرى</string>
     <string name="invalid_account">حساب غير صالح</string>

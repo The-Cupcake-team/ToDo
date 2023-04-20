@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_normal"
-            android:text="@string/_3_plans_remaining"
+            android:text="@string/plans_remaining"
             android:textColor="@color/color_text_secondary"
             android:textSize="@dimen/font_size_body"
             app:layout_constraintStart_toStartOf="@+id/icon_team_group"
