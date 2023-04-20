@@ -67,6 +67,7 @@
     <string name="avatar_team_member">avatar team member</string>
     <string name="all_tasks_chip">All</string>
     <string name="invalid_username_password">Invalid Username or Password</string>
+    <string name="change_status_to">change status to</string>
 
 
 </resources>
