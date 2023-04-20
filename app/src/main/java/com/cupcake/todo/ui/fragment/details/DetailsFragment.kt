@@ -13,8 +13,8 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentDetailsBinding
-import com.cupcake.todo.model.network.response.PersonalTask
-import com.cupcake.todo.model.network.response.TeamTask
+import com.cupcake.todo.data.network.response.PersonalTask
+import com.cupcake.todo.data.network.response.TeamTask
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.details.adapter.DetailsAdapter
 import com.google.android.material.snackbar.Snackbar

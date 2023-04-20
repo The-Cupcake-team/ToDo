@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemPersonalTaskBinding
-import com.cupcake.todo.model.network.response.PersonalTask
-import com.cupcake.todo.ui.util.formatDate
+import com.cupcake.todo.data.network.response.PersonalTask
+import com.cupcake.todo.ui.util.extension.formatDate
 
 class PersonalTasksAdapter(
     private var personalTasks: List<PersonalTask>,

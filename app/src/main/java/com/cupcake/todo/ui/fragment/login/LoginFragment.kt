@@ -11,7 +11,6 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentLoginBinding
-import com.cupcake.todo.presenter.login.LoginPresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.home.HomeFragment
 import com.cupcake.todo.ui.fragment.register.RegisterFragment

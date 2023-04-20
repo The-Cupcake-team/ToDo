@@ -1,7 +1,7 @@
 package com.cupcake.todo.ui.fragment.personal_tasks.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.cupcake.todo.model.network.response.PersonalTask
+import com.cupcake.todo.data.network.response.PersonalTask
 
 class PersonalDiffUtil(
     private val oldTasks: List<PersonalTask>,

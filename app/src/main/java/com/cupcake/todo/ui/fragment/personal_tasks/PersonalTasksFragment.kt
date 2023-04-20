@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.cupcake.todo.databinding.FragmentPersonalTasksBinding
-import com.cupcake.todo.model.network.response.PersonalTask
+import com.cupcake.todo.data.network.response.PersonalTask
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.personal_tasks.adapter.PersonalTasksAdapter
 import com.cupcake.todo.ui.fragment.personal_tasks.adapter.PersonalTasksInteraction
 import com.cupcake.todo.ui.util.TaskStatus
 import com.cupcake.todo.ui.util.extension.hidden
 import com.cupcake.todo.ui.util.extension.show
-import com.cupcake.todo.ui.util.stateTasks
+import com.cupcake.todo.ui.util.extension.stateTasks
 
 class PersonalTasksFragment : BaseFragment<FragmentPersonalTasksBinding>(), IPersonalTasksView,
     PersonalTasksInteraction {

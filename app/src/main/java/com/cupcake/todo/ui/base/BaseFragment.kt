@@ -20,7 +20,6 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.v("ameer", "int ${LOG_TAG}")
         _binding = bindingInflater(layoutInflater, container,false)
         PrefsUtil.initPrefsUtil(requireContext())
         return binding.root

@@ -1,7 +1,7 @@
 package com.cupcake.todo.ui.fragment.details
 
-import com.cupcake.todo.model.network.ApiServiceImpl
-import com.cupcake.todo.model.network.response.BaseResponse
+import com.cupcake.todo.data.network.ApiServiceImpl
+import com.cupcake.todo.data.network.response.BaseResponse
 
 
 class DetailsPresenter(private val view: IDetailsView) {

@@ -1,6 +1,6 @@
 package com.cupcake.todo.ui.fragment.personal_tasks
 
-import com.cupcake.todo.model.network.response.PersonalTask
+import com.cupcake.todo.data.network.response.PersonalTask
 
 interface IPersonalTasksView {
 

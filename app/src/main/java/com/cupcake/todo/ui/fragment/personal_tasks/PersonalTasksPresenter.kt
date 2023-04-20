@@ -1,8 +1,8 @@
 package com.cupcake.todo.ui.fragment.personal_tasks
 
-import com.cupcake.todo.model.network.ApiServiceImpl
-import com.cupcake.todo.model.network.response.BaseResponse
-import com.cupcake.todo.model.network.response.PersonalTask
+import com.cupcake.todo.data.network.ApiServiceImpl
+import com.cupcake.todo.data.network.response.BaseResponse
+import com.cupcake.todo.data.network.response.PersonalTask
 
 class PersonalTasksPresenter(private val view: IPersonalTasksView) {
 

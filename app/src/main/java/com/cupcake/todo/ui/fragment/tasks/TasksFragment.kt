@@ -10,13 +10,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentTasksBinding
 import com.cupcake.todo.ui.base.BaseFragment
-import com.cupcake.todo.ui.fragment.add_task.AddPersonalTaskFragment
+import com.cupcake.todo.ui.fragment.add_personal_task.AddPersonalTaskFragment
 import com.cupcake.todo.ui.fragment.add_team_task.AddTeamTaskFragment
 import com.cupcake.todo.ui.fragment.personal_tasks.PersonalTasksFragment
 import com.cupcake.todo.ui.fragment.tasks.adapter.ViewPagerTasksAdapter
 import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
-import com.cupcake.todo.ui.util.isPersonalTabTaskSelected
-import com.cupcake.todo.ui.util.navigateTo
+import com.cupcake.todo.ui.util.extension.isPersonalTabTaskSelected
+import com.cupcake.todo.ui.util.extension.navigateTo
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlin.math.abs

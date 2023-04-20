@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.databinding.ItemTeamTaskBinding
-import com.cupcake.todo.model.network.response.TeamTask
-import com.cupcake.todo.ui.util.formatDate
+import com.cupcake.todo.data.network.response.TeamTask
+import com.cupcake.todo.ui.util.extension.formatDate
 import java.util.*
 
 class TeamTaskAdapter(
