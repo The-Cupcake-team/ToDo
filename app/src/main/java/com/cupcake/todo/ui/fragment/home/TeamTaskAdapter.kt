@@ -27,10 +27,10 @@ class TeamTaskAdapter(
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: TeamTaskViewHolder, position: Int) {
-        val item = items[position] as TeamTask
+        val item = items[position]
         holder.binding.apply {
             textViewTaskTitle.text = item.title
-            textViewDate.text = formatDate(item.creationTime)
+            textViewDate.text = formatDate(item.createTime)
             textViewAssignee.text = item.assignee.take(2)
             textViewDescription.text = item.description
 

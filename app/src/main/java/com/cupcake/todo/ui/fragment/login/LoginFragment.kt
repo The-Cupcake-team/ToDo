@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,7 @@ import com.cupcake.todo.util.PrefsUtil
 import com.google.android.material.snackbar.Snackbar
 
 
-class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(), ILoginView {
     override val LOG_TAG: String = this::class.java.name
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding =
         FragmentLoginBinding::inflate
@@ -97,8 +96,10 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     }
 
     override fun onLoginSuccess() {
-        saveUserNameToSharedPref()
-        this.navigateWithReplaceFragment(HomeFragment())
+        activity?.runOnUiThread {
+            saveUserNameToSharedPref()
+            this.navigateWithReplaceFragment(HomeFragment())
+        }
     }
 
     private fun saveUserNameToSharedPref(){

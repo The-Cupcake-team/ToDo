@@ -17,7 +17,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.google.android.material.tabs.TabLayout
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
 
 fun TeamTask.toTeamTask(): HomeItem<Any> {
@@ -79,13 +79,14 @@ fun Fragment.navigateWithSendObject(fragment: Fragment, key: String, task: Any? 
     }
 }
 
+
 fun Fragment.navigateTo(fragment: Fragment) {
     val fragmentManager = requireActivity().supportFragmentManager
     val transaction = fragmentManager.beginTransaction()
 
     transaction.apply {
-        replace(android.R.id.content, fragment)
-        addToBackStack(null)
+        add(android.R.id.content, fragment)
+        addToBackStack(Fragment::class.java.simpleName)
         commit()
     }
 }

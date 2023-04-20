@@ -37,6 +37,7 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val titleTabTasks = resources.getStringArray(R.array.task)
+        setupBackButton()
         val adapter = ViewPagerTasksAdapter(
             fragmentManager = requireActivity().supportFragmentManager,
             fragmentItems = fragmentTasks,
@@ -76,6 +77,12 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>() {
             this.navigateTo(addPersonalTask)
         } else {
             this.navigateTo(addTeamTask)
+        }
+    }
+
+    private fun setupBackButton() {
+        binding.toolBarTask.setNavigationOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 }
