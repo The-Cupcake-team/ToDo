@@ -17,11 +17,11 @@ import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
 import com.cupcake.todo.ui.util.navigateTo
 import com.cupcake.todo.ui.util.navigateWithSendObject
 import com.cupcake.todo.ui.util.toPersonalTask
+import com.cupcake.todo.util.PrefsUtil
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
 
-    private var userName: String? = null
     private lateinit var homeAdapter: HomeAdapter
     private var itemsList: MutableList<HomeItem<Any>> = mutableListOf()
     private val presenter: HomePresenter = HomePresenter(this)
@@ -34,8 +34,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.getAllTasks()
-        userName = arguments?.getString(USERNAME)
-
 
     }
 
@@ -55,7 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
 
     override fun getTaskStatusCounts(personalTasks: Triple<Float, Float, Float>) {
         val details = mapOf(
-            USERNAME to userName,
+            USERNAME to PrefsUtil.userName,
             TODO to personalTasks.first,
             IN_PROGRESS to personalTasks.second,
             DONE to personalTasks.third
@@ -122,16 +120,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
         const val DONE = "done"
         const val RECENT_TASK = "Recent task"
         const val LOG_TAG = "TAG"
-
         const val PERSONAL_TASK_DATA = "personal task data"
         const val TEAM_TASK_DATA = "team task data"
 
-        fun newInstance(userName: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(USERNAME, userName)
-                }
-            }
     }
 
 
