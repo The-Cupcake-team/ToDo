@@ -47,5 +47,7 @@
         <item>شخصي</item>
         <item>تيم</item>
     </string-array>
+    <string name="unable_to_register">عدم الامكان من التسجيل</string>
+    <string name="network_error_message_register">حدث خلل ما, الرجاء محاولة التسجيل  مرة اخرى بعد التأكد من اتصال الشبكة.</string>
 
 </resources>
