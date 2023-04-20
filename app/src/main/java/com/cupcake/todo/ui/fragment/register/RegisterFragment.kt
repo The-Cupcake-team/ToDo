@@ -18,7 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView {
     override val LOG_TAG: String = this::class.java.name
-    override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentRegisterBinding =
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentRegisterBinding =
         FragmentRegisterBinding::inflate
     private lateinit var presenter: RegisterPresenter
     private lateinit var username: String
