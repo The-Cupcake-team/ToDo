@@ -1,5 +1,8 @@
 package com.cupcake.todo.ui.util
 
+import android.app.UiModeManager
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
@@ -40,7 +43,16 @@ fun PieChart.setupPieChart(pieChartView: PieChart, dataValue: MutableList<PieEnt
     pieChart.legend.isEnabled = false
     pieChart.holeRadius = 60f
 
+    // Set the hole color based on the app theme
+    val nightMode = isNightMode(context)
+    val holeColor = if (nightMode) Color.parseColor("#353535") else Color.parseColor("#FFFFFFFF")
+    pieChart.setHoleColor(holeColor)
+
     pieChart.invalidate()
+}
+fun isNightMode(context: Context): Boolean {
+    val uiModeManager = context.getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+    return uiModeManager.nightMode == UiModeManager.MODE_NIGHT_YES
 }
 
 fun formatDate(date: String): String? {
