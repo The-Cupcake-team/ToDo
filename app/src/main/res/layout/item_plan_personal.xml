@@ -27,6 +27,8 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:fontFamily="@font/montserrat_semibold"
             android:text="@string/personal_plans"
+            android:ellipsize="end"
+            android:lines="1"
             android:textColor="@color/color_text_secondary"
             android:textSize="@dimen/font_size_body"
             app:layout_constraintBottom_toBottomOf="@+id/icon_team_group"

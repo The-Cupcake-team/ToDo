@@ -95,7 +95,7 @@
             android:layout_height="@dimen/spacing_medium"
             android:layout_marginEnd="@dimen/spacing_normal"
             android:background="@drawable/ic_graph_check_box"
-            android:backgroundTint="@color/color_done"
+            android:backgroundTint="@color/graph_color_light_sea_green"
             app:layout_constraintBottom_toBottomOf="@+id/text_view_done_status"
             app:layout_constraintEnd_toStartOf="@+id/text_view_done_percent"
             app:layout_constraintTop_toTopOf="@+id/text_view_done_percent"
@@ -108,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textColor="@color/color_done"
+        android:textColor="@color/graph_color_light_sea_green"
         app:layout_constraintBaseline_toBaselineOf="@+id/text_view_in_progress_percent"
         app:layout_constraintStart_toStartOf="@id/text_view_done_status"
         tools:text="40%" />
