@@ -1,10 +1,12 @@
 package com.cupcake.todo.model.network
 
-import com.cupcake.todo.model.network.response.AddPersonalTaskResponse
-import com.cupcake.todo.model.network.response.AddTeamTaskResponse
 import com.cupcake.todo.model.network.response.BaseResponse
+import com.cupcake.todo.model.network.response.Login
+import com.cupcake.todo.model.network.response.PersonalTask
 import com.cupcake.todo.model.network.response.Register
 import com.cupcake.todo.model.network.response.TeamTask
+
+
 import com.cupcake.todo.model.network.response.*
 interface ApiService {
     fun register(
@@ -36,7 +38,7 @@ interface ApiService {
         title: String,
         description: String,
         assignee: String,
-        onSuccess: (response: BaseResponse<AddTeamTaskResponse>) -> Unit,
+        onSuccess: (response: BaseResponse<TeamTask>) -> Unit,
         onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit,
     )
 
@@ -51,10 +53,17 @@ interface ApiService {
     )
 
     fun addPersonalTask(
-        title:String,
-        description:String,
-        onSuccess: (response: BaseResponse<AddPersonalTaskResponse>) -> Unit,
+        title: String,
+        description: String,
+        onSuccess: (response: BaseResponse<PersonalTask>) -> Unit,
         onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit,
     )
 
+    fun updateTaskStatus(
+        id : String,
+        status : Int,
+        isPersonalTask: Boolean,
+        onSuccess: (response: BaseResponse<String>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
+    )
 }

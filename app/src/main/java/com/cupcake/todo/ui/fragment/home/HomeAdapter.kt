@@ -21,7 +21,7 @@ import java.util.*
 
 class HomeAdapter(
     private var items: List<HomeItem<Any>>,
-    private val onClickViewMore: (planType: String) -> Unit,
+    private val onClickViewMore: () -> Unit,
     private val onClickPersonalTaskItem: (personalTask: PersonalTask) -> Unit,
     private val onClickTeamTaskItem: (teamTask: TeamTask) -> Unit,
     private val onClickPlanItem: (isPersonalPlane: Boolean) -> Unit
@@ -114,7 +114,7 @@ class HomeAdapter(
         holder.binding.apply {
             textViewRecentTask.text = currentItem
             textViewViewAll.setOnClickListener {
-                onClickViewMore(currentItem)
+                onClickViewMore()
             }
 
         }
@@ -133,7 +133,7 @@ class HomeAdapter(
         holder.binding.apply {
             textViewTaskTitle.text = currentItem.title
             textViewDescription.text = currentItem.description
-            textViewDate.text = formatDate(currentItem.creationTime)
+            textViewDate.text = formatDate(currentItem.createTime)
             root.setOnClickListener {
                 onClickPersonalTaskItem(currentItem)
             }

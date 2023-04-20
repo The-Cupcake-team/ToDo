@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.ItemPersonalTaskBinding
 import com.cupcake.todo.model.network.response.PersonalTask
+import com.cupcake.todo.ui.util.formatDate
 
 class PersonalTasksAdapter(
     private var personalTasks: List<PersonalTask>,
@@ -32,7 +33,7 @@ class PersonalTasksAdapter(
     override fun onBindViewHolder(holder: PersonalTasksViewHolder, position: Int) {
         val currentItem = personalTasks[position]
         holder.binding.apply {
-            textViewDate.text = currentItem.creationTime
+            textViewDate.text = formatDate(currentItem.createTime)
             textViewDescription.text = currentItem.description
             textViewTaskTitle.text = currentItem.title
             root.setOnClickListener { listener.onClickPersonalTask(currentItem) }

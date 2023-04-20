@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/color_background"
     android:layout_height="match_parent"
+    android:background="@color/color_background"
     android:orientation="vertical">
 
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_details"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/appbar_details"
+            android:id="@+id/tool_bar_details"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@color/color_background"
@@ -29,9 +33,115 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_details"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbar_details"
+        tools:listitem="@layout/item_profile_image" />
 
 
-</LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/spinner_status"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/ic_drop_down"
+        app:endIconTint="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/recycler_view_details">
+
+        <AutoCompleteTextView
+            android:textAlignment="viewStart"
+            android:id="@+id/dropdown_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_popup_background"
+            android:fontFamily="@font/montserrat"
+            android:inputType="none"
+            android:paddingStart="@dimen/spacing_large"
+            android:focusable="false"
+            android:paddingEnd="@dimen/spacing_large"
+            tools:text="@string/to_do"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_caption" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/details_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:layout_marginVertical="@dimen/spacing_medium"
+        android:backgroundTint="@color/color_card"
+        app:cardCornerRadius="@dimen/radius_medium"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_status"
+        app:strokeWidth="0dp">
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/text_view_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:layout_marginVertical="@dimen/spacing_medium"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/color_text_secondary"
+        android:textSize="@dimen/font_size_caption"
+        app:layout_constraintEnd_toEndOf="@id/details_background"
+        app:layout_constraintTop_toTopOf="@id/details_background"
+        tools:text="23 march 20:00" />
+
+    <TextView
+        android:id="@+id/text_view_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:layout_marginVertical="@dimen/spacing_medium"
+        android:ellipsize="end"
+        android:textAlignment="viewStart"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textColor="@color/color_text_primary"
+        android:textSize="@dimen/font_size_body"
+        app:layout_constraintEnd_toStartOf="@+id/text_view_date"
+        app:layout_constraintStart_toStartOf="@id/details_background"
+        app:layout_constraintTop_toTopOf="@id/details_background"
+        tools:text="my first task" />
+
+
+    <TextView
+        android:id="@+id/text_view_details"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:fontFamily="@font/montserrat"
+        android:paddingHorizontal="@dimen/spacing_medium"
+        android:paddingVertical="@dimen/spacing_medium"
+        android:scrollbars="vertical"
+        android:textAlignment="viewStart"
+        android:textColor="@color/color_text_secondary"
+        android:textIsSelectable="true"
+        android:textSize="@dimen/font_size_body"
+        app:layout_constraintBottom_toBottomOf="@id/details_background"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_title"
+        tools:text="@tools:sample/lorem/random" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

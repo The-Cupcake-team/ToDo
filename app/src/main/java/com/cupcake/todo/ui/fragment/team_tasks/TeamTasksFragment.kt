@@ -11,9 +11,13 @@ import com.cupcake.todo.databinding.ItemDialogueNoInternetBinding
 import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.presenter.teamtasks.TeamTasksPresenter
 import com.cupcake.todo.ui.base.BaseFragment
+import com.cupcake.todo.ui.fragment.details.DetailsFragment
 import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksAdapter
 import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksInteractionListener
 import com.cupcake.todo.ui.util.TaskStatus
+import com.cupcake.todo.ui.util.navigateTo
+import com.cupcake.todo.ui.util.extension.hidden
+import com.cupcake.todo.ui.util.extension.show
 import com.cupcake.todo.ui.util.stateTasks
 
 class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksView,
@@ -59,9 +63,10 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
         }
     }
 
-    override fun onClickTeamTask(id: String) {
-        //navigateToFragment(DetailsFragment())
+    override fun onClickTeamTask(teamTask: TeamTask) {
+        navigateTo(DetailsFragment.newInstance(teamTask))
     }
+
 
     override fun showInternetErrorDialog() {
         activity?.runOnUiThread {
@@ -77,11 +82,11 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
     }
 
     override fun showLoading() {
-        Log.v(LOG_TAG, "showLoading")
+        binding.loading.root.show()
     }
 
     override fun hideLoading() {
-        Log.v(LOG_TAG, "showLoading")
+        binding.loading.root.hidden()
     }
 
     override fun onTeamTasksSuccess(teamTasks: List<TeamTask>) {

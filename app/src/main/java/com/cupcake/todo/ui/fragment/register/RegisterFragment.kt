@@ -1,7 +1,10 @@
 package com.cupcake.todo.ui.fragment.register
 
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -48,7 +51,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
 
             if (isValidInput(username, password)) {
                 presenter.register(username, password)
-                onRegisterSuccess()
             } else {
                 showInputErrorMessage(username, password)
             }
@@ -82,6 +84,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
             this.navigateWithAddFragment(LoginFragment())
         }
     }
+
     private fun navigateToFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager.beginTransaction().apply {
             add(R.id.fragmentContainer, fragment)
@@ -152,9 +155,15 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), IRegisterView 
     }
 
     override fun onRegisterFailure(error: String) {
+        val dialogBuilder = AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.unable_to_register))
+            .setMessage(getString(R.string.network_error_message_register))
+            .setPositiveButton(getString(R.string.ok)) { _, _ -> }
 
+        requireActivity().runOnUiThread {
+            Handler(Looper.getMainLooper()).post { dialogBuilder.create().show() }
+        }
     }
-
 
     private fun Fragment.navigateWithReplaceFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager.beginTransaction().apply {
