@@ -12,6 +12,10 @@ import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.presenter.home.HomePresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.details.DetailsFragment
+import com.cupcake.todo.ui.fragment.personal_tasks.PersonalTasksFragment
+import com.cupcake.todo.ui.fragment.team_tasks.TeamTasksFragment
+import com.cupcake.todo.ui.util.extension.hidden
+import com.cupcake.todo.ui.util.extension.show
 import com.cupcake.todo.ui.fragment.tasks.TasksFragment
 import com.cupcake.todo.ui.util.navigateTo
 import com.cupcake.todo.ui.util.toPersonalTask
@@ -82,12 +86,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
     }
 
     override fun showLoading() {
-        Log.e(LOG_TAG, "showLoading(")
+        binding.loading.root.show()
 
     }
 
     override fun hideLoading() {
-        Log.e(LOG_TAG, "hideLoading(")
+        binding.loading.root.hidden()
     }
 
     private fun onClickViewMore() {
