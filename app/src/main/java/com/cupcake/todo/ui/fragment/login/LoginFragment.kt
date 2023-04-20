@@ -16,6 +16,7 @@ import com.cupcake.todo.presenter.login.LoginPresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.home.HomeFragment
 import com.cupcake.todo.ui.fragment.register.RegisterFragment
+import com.cupcake.todo.util.PrefsUtil
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -96,9 +97,14 @@ class LoginFragment() : BaseFragment<FragmentLoginBinding>(), ILoginView {
     }
 
     override fun onLoginSuccess() {
+        saveUserNameToSharedPref()
+        this.navigateWithReplaceFragment(HomeFragment())
+    }
+
+    private fun saveUserNameToSharedPref(){
         var  userName = username.split("_").first()
         userName = userName[0].uppercase() + userName.substring(1)
-        this.navigateWithReplaceFragment(HomeFragment.newInstane(userName))
+        PrefsUtil.userName = userName
     }
 
     override fun onLoginFailure(throwable: Throwable, statusCode: Int?, error: String?) {
