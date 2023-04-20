@@ -22,7 +22,7 @@ import com.google.android.material.snackbar.Snackbar
 class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
     override val LOG_TAG: String = this::class.java.name
-    override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> FragmentDetailsBinding =
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDetailsBinding =
         FragmentDetailsBinding::inflate
 
     private val teamTask by lazy { arguments?.getParcelable<TeamTask>(TEAM_TASK_DETAILS) }

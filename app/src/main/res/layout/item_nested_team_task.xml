@@ -9,5 +9,6 @@
     android:orientation="horizontal"
     android:paddingStart="@dimen/spacing_medium"
     android:paddingEnd="@dimen/spacing_normal"
+    android:paddingTop="@dimen/spacing_small"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:listitem="@layout/item_team_task" />

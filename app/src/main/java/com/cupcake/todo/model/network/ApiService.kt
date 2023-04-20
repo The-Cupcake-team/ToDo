@@ -7,6 +7,7 @@ import com.cupcake.todo.model.network.response.Register
 import com.cupcake.todo.model.network.response.TeamTask
 
 
+import com.cupcake.todo.model.network.response.*
 interface ApiService {
     fun register(
         username: String,
@@ -43,6 +44,11 @@ interface ApiService {
 
     fun getTeamTasks(
         onSuccess: (response: BaseResponse<List<TeamTask>>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
+    )
+
+    fun getPersonalTasks(
+        onSuccess: (response: BaseResponse<List<PersonalTask>>) -> Unit,
         onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
     )
 

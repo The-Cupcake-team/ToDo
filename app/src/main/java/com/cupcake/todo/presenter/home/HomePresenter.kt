@@ -43,7 +43,7 @@ class HomePresenter(
     }
 
     private fun getLatestTeamTasks(teamTasks: List<TeamTask>): List<TeamTask> {
-        return teamTasks.take(3)
+        return teamTasks.reversed().take(3)
     }
 
 

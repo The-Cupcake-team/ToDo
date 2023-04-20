@@ -142,6 +142,24 @@ class ApiServiceImpl : ApiService {
         )
     }
 
+    override fun getPersonalTasks(
+        onSuccess: (response: BaseResponse<List<PersonalTask>>) -> Unit,
+        onFailure: (throwable: Throwable, statusCode: Int?, message: String?) -> Unit
+    ) {
+        client.getRequest(ApiEndPoint.toDoPersonal).enqueueCall(
+            object : ApiCallback<BaseResponse<List<PersonalTask>>>{
+                override fun onSuccess(response: BaseResponse<List<PersonalTask>>) {
+                    onSuccess(response)
+                }
+
+                override fun onFailure(throwable: Throwable, statusCode: Int?, message: String?) {
+                    onFailure(throwable,statusCode,message)
+                }
+
+            }
+        )
+    }
+
     override fun addPersonalTask(
         title: String,
         description: String,

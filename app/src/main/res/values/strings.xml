@@ -29,6 +29,7 @@
     <string name="_23_march_20_00">23 march 20:00</string>
     <string name="this_is_my_firs_task_i_should_do_some_thing_but_i_dont_know">this is my firs task i should do some thing but i dont know</string>
     <string name="ms">Ms</string>
+    <string name="plans_remaining">plans Remaining</string>
     <string name="_3_plans_remaining">plans Remaining</string>
     <string name="inprogress">inProgress</string>
     <string name="team_task">Team Task</string>
@@ -67,6 +68,12 @@
     <string name="all_tasks_chip">All</string>
     <string name="invalid_username_password">Invalid Username or Password</string>
     <string name="change_status_to">change status to</string>
+
+
+    <string-array name="task">
+        <item>Personal</item>
+        <item>Team</item>
+    </string-array>
 
 
 </resources>

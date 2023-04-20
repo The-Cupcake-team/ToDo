@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.tasks.TasksFragment"
     android:orientation="vertical"
     android:background="@color/color_background"
-   android:paddingTop="@dimen/spacing_medium">
+    android:paddingTop="@dimen/spacing_medium">
 
-<include
-    android:id="@+id/search_bar"
-    layout="@layout/item_search_bar"
-   />
+    <include
+        android:id="@+id/search_bar"
+        layout="@layout/item_search_bar" />
 
-<com.google.android.material.tabs.TabLayout
-    android:id="@+id/tab_tasks"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/spacing_medium"/>
-
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xnormal"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"
+        app:tabGravity="fill"
+        app:tabMaxWidth="@dimen/zero"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager_tasks"
+        android:id="@+id/view_pager_tasks"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_tasks" />
 
-</LinearLayout>
+    <include
+        android:id="@+id/button_add_task"
+        layout="@layout/item_floating_action_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
