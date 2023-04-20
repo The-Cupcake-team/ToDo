@@ -36,9 +36,13 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter = DetailsPresenter(this)
-
         binding.textViewDetails.movementMethod = ScrollingMovementMethod()
+        bindTasksData()
+        initSpinner()
+        setupBackButton()
+    }
 
+    private fun bindTasksData(){
         teamTask?.let {
             val mAdapter = DetailsAdapter(presenter.team, it.assignee)
             binding.recyclerViewDetails.adapter = mAdapter
@@ -53,8 +57,6 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
             textViewDate.text = personalTask?.createTime
             recyclerViewDetails.visibility = View.GONE
         }
-
-        initSpinner()
     }
 
     override fun showLoading() {
@@ -125,5 +127,11 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(), IDetailsView {
     override fun onResume() {
         super.onResume()
         initSpinner()
+    }
+
+    private fun setupBackButton() {
+        binding.toolBarDetails.setNavigationOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
     }
 }
