@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentTeamTasksBinding
 import com.cupcake.todo.databinding.ItemDialogueNoInternetBinding
-import com.cupcake.todo.presenter.model.TeamTask
 import com.cupcake.todo.presenter.teamtasks.TeamTasksPresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.details.DetailsFragment
+import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
 import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksAdapter
 import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksInteractionListener
 

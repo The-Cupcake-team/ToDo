@@ -1,7 +1,7 @@
 package com.cupcake.todo.ui.fragment.team_tasks.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.cupcake.todo.presenter.model.TeamTask
+import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
 
 class TasksDiffUtil(private val oldTasks: List<TeamTask>, private val newTasks: List<TeamTask>) :
     DiffUtil.Callback()
