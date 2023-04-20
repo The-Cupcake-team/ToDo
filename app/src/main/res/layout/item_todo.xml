@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_view_remaining_plans"
+        android:id="@+id/text_view_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_task_title" />
 
     <TextView
-        android:id="@+id/text_view_go_t_plans"
+        android:id="@+id/text_view_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/_23_march_20_00"
@@ -45,7 +45,7 @@
         android:fontFamily="@font/montserrat"
         android:textColor="@color/color_text_tertiary"
         app:layout_constraintBottom_toBottomOf="@+id/chip2"
-        app:layout_constraintEnd_toEndOf="@+id/text_view_remaining_plans"
+        app:layout_constraintEnd_toEndOf="@+id/text_view_description"
         app:layout_constraintTop_toTopOf="@+id/chip2"
         app:layout_constraintVertical_bias="0.541" />
 
@@ -61,8 +61,8 @@
         android:paddingVertical="@dimen/spacing_small"
         android:text="@string/to_do"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/text_view_remaining_plans"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_remaining_plans" />
+        app:layout_constraintStart_toStartOf="@+id/text_view_description"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_description" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

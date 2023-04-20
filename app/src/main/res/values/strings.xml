@@ -30,7 +30,7 @@
     <string name="this_is_my_firs_task_i_should_do_some_thing_but_i_dont_know">this is my firs task i should do some thing but i dont know</string>
     <string name="ms">Ms</string>
     <string name="to_do">To Do</string>
-    <string name="_3_plans_remaining">3 plans Remaining</string>
+    <string name="_3_plans_remaining">plans Remaining</string>
     <string name="inprogress">inProgress</string>
     <string name="team_task">Team Task</string>
     <string name="ic_graph">ic_graph</string>
@@ -48,12 +48,25 @@
         <item>Done</item>
     </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="avatar_team_member">avatar team member</string>
+    <string name="try_again">Try again</string>
+    <string name="invalid_account">Invalid account</string>
+    <string name="unable_to_login">Unable to login</string>
+    <string name="network_error_message">An unexpected error occurred. Please try logging in again after check your network connection</string>
+    <string name="empty_form">Must not be empty</string>
+    <string name="check_your_internet">check your internet</string>
+    <string name="something_went_wrong">something went wrong</string>
 
+    <string name="unable_to_registration">Registration failed due to an unknown error.</string>
+    <string name="registration_failed">Registration Failed</string>
+    <string name="ok">OK</string>
+    <string name="enter_user_name">Please enter a username</string>
+    <string name="user_name_requirment">Username must be at least 4 characters with no special characters</string>
+    <string name="enter_password">Please enter a password</string>
+    <string name="password_requirment">Password must be at least 8 characters</string>
+    <string name="register_successful">Registration successful! ✔</string>
+    <string name="avatar_team_member">avatar team member</string>
     <string name="all_tasks_chip">All</string>
-    <string name="something_went_wrong">Something went wrong</string>
-    <string name="ok">Ok</string>
-    <string name="check_your_internet">Check your internet connection and try again</string>
+    <string name="invalid_username_password">Invalid Username or Password</string>
 
 
 </resources>

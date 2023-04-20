@@ -12,17 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/view_graph"
-            android:layout_width="@dimen/view_graph_size"
-            android:layout_height="@dimen/view_graph_size"
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="132dp"
+            android:layout_height="132dp"
             android:layout_marginVertical="@dimen/spacing_medium"
             app:layout_constraintBottom_toTopOf="@+id/text_view_in_progress_percent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_graph"
-            android:contentDescription="@string/ic_graph"
             />
 
         <ImageView

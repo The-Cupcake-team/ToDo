@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import com.cupcake.todo.R
 import com.cupcake.todo.databinding.FragmentTeamTasksBinding
 import com.cupcake.todo.databinding.ItemDialogueNoInternetBinding
+import com.cupcake.todo.model.network.response.TeamTask
 import com.cupcake.todo.presenter.teamtasks.TeamTasksPresenter
 import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.details.DetailsFragment
-import com.cupcake.todo.ui.fragment.personal_tasks.model.TeamTask
 import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksAdapter
 import com.cupcake.todo.ui.fragment.team_tasks.adapter.TeamTasksInteractionListener
 
@@ -78,16 +78,8 @@ class TeamTasksFragment : BaseFragment<FragmentTeamTasksBinding>(), ITeamTasksVi
         }
     }
 
-    private fun navigateToFragment(fragment: Fragment) {
-        requireActivity().supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragmentContainer, fragment)
-            addToBackStack(fragment.javaClass.simpleName)
-            commit()
-        }
-    }
-
-    override fun onClickTeamTask(teamTask: TeamTask) {
-        navigateToFragment(DetailsFragment.newInstance(teamTask))
+    override fun onClickTeamTask(id: String) {
+       // navigateToFragment(DetailsFragment())
     }
 
     override fun showInternetErrorDialog() {

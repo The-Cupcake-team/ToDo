@@ -38,72 +38,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_app_bar"/>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ed_user_name"
-        style="@style/EditTextSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_input"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:drawableStart="@drawable/ic_user"
-        android:hint="@string/user_name"
-        app:layout_constraintBottom_toTopOf="@id/ed_password"
-        app:layout_constraintTop_toBottomOf="@id/image_login" />
-
-    <EditText
-        android:id="@+id/ed_password"
-        style="@style/EditTextSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_input"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:drawableStart="@drawable/ic_lock"
-        android:drawableEnd="@drawable/ic_open_eye"
-        android:hint="@string/password"
-        app:layout_constraintTop_toBottomOf="@id/ed_user_name" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_login"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_input"
         android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:background="@drawable/button_background"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/login"
-        android:textAllCaps="false"
-        android:textColor="@color/color_on_primary"
-        android:textSize="@dimen/font_size_title"
-        app:layout_constraintTop_toBottomOf="@id/ed_password" />
+        android:layout_marginTop="@dimen/spacing_large"
+        android:hint="@string/password"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:layout_constraintTop_toBottomOf="@id/image_login" >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/card_background"
+            android:maxLength="15"
+            android:textColorHint="@color/color_text_tertiary"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button_login"
-        app:layout_constraintStart_toStartOf="@+id/button_login">
-
-        <TextView
-            android:id="@+id/text_view_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_xlarge"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/have_no_account"
-            android:textColor="@color/color_text_secondary"
-            android:textSize="@dimen/font_size_caption" />
-
-        <TextView
-            android:id="@+id/text_view_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginBottom="@dimen/spacing_xlarge"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/sign_up"
-            android:textColor="@color/brand"
-            android:textSize="@dimen/font_size_caption" />
-    </LinearLayout>
 
 
 
