@@ -10,6 +10,8 @@ import com.cupcake.todo.ui.base.BaseFragment
 import com.cupcake.todo.ui.fragment.personal_tasks.adapter.PersonalTasksAdapter
 import com.cupcake.todo.ui.fragment.personal_tasks.adapter.PersonalTasksInteraction
 import com.cupcake.todo.ui.util.TaskStatus
+import com.cupcake.todo.ui.util.extension.hidden
+import com.cupcake.todo.ui.util.extension.show
 import com.cupcake.todo.ui.util.stateTasks
 
 class PersonalTasksFragment : BaseFragment<FragmentPersonalTasksBinding>(), IPersonalTasksView,
@@ -46,11 +48,11 @@ class PersonalTasksFragment : BaseFragment<FragmentPersonalTasksBinding>(), IPer
     }
 
     override fun showLoading() {
-        // show loading
+        binding.loading.root.show()
     }
 
     override fun hideLoading() {
-        // hide loading
+        binding.loading.root.hidden()
     }
 
     override fun bindPersonalTasksToAdapter(personalTasks: List<PersonalTask>) {
